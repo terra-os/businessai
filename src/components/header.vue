@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">AI Terra Pilot</router-link>
+      <router-link to="/">AI Terra Platform</router-link>
     </div>
     <nav>
       <ul>
