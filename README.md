@@ -1,4 +1,4 @@
-# ai terraform monetization engine
+# ai terra web monetization engine
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
