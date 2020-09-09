@@ -7,7 +7,7 @@
           v-for="item in 10"
           :key="item"
           class="poster"
-          :style="{ backgroundImage: 'url(' + require('./../assets/img/cloud/' + randomInt(100,333) + '.png') + ')', 
+          :style="{ backgroundImage: 'url(' + require('./../assets/img/cloud/' + randomInt(100,366) + '.png') + ')', 
                       backgroundColor: 'rgba(' 
                         + randomInt(10,250) + ','
                         + randomInt(10,250) + ',' 
