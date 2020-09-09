@@ -7,7 +7,7 @@
           v-for="item in 10"
           :key="item"
           class="poster"
-          :style="{ backgroundImage: 'url(' + require('./../assets/img/cloud/' + randomInt(100,299) + '.png') + ')', 
+          :style="{ backgroundImage: 'url(' + require('./../assets/img/cloud/' + randomInt(100,333) + '.png') + ')', 
                       backgroundColor: 'rgba(' 
                         + randomInt(10,250) + ','
                         + randomInt(10,250) + ',' 
@@ -37,15 +37,15 @@ export default {
   props: ["matrix"],
   data() {
     return {
-      showEdit: false
+      showEdit: false,
     };
   },
   methods: {
     randomInt(min, max) {
       // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-  }
+    },
+  },
 };
 </script>
 
