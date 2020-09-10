@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">AI Terraform</router-link>
+      <router-link to="/">my Terra PM</router-link>
     </div>
     <nav>
       <ul>

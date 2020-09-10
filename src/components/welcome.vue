@@ -1,7 +1,7 @@
 <template>
   <div id="welcome">
-    <h1 contenteditable="true">Cloud @ AI speed</h1>
-    <p>Open Source Service Generator and Monetizer</p>
+    <h1 contenteditable="true">cloud PM @ AI speed</h1>
+    <p>serverless cloud PM and AI service monetization engine</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>
