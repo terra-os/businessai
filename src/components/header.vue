@@ -1,8 +1,12 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">Terra Cloud PM</router-link>
+      <router-link to="/">
+        <img src="../assets/TerraAI-logo.png" width="40" height="40" />
+        Cloud PM
+      </router-link>
     </div>
+
     <nav>
       <ul>
         <li v-if="!auth">
