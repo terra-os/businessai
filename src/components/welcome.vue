@@ -1,7 +1,7 @@
 <template>
   <div id="welcome">
     <h1 contenteditable="true">cloud DA @ AI speed</h1>
-    <p>serverless Cloud Data Architect and AI monetization engine</p>
+    <p>serverless cloud Data Architect & monetization engine</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>
