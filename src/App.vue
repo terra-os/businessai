@@ -700,6 +700,8 @@ import Post from "./views/Post.vue";
 import Report from "./views/Report.vue";
 import Steps from "./views/Steps.vue";
 
+//import matrixEditDemo from "./matrixEditDemo";
+
 import Icon from "./util/icon.vue";
 import Spreadsheet from "./views/Spreadsheet";
 // import gcp from "./gcp.js";
@@ -713,7 +715,7 @@ export default {
     "ai-steps": Steps,
     "ai-icon": Icon,
     Spreadsheet,
-    Tabs
+    Tabs,
   },
   created() {
     this.$store.dispatch("tryAutoLogin");
@@ -747,7 +749,7 @@ export default {
         "ATTN",
         "MED",
         "GAME",
-        "LIFE"
+        "LIFE",
       ],
       postName: ["job", "post", "dev", "repo", "prj", "bid", "rDNA"],
       postNameId: 0,
@@ -825,7 +827,7 @@ export default {
         "W",
         "X",
         "Y",
-        "Z"
+        "Z",
       ],
       blankTabMatrix: [
         [
@@ -855,8 +857,8 @@ export default {
           "",
           "",
           "",
-          ""
-        ]
+          "",
+        ],
       ],
       blankTabRow: [
         "a",
@@ -885,7 +887,7 @@ export default {
         "",
         "",
         "",
-        ""
+        "",
       ],
       textEdit: `
 Hello World!
@@ -905,7 +907,7 @@ github.com/ai-accelerator`,
           "",
           "subtitle",
           ":",
-          "welcome to ai web"
+          "welcome to ai web",
         ],
         [
           "1",
@@ -915,8 +917,8 @@ github.com/ai-accelerator`,
           "",
           "subtitle",
           ":",
-          "welcome to ai web"
-        ]
+          "welcome to ai web",
+        ],
       ],
       matrixBiz: [
         [
@@ -946,7 +948,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -975,7 +977,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "b",
@@ -1004,7 +1006,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1033,7 +1035,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "c",
@@ -1062,7 +1064,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1091,7 +1093,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "d",
@@ -1120,7 +1122,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1149,7 +1151,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "e",
@@ -1178,7 +1180,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1207,7 +1209,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "f",
@@ -1236,7 +1238,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1265,7 +1267,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "g",
@@ -1294,7 +1296,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1323,7 +1325,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "h",
@@ -1352,7 +1354,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1381,12 +1383,12 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
-        ]
+          "",
+        ],
       ],
       listDev: [
         // list/rows of posts, docs, links, obj, etc from matrixDev
-        { title: "Toronto W3AI News", post: "bla bla, bla", author: "SI" }
+        { title: "Toronto W3AI News", post: "bla bla, bla", author: "SI" },
       ],
       matrixDev: [
         [
@@ -1416,7 +1418,7 @@ github.com/ai-accelerator`,
           "24",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1448,7 +1450,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "b",
@@ -1477,7 +1479,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1506,7 +1508,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "c",
@@ -1535,7 +1537,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1564,7 +1566,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         // ['1','Post',':','Toronto W3AI News','','posts',':','24','','comments',':','36','','','','','','','','','','','','','','','\n'],
         [
@@ -1594,7 +1596,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1623,7 +1625,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         // ['1','Gantt',':','calendar','','','','','','','','','','','','','','','','','','','','','','','\n'],
         [
@@ -1653,7 +1655,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1682,7 +1684,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "f",
@@ -1711,7 +1713,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1740,7 +1742,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "g",
@@ -1769,7 +1771,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1798,7 +1800,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "h",
@@ -1827,7 +1829,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
+          "\n",
         ],
         [
           "1",
@@ -1856,8 +1858,8 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          "\n"
-        ]
+          "\n",
+        ],
       ],
       listOps: [
         [
@@ -1868,7 +1870,7 @@ github.com/ai-accelerator`,
           "",
           "subtitle",
           ":",
-          "welcome to ai web"
+          "welcome to ai web",
         ],
         [
           "1",
@@ -1878,8 +1880,8 @@ github.com/ai-accelerator`,
           "",
           "subtitle",
           ":",
-          "realtime recombinant services"
-        ]
+          "realtime recombinant services",
+        ],
       ],
       matrixOps: [
         [
@@ -1909,7 +1911,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -1938,7 +1940,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         //         ['2','Post',':','Hello Service World!','','subtitle',':','welcome to ai web','','body',':',
         //         `AI super productivity services.
@@ -1972,7 +1974,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2001,7 +2003,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "c",
@@ -2030,7 +2032,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2059,7 +2061,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "d",
@@ -2088,7 +2090,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2117,7 +2119,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "e",
@@ -2146,7 +2148,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2175,7 +2177,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "f",
@@ -2204,7 +2206,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2233,7 +2235,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "g",
@@ -2262,7 +2264,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2291,7 +2293,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "h",
@@ -2320,7 +2322,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2349,16 +2351,27 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
-        ]
+          "",
+        ],
       ],
       matrixEdit: [
         [
           "a",
-          "STATUS",
+          `STATUS`,
           ":",
           "post",
           "",
+          `ingress - srv.yaml
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: true
+---
+      `,
           "",
           "",
           "",
@@ -2380,7 +2393,6 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
         ],
         [
           "1",
@@ -2409,7 +2421,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "b",
@@ -2438,7 +2450,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2467,7 +2479,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "c",
@@ -2496,7 +2508,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2525,7 +2537,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "d",
@@ -2554,7 +2566,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2583,7 +2595,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "e",
@@ -2612,7 +2624,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2641,7 +2653,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "f",
@@ -2670,7 +2682,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2699,7 +2711,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "g",
@@ -2728,7 +2740,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2757,7 +2769,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "h",
@@ -2786,7 +2798,7 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
+          "",
         ],
         [
           "1",
@@ -2815,26 +2827,26 @@ github.com/ai-accelerator`,
           "",
           "",
           "",
-          ""
-        ]
+          "",
+        ],
       ],
       newDevPosts: [
         "Funded: 5min innovation engine install",
         "Voting: Chinese & Hindi innovation engine",
-        "Idea: Job posts as innovation demand"
+        "Idea: Job posts as innovation demand",
       ],
       newOpsPosts: [
         "COM: xl cash = meta AI/ML/Kubernetes",
         "ORG: Innovation/Project Rendering",
-        "R&D: Code/Branch Ranking Blockchains"
-      ]
+        "R&D: Code/Branch Ranking Blockchains",
+      ],
     };
   },
   computed: {
-    devPosts: function() {
-      return this.matrixDev.filter(row => row[1] === "Post");
+    devPosts: function () {
+      return this.matrixDev.filter((row) => row[1] === "Post");
     },
-    filteredMatrixOps: function() {
+    filteredMatrixOps: function () {
       let result = [];
       let tabLine = false;
 
@@ -2890,11 +2902,11 @@ github.com/ai-accelerator`,
       }
 
       return result;
-    }
+    },
   },
 
   firestore: {
-    projects: fs.collection("projects")
+    projects: fs.collection("projects"),
   },
 
   mounted() {
@@ -2929,11 +2941,11 @@ github.com/ai-accelerator`,
       let newProjectData = this.matrixDev.slice(0);
       let file = new File(newProjectData, projectName, {
         type: "text/plain",
-        lastModified: new Date().getTime()
+        lastModified: new Date().getTime(),
       });
 
       /* eslint-disable no-unused-vars */
-      projectDataRef.put(file).then(function(snapshot) {
+      projectDataRef.put(file).then(function (snapshot) {
         // console.log('Uploaded a blob or file!');
       });
       /* eslint-enable no-unused-vars */
@@ -3209,7 +3221,7 @@ github.com/ai-accelerator`,
           0,
           newRow
         );
-        this.matrixEdit.splice(
+        this.matrixEditDemo.splice(
           this.visibleRows + (this.visibleRows + 1) * tab,
           0,
           newRow
@@ -3239,7 +3251,7 @@ github.com/ai-accelerator`,
       const lines = { ...this.matrixDev };
 
       fs.collection("projects").add({
-        tablelines: lines
+        tablelines: lines,
       });
 
       // experimenting with adding task to local Redis database
@@ -3317,8 +3329,8 @@ github.com/ai-accelerator`,
       x[col].classList.add(color);
       x[col].classList.add("fade-on-change");
       // setTimeout(250);
-    }
-  }
+    },
+  },
 };
 </script>
 
