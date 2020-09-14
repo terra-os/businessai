@@ -753,7 +753,7 @@ export default {
       opsNameId: 1,
       backgroundText: `&nbsp; cash = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
-            &nbsp;ai &nbsp; accelerator`,
+            &nbsp;money &nbsp; accelerator`,
       liveText: `&nbsp; cash = &nbsp;cmds &nbsp;&#x2731 ops
             <br><br>
             market &nbsp;engine`,
