@@ -759,7 +759,7 @@ export default {
             market &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
-      eXchange &nbsp;engine`,
+      monetary &nbsp;engine`,
       visibleRows: 1,
       tab: ["0", "0", "0"],
       pause: true,
