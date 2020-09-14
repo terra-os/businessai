@@ -756,7 +756,7 @@ export default {
             &nbsp;money &nbsp; accelerator`,
       liveText: `&nbsp; cash = &nbsp;cmds &nbsp;&#x2731 ops
             <br><br>
-            market &nbsp;engine`,
+            terra &nbsp;market &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
       monetary &nbsp;engine`,
