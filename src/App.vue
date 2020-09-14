@@ -919,7 +919,8 @@ github.com/ai-accelerator`,
       matrixEdit: matrixEdit(),
       cellToEdit: `AI super productivity app.
 Add ideas and projects to trigger contributors worldwide.
-Or add your services to contribute to world's most interesting projects.`,
+Or monetize your services
+on world's most interesting projects.`,
       matrixBiz: [
         [
           "a",
@@ -2705,6 +2706,7 @@ github.com/ai-accelerator`,
       console.log(m, c, t, r, cellId);
 
       this.fx = this.currentCellVal;
+      this.cellToEdit = this.matrixEdit[row][col];
 
       let cellToUpdate = document.getElementById(cellId);
       cellToUpdate.innerHTML = v;
