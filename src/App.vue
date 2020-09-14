@@ -759,7 +759,7 @@ export default {
             terra &nbsp;market &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
-      monetary &nbsp;engine`,
+      lb monetary engine`,
       visibleRows: 1,
       tab: ["0", "0", "0"],
       pause: true,
