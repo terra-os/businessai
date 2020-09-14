@@ -1,12 +1,14 @@
 export default function () {
   return [
     [
-`- # Microservices / Node & React
-TerraOfficeVM`,"mins","%",`https://regexr.com/ |  https://skaffold.dev  | https://www.npmjs.com/package/supertest | 
-https://jestjs.io/ |  | https://getbootstrap.com/ | base64decode.org | https://docs.nats.io/ |","https://github.com/OptimalBits/bull | https://docs.github.com/en/actions |  
+      `- # Microservices / Node & React
+TerraOfficeVM`, "mins", "%",
+`https://regexr.com/ |  https://skaffold.dev  | https://www.npmjs.com/package/supertest | 
+https://jestjs.io/ |  | https://getbootstrap.com/ | base64decode.org | https://docs.nats.io/ |`,
+`https://github.com/OptimalBits/bull | https://docs.github.com/en/actions |  
 https://stripe.com/docs/api | https://www.npmjs.com/package/react-stripe-checkout   |
 https://stripe.com/docs/api/charges/create | 
-      https://docs.github.com/en/actions/reference/events-that-trigger-workflows`,
+https://docs.github.com/en/actions/reference/events-that-trigger-workflows`,
     ],
     [
 "- Screenshots","301","",`# 
@@ -36,7 +38,7 @@ completes if payment succeeds
 - Tickets Service Orders Service Ticket Prop Type title Title of event this ticket is for price Price of the ticket in USD userId ID of the user who is selling this ticket Order Prop Type userId User who created this order and is trying to buy a ticket status Whether the order is expired, paid, or pending expiresAt Time at which this order expires (user has 15 mins to pay) ticketId ID of the ticket the user is trying to buy Ticket Prop Type Event ticket:created Event ticket:updated version Version of this ticket. Increment every time this ticket is changed title Title of event this ticket is for price Price of the ticket in USD version Ensures that we dont process events twice or out of order
 
     `,
-    `ingress - srv.yaml
+    `ingress-srv.yaml
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress

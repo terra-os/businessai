@@ -538,7 +538,7 @@
               <div id="text-editor">
                 <textarea
                   id="textEdit"
-                  v-model="matrixDev[1][11]"
+                  v-model="cellToEdit"
                   placeholder="Edit your AI Post & Ops here."
                 ></textarea>
               </div>
@@ -553,7 +553,7 @@
                       @click.prevent.right="expandRowsBatch"
                     >{{ corner }}</td>
                     <td
-                      class="cell tbl-head"
+                      class="xcell tbl-head"
                       v-for="(h, index) in header"
                       v-bind:key="index"
                     >{{ h }}</td>
@@ -562,16 +562,12 @@
                   <tr class="row" v-for="(row, rowIndex) in matrixEdit" v-bind:key="rowIndex">
                     <td
                       contenteditable="true"
-                      class="cell"
+                      class="xcell"
                       matrix="Edit"
                       v-for="(cell, colIndex) in row"
                       v-bind:key="colIndex"
                       :row="rowIndex"
                       :col="colIndex"
-                      :tab="Math.floor(rowIndex/(visibleRows+1) + 1)"
-                      :tabrow="rowIndex%(visibleRows+1)"
-                      :class="[(rowIndex%(visibleRows+1) == 0) ? tabClass : '',
-                            ((rowIndex%(visibleRows+1) == 0) && (colIndex == 1)) ? tabTitle : '']"
                       @click="onCellClick"
                     >{{ cell }}</td>
                   </tr>
@@ -700,7 +696,7 @@ import Post from "./views/Post.vue";
 import Report from "./views/Report.vue";
 import Steps from "./views/Steps.vue";
 
-import matrixEdit from "./matrixEdit";
+import matrixEdit from "./matrixEditDemo";
 
 import Icon from "./util/icon.vue";
 import Spreadsheet from "./views/Spreadsheet";
@@ -921,6 +917,9 @@ github.com/ai-accelerator`,
         ],
       ],
       matrixEdit: matrixEdit(),
+      cellToEdit: `AI super productivity app.
+Add ideas and projects to trigger contributors worldwide.
+Or add your services to contribute to world's most interesting projects.`,
       matrixBiz: [
         [
           "a",
@@ -2702,12 +2701,13 @@ github.com/ai-accelerator`,
       let cellId = mat + ":" + row + ":" + col;
 
       // console.log('test onCellClick')
-      // console.log(m, c, t, r, cellId);
+      /* eslint-disable no-console */
+      console.log(m, c, t, r, cellId);
+
+      this.fx = this.currentCellVal;
 
       let cellToUpdate = document.getElementById(cellId);
       cellToUpdate.innerHTML = v;
-
-      // this.fx = this.currentCellVal;
 
       // if ( this.fx[0] === '=' ) {
       //   this.fx += ' ' + m + t + c + r + '';
@@ -3239,6 +3239,16 @@ li.list-group-item {
   margin: 0px;
   border: 0px;
   padding: 0px;
+}
+
+.xcell {
+  padding: 0;
+  max-height: 20px;
+  min-width: 3rem;
+  max-width: 10rem;
+  overflow-x: visible;
+  overflow-wrap: normal;
+  white-space: nowrap;
 }
 
 .cell,
