@@ -1,6 +1,6 @@
 <template>
   <div id="welcome">
-    <h1 contenteditable="true">cloud DA @ AI speed</h1>
+    <h1 contenteditable="true">Cloud DA @ AI speed</h1>
     <p>cloud Data Architect app / monetization engine PoC</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
