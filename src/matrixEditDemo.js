@@ -384,9 +384,109 @@ export * from "./events/types/order-status";
     ],
     [
       [
+        `# Mongoose Refs
 
+- Need to Create a Ticket Model for the tickets inside the Order service
+
+- these tickets will be referenced through the ref / population feature in mongoose
+
+=> 1 -  Create / Save Order + Ticket
+
+=> 2 -  Associate an existing Ticket with a new Order
+
+=> 3 -  Fetch and reference an exisiting Order and its associated Ticket
+`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2047.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2049.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2048.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2050.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2052.png")`,
+    
       ], [
-        
+        `# Defining the Ticket Model / Data Layer for the Order Service
+
+- Import mongoose and define the 3 TS / Mongoose interfaces
+
+import mongoose from 'mongoose';
+
+interface TicketAttrs {
+
+}
+
+interface TicketDoc extends mongoose.Document {
+
+}
+
+interface TicketModel extends mongoose.Model<TicketDoc> {
+  
+}
+
+=> Replication of Data between services !!! 
+  => is there opportunity for a common shared library ? =>> No ! Don't !
+
+- this could be very specific for this service
+  - with attributes just for the Orders service needs to work correctly
+  - there might be other attributes saved in the db of the Tickets Service
+    that are not relevent for the Orders service
+  - Orders Service only needs : Ticket Title, Price, Version and ticketId
+
+=> Definetly we need different defs between Ordrs and Tickets 
+  even if largely overlapping and redundant
+
+- Also Orders might grow to incapsulate things that can be ordered / purchased 
+  that are not tickets !!! - eg: Services / Tasks / CMDs / for Cogito Markets / PMOs
+  - or Parking services
+`,`orders/src/models/ticket.ts
+---
+import mongoose from "mongoose";
+
+interface TicketAttrs {
+  title: string;
+  price: number;
+}
+
+export interface TicketDoc extends mongoose.Document {
+  title: string;
+  price: number;
+}
+
+interface TicketModel extends mongoose.Model<TicketDoc> {
+  build(attrs: TicketAttrs): TicketDoc;
+}
+
+---`,`orders/src/models/ticket.ts
+---
+const ticketSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+      },
+    },
+  }
+);
+
+ticketSchema.statics.build = (attrs: TicketAttrs) => {
+  return new Ticket(attrs);
+};
+
+const Ticket = mongoose.model<TicketDoc, TicketModel>(
+  "Ticket",
+  ticketSchema
+);
+
+export { Ticket };
+---`,`Order Service data structures :
+
+Tickets Service Orders Service Ticket Prop Type title Title of event this ticket is for price Price of the ticket in USD userId ID of the user who is selling this ticket Order Prop Type userId User who created this order and is trying to buy a ticket status Whether the order is expired, paid, or pending expiresAt Time at which this order expires (user has 15 mins to pay) ticketId ID of the ticket the user is trying to buy Ticket Prop Type version Version of this ticket. Increment every time this ticket is changed title Title of event this ticket is for price Price of the ticket in USD version Ensures that we don't process events twice or out of order ticket:updated { id: 'abc', price: 10, version: 2 } ticket:updated { id: 'abc', price: 20, version: 3 } ticket:updated { id: 'abc', price: 30, version: 4 }`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2054.png")`,
+    
       ], [
         
       ], [
