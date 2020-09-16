@@ -140,7 +140,24 @@ metadata:
             dest: .
 
 6 - Set up routing rules in the ingress service # ToDo next
-`,"",""
-]
+`,"","",
+    ],
+[`# The Orders Service
+
+Services 
+1 - auth - Everything related to user signup/signin/signout 
+2 - tickets - Ticket creation/editing. Knows whether a ticket can be updated 
+3 - orders - Order creation/editing 
+4 - expiration - Watches for orders to be created, cancels them after 15 minutes 
+5 - payments - Handles credit card payments. Cancels orders if payments fails, 
+completes if payment succeeds
+
+- Tickets Service Orders Service Ticket Prop Type title Title of event this ticket is for price Price of the ticket in USD userId ID of the user who is selling this ticket Order Prop Type userId User who created this order and is trying to buy a ticket status Whether the order is expired, paid, or pending expiresAt Time at which this order expires (user has 15 mins to pay) ticketId ID of the ticket the user is trying to buy Ticket Prop Type Event ticket:created Event ticket:updated version Version of this ticket. Increment every time this ticket is changed title Title of event this ticket is for price Price of the ticket in USD version Ensures that we don't process events twice or out of order
+
+
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2026.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2025.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2024.png")`,]
   ]
 }
