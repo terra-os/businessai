@@ -488,21 +488,301 @@ export { Ticket };
 Tickets Service Orders Service Ticket Prop Type title Title of event this ticket is for price Price of the ticket in USD userId ID of the user who is selling this ticket Order Prop Type userId User who created this order and is trying to buy a ticket status Whether the order is expired, paid, or pending expiresAt Time at which this order expires (user has 15 mins to pay) ticketId ID of the ticket the user is trying to buy Ticket Prop Type version Version of this ticket. Increment every time this ticket is changed title Title of event this ticket is for price Price of the ticket in USD version Ensures that we don't process events twice or out of order ticket:updated { id: 'abc', price: 10, version: 2 } ticket:updated { id: 'abc', price: 20, version: 3 } ticket:updated { id: 'abc', price: 30, version: 4 }`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2054.png")`,
     
       ], [
-        
+        `# Planning the tasks for the Order Creation Logic
+
+    // Find the ticket the user is trying to order in the database
+
+    // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
+
+    // calculate an expiration date for this order
+
+    // Build the order and save it to the database
+
+    // Publish an event saying that an order was created
+`,`orders/src/routes/new.ts
+---
+  async (req: Request, res: Response) => {
+    const { ticketId } = req.body;
+
+    // Find the ticket the user is trying to order in the database
+    const ticket = await Ticket.findById(ticketId);
+    if (!ticket) {
+      throw new NotFoundError();
+    }
+
+    // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
+
+    // calculate an expiration date for this order
+
+    // Build the order and save it to the database
+
+    // Publish an event saying that an order was created
+
+    res.send({});
+  }
+
+---`,
+    
       ], [
-        
+        `# Finding Reserved Tickets
+
+- Find the order - not cancelled where the ticket we try to reserve
+
+- use mongodb operator : $in :
+
+    // Make sure that this ticket is not already reserved 
+      - Many users might try to buy the same ticket at the same time
+    // Run query to look at all orders. Find an order where the ticket
+    // is the ticket we just found *and* the orders status is *not* cancelled.
+    // If we find an order from that means the ticket *is* reserved
+    const existingOrder = await Order.findOne({
+      ticket: ticket,
+      status: {
+        $in: [
+          OrderStatus.Created,
+          OrderStatus.AwaitingPayment,
+          OrderStatus.Complete
+        ]
+      }
+    });
+    if (existingOrder) {
+      throw new BadRequestError('Ticket is already reserved');
+    }
+`,`new.ts
+---
+    // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
+    // Run query to look at all orders. Find an order where the ticket
+    // is the ticket we just found *and* the orders status is *not* cancelled.
+    // If we find an order from that means the ticket *is* reserved
+    const existingOrder = await Order.findOne({
+      ticket: ticket,
+      status: {
+        $in: [
+          OrderStatus.Created,
+          OrderStatus.AwaitingPayment,
+          OrderStatus.Complete
+        ]
+      }
+    });
+    if (existingOrder) {
+      throw new BadRequestError('Ticket is already reserved');
+    }
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2056.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2055.png")`,
+    
       ], [
-        
+        `# Refactor Finding Existing Order logic 
+
+- build isReserved() method in the TicketDoc interface : - to reduce / re-use code :
+
+export interface TicketDoc extends mongoose.Document {
+  title: string;
+  price: number;
+  isReserved(): Promise<boolean>; // ~ isBooked(), isScheduled(), isPlanned()
+}
+
+- 
+`,`models/ticket.ts
+---
+ticketSchema.statics.build = (attrs: TicketAttrs) => {
+  return new Ticket(attrs);
+};
+ticketSchema.methods.isReserved = async function () {
+  // use function keyword in order to be able to use 'this' inside
+  const existingOrder = await Order.findOne({
+    ticket: this,
+    status: {
+      $in: [
+        OrderStatus.Created,
+        OrderStatus.AwaitingPayment,
+        OrderStatus.Complete,
+      ],
+    },
+  });
+
+  return !!existingOrder; // to return a boolean as per def
+};
+
+const Ticket = mongoose.model<TicketDoc, TicketModel>(
+  "Ticket",
+  ticketSchema
+);
+
+export { Ticket };
+
+---`,`orders/src/routes/new.ts
+---
+async (req: Request, res: Response) => {
+    const { ticketId } = req.body;
+
+    // Find the ticket the user is trying to order in the database
+    const ticket = await Ticket.findById(ticketId);
+    if (!ticket) {
+      throw new NotFoundError();
+    }
+
+    // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
+    // Run query to look at all orders. Find an order where the ticket
+    // is the ticket we just found *and* the orders status is *not* cancelled.
+    // If we find an order from that means the ticket *is* reserved
+    const isReserved = await ticket.isReserved();
+    if (isReserved) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
+
+    // calculate an expiration date for this order
+
+    // Build the order and save it to the database
+
+    // Publish an event saying that an order was created
+
+    res.send({});
+  }
+---`,
+    
       ], [
-        
+        `# Calculate an Expiration Time for the Order
+
+- const EXPIRATION_WINDOW_SECONDS = 15 * 60; // 15mins in seconds
+
+- Move const to an Environment var to not have to re-deploy on change !!!
+
+- Or even fancier - Put it in the DB to allow the admin to change it on the fly !!!
+
+- You can have !!! Per user Expiration Settings !!! <<< ToDo for Cogito !!! 
+
+- 
+`,`new.ts
+---
+  async (req: Request, res: Response) => {
+    const { ticketId } = req.body;
+
+    // Find the ticket the user is trying to order in the database
+    const ticket = await Ticket.findById(ticketId);
+    if (!ticket) {
+      throw new NotFoundError();
+    }
+
+    // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
+    const isReserved = await ticket.isReserved();
+    if (isReserved) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
+
+    // calculate an expiration date for this order
+    const expiration = new Date(); // = Now - Current Date/Time
+    expiration.setSeconds(
+      expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS
+    );
+
+    // Build the order and save it to the database
+    const order = Order.build({
+      userId: req.currentUser!.id,
+      status: OrderStatus.Created,
+      expiresAt: expiration,
+      ticket,
+    });
+    await order.save();
+
+    // Publish an event saying that an order was created
+
+    res.status(201).send(order);
+---`,
+    
       ], [
-        
+        `# Test Suite Setup for Orders Service
+
+- Copy test/setup from tickets dir
+
+- Cmd + Shift + P - Reload VSCode window
+
+- Copy __mocks__ folder from tickets
+`,`
+---
+
+---`,
+    
       ], [
-        
+        `# Asserting Tickets Exist test
+
+- Tests :
+  - user tries to reserve a ticket that dos not exist
+  - user tries to reserve a ticket already reserved
+  - test the successfully reserving a ticket
+
+- we need to prep tickets in db to ensure tests work ...
+
+- 
+`,`new.test.ts
+---
+import mongoose from "mongoose";
+import request from "supertest";
+import { app } from "../../app";
+
+it("returns an error if the ticket does not exist", async () => {
+  const ticketId = mongoose.Types.ObjectId();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", global.signin())
+    .send({ ticketId })
+    .expect(404);
+});
+
+it("returns an error if the ticket is already reserved", async () => {});
+
+it("reserves a ticket", async () => {});
+
+---`,
+    
       ], [
-        
+        `# Testing / Asserting Reserved Tickets
+
+- 
+`,`new.test.ts
+---
+it("returns an error if the ticket is already reserved", async () => {
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+  const order = Order.build({
+    ticket,
+    userId: "randomUserId",
+    status: OrderStatus.Created,
+    expiresAt: new Date(),
+  });
+  await order.save();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", global.signin())
+    .send({ ticketId: ticket.id })
+    .expect(400);
+});
+---`,
+    
       ], [
-        
+        `# Testing the New Order Created Successfully case
+
+- 
+`,`new.test.ts
+---
+it("reserves a ticket", async () => {
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", global.signin())
+    .send({ ticketId: ticket.id })
+    .expect(201);
+});
+---`,
+    
       ]
     ],
     [
