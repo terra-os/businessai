@@ -1195,13 +1195,211 @@ it('marks an order as cancelled', async () => {
 ---`,
     
       ], [
-        
+        `# Orders Service Events
+Orders Service emits 2 types of Events:
+- order:created
+- order:cancelled
+
+Order:Created Event
+Tickets service 
+needs to be told that one of its tickets has been reserved, 
+and no further edits to that ticket should be allowed / lockdown ticket !!
+
+Payments service 
+needs to know there is a new order 
+that a user might submit a payment for 
+
+Expiration service 
+needs to start a 15 minute timer to eventually time out this order
+
+Order:Cancelled Event 
+- Tickets service 
+should unreserve a ticket if the corresponding order has been cancelled 
+so this ticket can be edited again 
+- Payments Service
+should know that any incoming payments for this order should be rejected
+
+Events Creation process :
+0 - Add Event name to the Subjects enum in 
+1 - Create Event Interface in common/src/events with Subject and Data
+2 - then Republish the Common NPM  Module
+3 - then Update the Common Module inside the Orders Service
+`,`common/src/events/subjects.ts
+---
+export enum Subjects {
+  TicketCreated = "ticket:created",
+  TicketUpdated = "ticket:updated",
+}
+
+---`,`common/src/events/ticket-created-event.ts
+---
+import { Subjects } from "./subjects";
+
+export interface TicketCreatedEvent {
+  subject: Subjects.TicketCreated;
+  data: {
+    id: string;
+    title: string;
+    price: number;
+    userId: string;
+  };
+}
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2074.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2075.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2072.png")`,
+    
       ], [
-        
+        `# Creating the Events for the Orders Service
+
+- order:created data needs to include
+  - for Tickets service :
+    - ticket.id
+  - for Payments service :
+    - user.id
+    - ticket.price
+  - for Expiration service
+    - order.expiresAt
+    - order.id
+
+- We'll add also order.status as a provision for future Services
+
+- order:cancelled data needs to include :
+  - for Tickets service :
+    - ticket.id - to know what ticket to un-reserve
+  - for Payments service:
+    - order.id
+
+System Design Decision : 
+A - Share Maximum info in events
+B - Share Minimum info in Events - in our case we share minimum info needed
+
+ because we know exactly what services and how they will use the events
+
+- This is not Future Proof - There might be future servces that might need more data !!!
+- in case of changes - the common  library needs to be Redeployed !!!
+
+=> COGITO - might need to go with Max info until stabilized
+
+$ common % npm run pub 
+  cd .. && cd orders
+$ orders % npm update @w3ai/common  
+`,`order-created-event.ts
+---
+import { Subjects } from "./subjects";
+import { OrderStatus } from "./types/order-status";
+
+export interface OrderCreatedEvent {
+  subject: Subjects.OrderCreated;
+  data: {
+    id: string;
+    status: OrderStatus;
+    userId: string;
+    expiresAt: string;
+    ticket: {
+      id: string;
+      price: number;
+    };
+  };
+}
+
+---`,`order-cancelled-event.ts
+---
+import { Subjects } from "./subjects";
+
+export interface OrderCancelledEvent {
+  subject: Subjects.OrderCancelled;
+  data: {
+    id: string;
+    ticket: {
+      id: string;
+    };
+  };
+}
+
+---`,`common/src/events/subjects.ts
+---
+export enum Subjects {
+  TicketCreated = "ticket:created",
+  TicketUpdated = "ticket:updated",
+
+  OrderCreated = "order:created",
+  OrderCancelled = "order:cancelled",
+}
+
+---`,`common/src/index.ts
+---
+// Export errors and middlewares initially in market auth
+export * from "./errors/bad-request-error";
+export * from "./errors/custom-error";
+export * from "./errors/database-connection-error";
+export * from "./errors/not-authorized-error";
+export * from "./errors/not-found-error";
+export * from "./errors/request-validation-error";
+
+export * from "./middlewares/current-user";
+export * from "./middlewares/error-handler";
+export * from "./middlewares/require-auth";
+export * from "./middlewares/validate-request";
+
+export * from "./events/base-listener";
+export * from "./events/base-publisher";
+export * from "./events/subjects";
+export * from "./events/ticket-created-event";
+export * from "./events/ticket-updated-event";
+export * from "./events/types/order-status";
+export * from "./events/order-cancelled-event";
+export * from "./events/order-created-event";
+
+---`,
+    
       ], [
-        
+        `# Implementing Orders Publishers
+
+- 
+`,`order-created-publisher.ts
+---
+import { Publisher, OrderCreatedEvent, Subjects } from "@w3ai/common";
+
+export class OrderCreatedPublisher extends Publisher<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+}
+
+---`,`order-cancelled-publisher.ts
+---
+import { Publisher, OrderCancelledEvent, Subjects } from "@w3ai/common";
+
+export class OrderCancelledPublisher extends Publisher<
+  OrderCancelledEvent
+> {
+  readonly subject = Subjects.OrderCancelled;
+}
+
+
+---`,
+    
       ], [
-        
+        `# Publishing the Order Created Event
+
+- expiresAt - should be shared in a Time Zone agnostic way
+  => a UTC timestamp
+
+
+`,`new.ts
+---
+    // Publish an event saying that an order was created
+    new OrderCreatedPublisher(natsWrapper.client).publish({
+      id: order.id,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      ticket: {
+        id: ticket.id,
+        price: ticket.price
+      }
+    })
+---`,
+    
       ]
 
     ],
