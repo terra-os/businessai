@@ -1686,7 +1686,26 @@ tickets-mongo-depl-66bffb87c6-5jmsq     1/1     Running   0          4m59s
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20170.png")`,
     
       ], [
-        
+        `# Update Dependencies on Local Machine for TS to Know / Use Def files 
+
+- $ payments % npm install
+
+- Listeners: Order:created & order:cancelled
+
+- Publishers: Payment:created
+
+- We need Mongoose Models for :
+  - Orders
+  - Payments / charges 
+
+- What Data do we need in Orders model in the Payments Service :
+  - id
+  - status
+  - version
+  - userId
+  - price
+`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20174.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20173.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20172.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20171.png")`,
+    
       ], [
         
       ]
