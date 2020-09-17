@@ -1507,9 +1507,35 @@ it("emits an order cancelled event", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2077.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2076.png")`,
     
       ], [
-        
+        `# Listener Creation
+
+- extending the base-listener class from the common library
+`,`
+---
+
+---`,
+    
       ], [
-        
+        `# Blueprint for Listeners
+
+- 
+`,`orders/src/events/listeners/ticket-created-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Subjects, Listener, TicketCreatedEvent } from "@w3ai/common";
+import { Ticket } from "../../models/ticket";
+
+export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
+  readonly subject = Subjects.TicketCreated;
+  queueGroupName = 'orders-service';
+
+  onMessage(data: TicketCreatedEvent['data'], msg: Message) {
+
+  }
+}
+
+---`,
+    
       ], [
         
       ], [
