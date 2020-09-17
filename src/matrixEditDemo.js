@@ -2564,7 +2564,33 @@ orderSchema.plugin(updateIfCurrentPlugin);
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20121.png")`,
     
       ], [
-        
+        `# Fixing some tests
+
+2 - Fix up some tests - we are creating some Tickets in the Orders service 
+  without providing them an ID Next Couple Videos 
+
+adding to the tests for : delete, index, new and show.test.ts
+
+import mongoose from 'mongoose';
+
+and
+
+id: mongoose.Types.ObjectId().toHexString(),
+
+3 - Fix up some route handlers - we are publishing events around orders 
+  but not providing the version of the order
+`,`delete.test.ts, index.test.ts
+---
+it("marks an order as cancelled", async () => {
+  // create a ticket with Ticket model
+  const ticket = Ticket.build({
+    id: mongoose.Types.ObjectId().toHexString(),
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20122.png")`,
+    
       ], [
         
       ], [
