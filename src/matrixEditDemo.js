@@ -1811,7 +1811,45 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20153.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20152.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20151.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,
     
       ], [
-        
+        `# Creating a queue in Expiration Service / Bull JS
+
+- Jobs are like an Event in NATS
+
+- Job type / description like a NATS Channel
+
+- use Queue class from Bull to produce and process jobs
+  - 1st param ~ channel name = Bucket inside Redis that we want to store 
+  the jobs in temporarely
+
+- Job - simmilar to the Message from NATS 
+  - a wrapper
+
+- `,`expiration-queue.ts
+---
+import Queue from "bull";
+
+// Describes Data to be stored inside a Job
+interface Payload {
+  orderId: string;
+}
+
+const expirationQueue = new Queue<Payload>("order:expiration", {
+  redis: {
+    host: process.env.REDIS_HOST,
+  },
+});
+
+expirationQueue.process(async (job) => {
+  console.log(
+    "I want to publish an expiration:complete event for orderId",
+    job.data.orderId
+  );
+});
+
+export { expirationQueue };
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20153.png")`,
+    
       ], [
         
       ]
