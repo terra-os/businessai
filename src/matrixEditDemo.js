@@ -2101,7 +2101,75 @@ it("publishes a ticket updated event", async () => {
 ---`,
     
       ], [
-        
+        `# Order Cancelled Listener
+
+- Tickets service should unreserve a ticket if the corresponding order 
+  has been cancelled so this ticket can be edited again
+
+- Payments should know that any incoming payments for this order should be rejected
+
+- 
+`,`order-cancelled-listener.ts
+---
+import {
+  Listener,
+  OrderCancelledEvent,
+  Subjects,
+} from "@w3ai/common";
+import { Message } from "node-nats-streaming";
+import { queueGroupName } from "./queue-group-name";
+import { Ticket } from "../../models/ticket";
+import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
+
+export class OrderCancelledListener extends Listener<
+  OrderCancelledEvent
+> {
+  readonly subject = Subjects.OrderCancelled;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCancelledEvent["data"], msg: Message) {
+    const ticket = await Ticket.findById(data.ticket.id);
+
+    if (!ticket) {
+      throw new Error("Ticket not found");
+    }
+
+    ticket.set({ orderId: undefined });
+    await ticket.save();
+    await new TicketUpdatedPublisher(this.client).publish({
+      id: ticket.id,
+      orderId: ticket.orderId,
+      userId: ticket.userId,
+      price: ticket.price,
+      title: ticket.title,
+      version: ticket.version,
+    });
+
+    msg.ack();
+  }
+}
+
+---`,`order-cancelled-listener.ts
+---
+import {
+  Listener,
+  OrderCancelledEvent,
+  Subjects,
+} from "@w3ai/common";
+import { Message } from "node-nats-streaming";
+import { queueGroupName } from "./queue-group-name";
+
+export class OrderCancelledListener extends Listener<
+  OrderCancelledEvent
+> {
+  readonly subject = Subjects.OrderCancelled;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCancelledEvent["data"], msg: Message) {}
+}
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20138.png")`,
+    
       ], [
         
       ], [
