@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable no-console */
+/* eslint-disable no-console */ /* eslint-disable no-console */
 <template>
   <div id="app">
     <app-header />
@@ -15,27 +14,37 @@
               <div contenteditable="true">
                 <h1 class="long">{{ team.title }}&nbsp;</h1>
                 <h1 class="short">{{ team.titleShort }}&nbsp;</h1>
-                <h5 class="long" contenteditable="true">{{ team.subtitle }}&nbsp;</h5>
-                <h5 class="short" contenteditable="true">{{ team.subtitleShort }}&nbsp;</h5>
+                <h5 class="long" contenteditable="true">
+                  {{ team.subtitle }}&nbsp;
+                </h5>
+                <h5 class="short" contenteditable="true">
+                  {{ team.subtitleShort }}&nbsp;
+                </h5>
               </div>
 
               <div class="title" title="Start / Stop Engine">
                 <button
                   class="btn btn-success player"
                   @click="pause ? start() : stop()"
-                >{{ pause ? '>' : '| |'}}</button>
+                >
+                  {{ pause ? '>' : '| |' }}
+                </button>
               </div>
               <div class="title">
                 <div
                   class="config-btn"
                   title="cycle time: 1-9"
                   @click="cycleId++"
-                >{{ cycle[cycleId%cycle.length] }}</div>
+                >
+                  {{ cycle[cycleId % cycle.length] }}
+                </div>
                 <div
                   class="config-btn"
                   title="cycle time: sec / min"
                   @click="timeUnitId++"
-                >&nbsp; {{ timeUnit[timeUnitId%timeUnit.length] }} &nbsp;</div>
+                >
+                  &nbsp; {{ timeUnit[timeUnitId % timeUnit.length] }} &nbsp;
+                </div>
               </div>
               <div class="title" title="Manual / batch cycles">
                 <button class="btn btn-warning player" @click="play">1</button>
@@ -45,12 +54,16 @@
                   class="config-btn"
                   title="run > com > edu > soc > dev > ops > test > bank"
                   @click="viewId++"
-                >&nbsp; {{ view[viewId%view.length] }} &nbsp;</div>
+                >
+                  &nbsp; {{ view[viewId % view.length] }} &nbsp;
+                </div>
                 <div
                   class="config-btn"
                   title="Switch views: fb | xls | yml | d3"
                   @click="fbview = !fbview"
-                >&nbsp; {{ fbview ? 'fb' : 'xls' }} &nbsp;</div>
+                >
+                  &nbsp; {{ fbview ? 'fb' : 'xls' }} &nbsp;
+                </div>
               </div>
               <!-- <div class="title" contenteditable="true">
                 <div class="config-btn">&nbsp;Sign Up&nbsp;</div>
@@ -64,14 +77,16 @@
                   <li
                     v-for="(title, devPostId) in newDevPosts.slice(0, 3)"
                     v-bind:key="devPostId"
-                  >{{ title }}</li>
+                  >
+                    {{ title }}
+                  </li>
                 </ul>
               </div>
               <div class="title long">
                 <h2>{{ team.newDevTitle }}</h2>
               </div>
               <div class="title short" @click="postNameId++">
-                <h2>{{ postName[postNameId%postName.length] }}</h2>
+                <h2>{{ postName[postNameId % postName.length] }}</h2>
               </div>
             </div>
 
@@ -80,14 +95,16 @@
                 <h2>{{ team.newOpsTitle }}</h2>
               </div>
               <div class="title short" @click="opsNameId++">
-                <h2>{{ opsName[opsNameId%opsName.length] }}</h2>
+                <h2>{{ opsName[opsNameId % opsName.length] }}</h2>
               </div>
               <div class="title news-scroller" contenteditable="true">
                 <ul class="scroller">
                   <li
                     v-for="(title, opsPostId) in newOpsPosts.slice(0, 3)"
                     v-bind:key="opsPostId"
-                  >{{ title }}</li>
+                  >
+                    {{ title }}
+                  </li>
                 </ul>
               </div>
             </div>
@@ -99,7 +116,7 @@
                 class="flag"
                 v-for="flag in team.flags"
                 v-bind:key="flag"
-                :src="require('./assets/flags/'+ flag + '.png')"
+                :src="require('./assets/flags/' + flag + '.png')"
               />
             </div>
           </div>
@@ -107,9 +124,22 @@
           <div id="ai-protocol">
             <div id="ai-prog">
               <div class="buttons">
-                <button class="next btn btn-warning" @click="setCell('b-table', 2, 3, 'Ok')">Rank</button>
-                <button class="next btn btn-primary" title="Next Option" @click="nextBranch">Options</button>
-                <button class="next btn btn-primary" @click="addNewRule">Rule:</button>
+                <button
+                  class="next btn btn-warning"
+                  @click="setCell('b-table', 2, 3, 'Ok')"
+                >
+                  Rank
+                </button>
+                <button
+                  class="next btn btn-primary"
+                  title="Next Option"
+                  @click="nextBranch"
+                >
+                  Options
+                </button>
+                <button class="next btn btn-primary" @click="addNewRule">
+                  Rule:
+                </button>
                 <input
                   type="text"
                   class="input-add-new"
@@ -122,19 +152,32 @@
               </div>
               <ul class="list-group">
                 <transition-group name="slide-down" type="animation" appear>
-                  <li class="list-group-item" v-for="project in viewProjects" v-bind:key="project">
+                  <li
+                    class="list-group-item"
+                    v-for="project in viewProjects"
+                    v-bind:key="project"
+                  >
                     <div class="table-title">
-                      <h3 class="line" title="Patent blockchain status - % tests passed">
+                      <h3
+                        class="line"
+                        title="Patent blockchain status - % tests passed"
+                      >
                         &nbsp;&nbsp;tx(
                         <img
                           class="owner"
-                          :src="require('./assets/img/users/2'+ project + '.png')"
+                          :src="
+                            require('./assets/img/users/2' + project + '.png')
+                          "
                         />
                         <ai-icon :bits="projectIconBits"></ai-icon>&#65121;
                         <ai-icon :bits="serviceIconBits"></ai-icon>
                         <img
                           class="owner"
-                          :src="require('./assets/img/users/2'+ services[0] + '.png')"
+                          :src="
+                            require('./assets/img/users/2' +
+                              services[0] +
+                              '.png')
+                          "
                         />
                         <!-- {{ services[0] ops }} -->
                         , {{ branch }}/{{ branches[0] }},
@@ -159,14 +202,22 @@
                             class="cell config-btn"
                             title="Click to expand visible rows"
                             @click="expandRows"
-                          >{{ corner }}</td>
+                          >
+                            {{ corner }}
+                          </td>
                           <td
                             class="cell tbl-head"
                             v-for="(h, index) in header"
                             v-bind:key="index"
-                          >{{ h }}</td>
+                          >
+                            {{ h }}
+                          </td>
                         </tr>
-                        <tr class="row" v-for="(row, rowIndex) in matrixBiz" v-bind:key="rowIndex">
+                        <tr
+                          class="row"
+                          v-for="(row, rowIndex) in matrixBiz"
+                          v-bind:key="rowIndex"
+                        >
                           <td
                             contenteditable="true"
                             class="cell"
@@ -175,12 +226,18 @@
                             v-bind:key="colIndex"
                             :row="rowIndex"
                             :col="colIndex"
-                            :tab="Math.floor(rowIndex/(visibleRows+1) + 1)"
-                            :tabrow="rowIndex%(visibleRows+1)"
-                            :class="[(rowIndex%(visibleRows+1) == 0) ? tabClass : '',
-                                  ((rowIndex%(visibleRows+1) == 0) && (colIndex == 1)) ? tabTitle : '']"
+                            :tab="Math.floor(rowIndex / (visibleRows + 1) + 1)"
+                            :tabrow="rowIndex % (visibleRows + 1)"
+                            :class="[
+                              rowIndex % (visibleRows + 1) == 0 ? tabClass : '',
+                              rowIndex % (visibleRows + 1) == 0 && colIndex == 1
+                                ? tabTitle
+                                : '',
+                            ]"
                             @click="onCellClick"
-                          >{{ cell }}</td>
+                          >
+                            {{ cell }}
+                          </td>
                         </tr>
                       </table>
                     </div>
@@ -198,8 +255,12 @@
 
             <div id="ai-jobs">
               <div class="buttons">
-                <button class="next btn btn-primary" @click="nextProject">Projects</button>
-                <button class="next btn btn-primary" @click="addProject">+</button>
+                <button class="next btn btn-primary" @click="nextProject">
+                  Projects
+                </button>
+                <button class="next btn btn-primary" @click="addProject">
+                  +
+                </button>
                 <input
                   type="text"
                   class="input-add-new"
@@ -211,44 +272,74 @@
                   class="next btn btn-warning"
                   @click="uploadProject"
                   title="Update project to ai store"
-                >u</button>
+                >
+                  u
+                </button>
                 <button
                   class="next btn btn-warning"
                   @click="sheetView = !sheetView"
                   title="Switch Tabs/Folder direction: Vertical/Horizontal"
-                >{{ sheetView ? '-' : '|' }}</button>
+                >
+                  {{ sheetView ? '-' : '|' }}
+                </button>
               </div>
               <ul class="list-group">
                 <transition-group name="slide-up" type="animation" appear>
-                  <li class="list-group-item" v-for="project in viewProjects" v-bind:key="project">
+                  <li
+                    class="list-group-item"
+                    v-for="project in viewProjects"
+                    v-bind:key="project"
+                  >
                     <div class="table-title">
-                      <h3 class="long" title="Dev Project & Job Demand in your social network">
+                      <h3
+                        class="long"
+                        title="Dev Project & Job Demand in your social network"
+                      >
                         <!-- <div class="icon3x3prj">{{ projectIcon }}</div>&nbsp;  -->
                         <ai-icon :bits="projectIconBits"></ai-icon>
                         <!-- title[{{ project }}]  -->
                         {{ team.demoProjects[project] }}
                         <img
                           class="owner"
-                          :src="require('./assets/img/users/2'+ project + '.png')"
+                          :src="
+                            require('./assets/img/users/2' + project + '.png')
+                          "
                         />
-                        <img class="icon" :src="require('./assets/icons/share.png')" />
+                        <img
+                          class="icon"
+                          :src="require('./assets/icons/share.png')"
+                        />
                         [{{ project }}]
                       </h3>
 
-                      <h3 class="short" title="Dev Project & Job Demand in your social network">
+                      <h3
+                        class="short"
+                        title="Dev Project & Job Demand in your social network"
+                      >
                         <!-- <div class="icon3x3prj">{{ projectIcon }}</div>&nbsp; -->
                         <ai-icon :bits="projectIconBits"></ai-icon>
                         <!-- title[{{ project }}]  -->
                         {{ team.demoProjects[project] }}
                         <img
                           class="owner"
-                          :src="require('./assets/img/users/2'+ project + '.png')"
+                          :src="
+                            require('./assets/img/users/2' + project + '.png')
+                          "
                         />
-                        <img class="icon" :src="require('./assets/icons/share.png')" />
+                        <img
+                          class="icon"
+                          :src="require('./assets/icons/share.png')"
+                        />
                         [{{ project }}]
                       </h3>
 
-                      <div class="fork" title="fork (copy) project" @click="onProjectFork">f</div>
+                      <div
+                        class="fork"
+                        title="fork (copy) project"
+                        @click="onProjectFork"
+                      >
+                        f
+                      </div>
                     </div>
 
                     <!-- <section class="views"> -->
@@ -270,19 +361,30 @@
                             class="cell config-btn"
                             title="Click to expand visible rows"
                             @click="expandRows"
-                          >{{ corner }}</td>
+                          >
+                            {{ corner }}
+                          </td>
                           <td
                             class="cell tbl-head"
                             v-for="(h, index) in header"
                             v-bind:key="index"
-                          >{{ h }}</td>
+                          >
+                            {{ h }}
+                          </td>
                         </tr>
 
                         <div v-if="sheetView">
-                          <Spreadsheet :sheet="matrixDev" :tabs="sheetView"></Spreadsheet>
+                          <Spreadsheet
+                            :sheet="matrixDev"
+                            :tabs="sheetView"
+                          ></Spreadsheet>
                         </div>
 
-                        <tr class="row" v-for="(row, rowIndex) in matrixDev" v-bind:key="rowIndex">
+                        <tr
+                          class="row"
+                          v-for="(row, rowIndex) in matrixDev"
+                          v-bind:key="rowIndex"
+                        >
                           <td
                             class="cell"
                             style="position: relative;"
@@ -292,18 +394,30 @@
                             :row="rowIndex"
                             :col="colIndex"
                             :valueini="matrixDev[rowIndex][colIndex]"
-                            :tab="Math.floor(rowIndex/(visibleRows+1) + 1)"
-                            :tabrow="rowIndex%(visibleRows+1)"
+                            :tab="Math.floor(rowIndex / (visibleRows + 1) + 1)"
+                            :tabrow="rowIndex % (visibleRows + 1)"
                             :title="matrixDev[rowIndex][colIndex]"
                             :class="[
-                                        (rowIndex%(visibleRows+1) == 0) ? tabClass : '',
-                                        ((rowIndex%(visibleRows+1) == 0) && (colIndex == 1)) ? tabTitle : '',
-                                        (matrixDev[rowIndex][colIndex] == 'Click') ? checkBtn : '',
-                                        (matrixDev[rowIndex][colIndex] == 'Cmd') ? cmdBtn : '',
-                                        (matrixDev[rowIndex][colIndex] == 'Order') ? orderBtn : '',
-                                        (matrixDev[rowIndex][colIndex] == 'Verbal') ? verbalBtn : '',
-                                        (matrixDev[rowIndex][colIndex] == 'Post') ? postClass : ''
-                                      ]"
+                              rowIndex % (visibleRows + 1) == 0 ? tabClass : '',
+                              rowIndex % (visibleRows + 1) == 0 && colIndex == 1
+                                ? tabTitle
+                                : '',
+                              matrixDev[rowIndex][colIndex] == 'Click'
+                                ? checkBtn
+                                : '',
+                              matrixDev[rowIndex][colIndex] == 'Cmd'
+                                ? cmdBtn
+                                : '',
+                              matrixDev[rowIndex][colIndex] == 'Order'
+                                ? orderBtn
+                                : '',
+                              matrixDev[rowIndex][colIndex] == 'Verbal'
+                                ? verbalBtn
+                                : '',
+                              matrixDev[rowIndex][colIndex] == 'Post'
+                                ? postClass
+                                : '',
+                            ]"
                           >
                             <!-- <div contenteditable="true" :id="'Dev:' + rowIndex + ':' + colIndex" 
                                 class="cell" 
@@ -325,14 +439,25 @@
                               matrix="Dev"
                               :row="rowIndex"
                               :col="colIndex"
-                              :tab="Math.floor(rowIndex/(visibleRows+1) + 1)"
-                              :tabrow="rowIndex%(visibleRows+1)"
+                              :tab="
+                                Math.floor(rowIndex / (visibleRows + 1) + 1)
+                              "
+                              :tabrow="rowIndex % (visibleRows + 1)"
                               :class="[
-                                          (rowIndex%(visibleRows+1) == 0) ? tabClass : '',
-                                          ((rowIndex%(visibleRows+1) == 0) && (colIndex == 1)) ? tabTitle : '',
-                                          (matrixDev[rowIndex][colIndex] == 'Click') ? checkBtn : '',
-                                          (matrixDev[rowIndex][colIndex] == 'Post') ? postClass : ''
-                                        ]"
+                                rowIndex % (visibleRows + 1) == 0
+                                  ? tabClass
+                                  : '',
+                                rowIndex % (visibleRows + 1) == 0 &&
+                                colIndex == 1
+                                  ? tabTitle
+                                  : '',
+                                matrixDev[rowIndex][colIndex] == 'Click'
+                                  ? checkBtn
+                                  : '',
+                                matrixDev[rowIndex][colIndex] == 'Post'
+                                  ? postClass
+                                  : '',
+                              ]"
                               v-on:keyup="fx = $event.target.value"
                             />
                           </td>
@@ -353,8 +478,12 @@
 
             <div id="ai-ops">
               <div class="buttons">
-                <button class="next btn btn-primary" @click="nextService">Services</button>
-                <button class="next btn btn-primary" @click="load = !load">+</button>
+                <button class="next btn btn-primary" @click="nextService">
+                  Services
+                </button>
+                <button class="next btn btn-primary" @click="load = !load">
+                  +
+                </button>
                 <input
                   type="text"
                   class="input-add-new"
@@ -363,11 +492,17 @@
                   size="40"
                   maxlength="40"
                 />
-                <button class="next btn btn-warning" @click="runOneOps">+</button>
+                <button class="next btn btn-warning" @click="runOneOps">
+                  +
+                </button>
               </div>
               <ul class="list-group">
                 <transition-group name="slide-down" type="animation" appear>
-                  <li class="list-group-item" v-for="service in services" v-bind:key="service">
+                  <li
+                    class="list-group-item"
+                    v-for="service in services"
+                    v-bind:key="service"
+                  >
                     <div class="table-title">
                       <h3
                         class="long"
@@ -379,9 +514,14 @@
                         {{ team.demoServices[service] }}
                         <img
                           class="owner"
-                          :src="require('./assets/img/users/2'+ service + '.png')"
+                          :src="
+                            require('./assets/img/users/2' + service + '.png')
+                          "
                         />
-                        <img class="icon" :src="require('./assets/icons/share.png')" />
+                        <img
+                          class="icon"
+                          :src="require('./assets/icons/share.png')"
+                        />
                         [{{ service }}]
                       </h3>
 
@@ -395,13 +535,24 @@
                         {{ team.demoServices[service] }}
                         <img
                           class="owner"
-                          :src="require('./assets/img/users/2'+ service + '.png')"
+                          :src="
+                            require('./assets/img/users/2' + service + '.png')
+                          "
                         />
-                        <img class="icon" :src="require('./assets/icons/share.png')" />
+                        <img
+                          class="icon"
+                          :src="require('./assets/icons/share.png')"
+                        />
                         [{{ service }}]
                       </h3>
 
-                      <div class="fork" title="fork (copy) service" @click="onServiceFork">f</div>
+                      <div
+                        class="fork"
+                        title="fork (copy) service"
+                        @click="onServiceFork"
+                      >
+                        f
+                      </div>
                     </div>
 
                     <!-- <section class="views"> -->
@@ -419,12 +570,16 @@
                             class="cell config-btn"
                             title="Click to expand visible rows"
                             @click="expandRows"
-                          >{{ corner }}</td>
+                          >
+                            {{ corner }}
+                          </td>
                           <td
                             class="cell tbl-head"
                             v-for="(h, index) in header"
                             v-bind:key="index"
-                          >{{ h }}</td>
+                          >
+                            {{ h }}
+                          </td>
                         </tr>
 
                         <template v-if="tab[2] === '0'">
@@ -441,16 +596,29 @@
                               v-bind:key="colIndex"
                               :row="rowIndex"
                               :col="colIndex"
-                              :tab="Math.floor(rowIndex/(visibleRows+1) + 1)"
-                              :tabrow="rowIndex%(visibleRows+1)"
+                              :tab="
+                                Math.floor(rowIndex / (visibleRows + 1) + 1)
+                              "
+                              :tabrow="rowIndex % (visibleRows + 1)"
                               :class="[
-                                        (rowIndex%(visibleRows+1) == 0) ? tabClass : '',
-                                        ((rowIndex%(visibleRows+1) == 0) && (colIndex == 1)) ? tabTitle : '',
-                                        (matrixOps[rowIndex][colIndex] == 'Click') ? checkBtn : '',
-                                        (matrixOps[rowIndex][colIndex] == 'Post') ? postClass : ''
-                                      ]"
+                                rowIndex % (visibleRows + 1) == 0
+                                  ? tabClass
+                                  : '',
+                                rowIndex % (visibleRows + 1) == 0 &&
+                                colIndex == 1
+                                  ? tabTitle
+                                  : '',
+                                matrixOps[rowIndex][colIndex] == 'Click'
+                                  ? checkBtn
+                                  : '',
+                                matrixOps[rowIndex][colIndex] == 'Post'
+                                  ? postClass
+                                  : '',
+                              ]"
                               @click="onCellClick"
-                            >{{ cell }}</td>
+                            >
+                              {{ cell }}
+                            </td>
                           </tr>
                         </template>
 
@@ -468,16 +636,29 @@
                               v-bind:key="colIndex"
                               :row="rowIndex"
                               :col="colIndex"
-                              :tab="Math.floor(rowIndex/(visibleRows+1) + 1)"
-                              :tabrow="rowIndex%(visibleRows+1)"
+                              :tab="
+                                Math.floor(rowIndex / (visibleRows + 1) + 1)
+                              "
+                              :tabrow="rowIndex % (visibleRows + 1)"
                               :class="[
-                                        (rowIndex%(visibleRows+1) == 0) ? tabClass : '',
-                                        ((rowIndex%(visibleRows+1) == 0) && (colIndex == 1)) ? tabTitle : '',
-                                        (matrixOps[rowIndex][colIndex] == 'Click') ? checkBtn : '',
-                                        (matrixOps[rowIndex][colIndex] == 'Post') ? postClass : ''
-                                      ]"
+                                rowIndex % (visibleRows + 1) == 0
+                                  ? tabClass
+                                  : '',
+                                rowIndex % (visibleRows + 1) == 0 &&
+                                colIndex == 1
+                                  ? tabTitle
+                                  : '',
+                                matrixOps[rowIndex][colIndex] == 'Click'
+                                  ? checkBtn
+                                  : '',
+                                matrixOps[rowIndex][colIndex] == 'Post'
+                                  ? postClass
+                                  : '',
+                              ]"
                               @click="onCellClick"
-                            >{{ cell }}</td>
+                            >
+                              {{ cell }}
+                            </td>
                           </tr>
                         </template>
                       </table>
@@ -511,26 +692,42 @@
                 </h2>
               </div>
               <div class="input-edit" contenteditable="true">{{ fx }}</div>
-              <button class="edit btn btn-warning" @click="show = !show;">Clone</button>
+              <button class="edit btn btn-warning" @click="show = !show">
+                Clone
+              </button>
               <button class="edit btn btn-warning" @click="runOneOps">+</button>
               <button
                 class="edit player btn btn-success"
                 @click="pause ? start() : stop()"
-              >{{ pause ? '>' : '| |' }}</button>
+              >
+                {{ pause ? '>' : '| |' }}
+              </button>
               <div>
                 <h2 class="title" contenteditable="true"></h2>
               </div>
-              <button class="edit btn btn-primary" @click="show = !show;">Interests</button>
-              <button class="edit btn btn-primary" @click="show = !show;">Members</button>
-              <button class="edit btn btn-primary" @click="show = !show;">Projects</button>
-              <button class="edit btn btn-primary" @click="show = !show;">Services</button>
-              <button class="edit btn btn-primary" @click="show = !show;">Wiki</button>
-              <button class="edit btn btn-danger" @click="show = !show;">Code</button>
-              <button class="edit btn btn-warning" @click="show = !show;">
+              <button class="edit btn btn-primary" @click="show = !show">
+                Interests
+              </button>
+              <button class="edit btn btn-primary" @click="show = !show">
+                Members
+              </button>
+              <button class="edit btn btn-primary" @click="show = !show">
+                Projects
+              </button>
+              <button class="edit btn btn-primary" @click="show = !show">
+                Services
+              </button>
+              <button class="edit btn btn-primary" @click="show = !show">
+                Wiki
+              </button>
+              <button class="edit btn btn-danger" @click="show = !show">
+                Code
+              </button>
+              <button class="edit btn btn-warning" @click="show = !show">
                 <b>&lt;</b>
               </button>
-              <button class="edit btn btn-success" @click="modeId++;">
-                <b>{{ mode[modeId%mode.length] }}</b>
+              <button class="edit btn btn-success" @click="modeId++">
+                <b>{{ mode[modeId % mode.length] }}</b>
               </button>
             </div>
 
@@ -551,15 +748,23 @@
                       title="Click to expand visible rows or Right click for full tab view"
                       @click="expandRows"
                       @click.prevent.right="expandRowsBatch"
-                    >{{ corner }}</td>
+                    >
+                      {{ corner }}
+                    </td>
                     <td
                       class="xcell tbl-head"
                       v-for="(h, index) in header"
                       v-bind:key="index"
-                    >{{ h }}</td>
+                    >
+                      {{ h }}
+                    </td>
                   </tr>
 
-                  <tr class="row" v-for="(row, rowIndex) in matrixEdit" v-bind:key="rowIndex">
+                  <tr
+                    class="row"
+                    v-for="(row, rowIndex) in matrixEdit"
+                    v-bind:key="rowIndex"
+                  >
                     <td
                       contenteditable="true"
                       class="xcell"
@@ -569,7 +774,9 @@
                       :row="rowIndex"
                       :col="colIndex"
                       @click="onCellClick"
-                    >{{ cell }}</td>
+                    >
+                      {{ cell }}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -664,12 +871,18 @@
                 </h4>
                 <h4>iantas @ w3ai</h4>
                 <h4 class="long">
-                  <a href="https://github.com/allcmds">innovation engines @ github</a>
+                  <a href="https://github.com/allcmds"
+                    >innovation engines @ github</a
+                  >
                 </h4>
                 <h4 class="short">
-                  <a href="https://github.com/allcmds/aiwfhos">ai help @ github</a>
+                  <a href="https://github.com/allcmds/aiwfhos"
+                    >ai help @ github</a
+                  >
                 </h4>
-                <h4 class="long" contenteditable="true">Collaboration Engine / W3AI SNN Protocol</h4>
+                <h4 class="long" contenteditable="true">
+                  Collaboration Engine / W3AI SNN Protocol
+                </h4>
               </div>
             </div>
           </div>
@@ -680,76 +893,76 @@
 </template>
 
 <script>
-import axios from "axios"; // for connecting to Frirebase RTDB
-import redisAxios from "axios"; // for connecting to local Redis db
+import axios from 'axios'; // for connecting to Frirebase RTDB
+import redisAxios from 'axios'; // for connecting to local Redis db
 
-import fb from "./gcp.js";
+import fb from './gcp.js';
 const fs = fb.firestore();
 const storage = fb.storage(); //  Firebase / GCP Storage
 
-import aiteam from "./ai-config.json";
+import aiteam from './ai-config.json';
 
-import Header from "./components/header.vue";
-import Tabs from "./components/tabs.vue";
+import Header from './components/header.vue';
+import Tabs from './components/tabs.vue';
 
-import Post from "./views/Post.vue";
-import Report from "./views/Report.vue";
-import Steps from "./views/Steps.vue";
+import Post from './views/Post.vue';
+import Report from './views/Report.vue';
+import Steps from './views/Steps.vue';
 
-import matrixEdit from "./matrixEditDemo";
+import matrixEdit from './matrixEditDemo';
 
-import Icon from "./util/icon.vue";
-import Spreadsheet from "./views/Spreadsheet";
+import Icon from './util/icon.vue';
+import Spreadsheet from './views/Spreadsheet';
 // import gcp from "./gcp.js";
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    "app-header": Header,
-    "ai-post": Post,
-    "ai-report": Report,
-    "ai-steps": Steps,
-    "ai-icon": Icon,
+    'app-header': Header,
+    'ai-post': Post,
+    'ai-report': Report,
+    'ai-steps': Steps,
+    'ai-icon': Icon,
     Spreadsheet,
     Tabs,
   },
   created() {
-    this.$store.dispatch("tryAutoLogin");
+    this.$store.dispatch('tryAutoLogin');
   },
   data() {
     return {
       team: aiteam,
-      interval: "timer",
+      interval: 'timer',
       speed: 2000, // milliseconds
       cycle: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       cycleId: 1,
-      timeUnit: ["sec", "min"],
+      timeUnit: ['sec', 'min'],
       timeUnitId: 0,
-      view: ["run", "com", "edu", "soc", "dev", "ops", "test", "bank"],
+      view: ['run', 'com', 'edu', 'soc', 'dev', 'ops', 'test', 'bank'],
       viewId: 0,
       sheetView: false,
-      mode: ["CEO", "DEV", "OPS", "EDU", "QA", "UA"],
+      mode: ['CEO', 'DEV', 'OPS', 'EDU', 'QA', 'UA'],
       modeId: 0,
       policyRule: [
-        "ROI",
-        "FAM",
-        "SOC",
-        "ECO",
-        "BIZ",
-        "POL",
-        "LOC",
-        "PWR",
-        "CTRL",
-        "TEAM",
-        "FUN",
-        "ATTN",
-        "MED",
-        "GAME",
-        "LIFE",
+        'ROI',
+        'FAM',
+        'SOC',
+        'ECO',
+        'BIZ',
+        'POL',
+        'LOC',
+        'PWR',
+        'CTRL',
+        'TEAM',
+        'FUN',
+        'ATTN',
+        'MED',
+        'GAME',
+        'LIFE',
       ],
-      postName: ["job", "post", "dev", "repo", "prj", "bid", "rDNA"],
+      postName: ['job', 'post', 'dev', 'repo', 'prj', 'bid', 'rDNA'],
       postNameId: 0,
-      opsName: ["ads", "app", "ops", "srv", "offr", "ask", "rRNA"],
+      opsName: ['ads', 'app', 'ops', 'srv', 'offr', 'ask', 'rRNA'],
       opsNameId: 1,
       backgroundText: `&nbsp; cash = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
@@ -761,129 +974,129 @@ export default {
       <br><br>
       balanced cash engine`,
       visibleRows: 1,
-      tab: ["0", "0", "0"],
+      tab: ['0', '0', '0'],
       pause: true,
       show: true,
       load: true,
-      rules: ["FAST"],
+      rules: ['FAST'],
       results: [8],
       patentState: 10,
       fbview: true,
-      noView: "noview",
+      noView: 'noview',
       viewProjects: [24],
       projects: [],
       projectStore: [],
       // newProjectTitle: 'New Project Title',
-      projectIconBits: "11010",
-      serviceIconBits: "10110",
+      projectIconBits: '11010',
+      serviceIconBits: '10110',
       // projectIcon: '11100',
       // serviceIcon: '10111',
       branch: 1,
       branches: [8],
       services: [10],
       blockchains: [365],
-      tabClass: "tabline",
-      tabTitle: "tabname",
-      checkBtn: "checkbtn",
-      cmdBtn: "cmdbtn",
-      orderBtn: "orderbtn",
-      verbalBtn: "verbalbtn",
-      postClass: "postclass",
-      currentTable: "",
-      currentRow: "",
-      currentCol: "",
-      currentCellVal: " ",
-      fx: "",
-      fxEval: "",
+      tabClass: 'tabline',
+      tabTitle: 'tabname',
+      checkBtn: 'checkbtn',
+      cmdBtn: 'cmdbtn',
+      orderBtn: 'orderbtn',
+      verbalBtn: 'verbalbtn',
+      postClass: 'postclass',
+      currentTable: '',
+      currentRow: '',
+      currentCol: '',
+      currentCellVal: ' ',
+      fx: '',
+      fxEval: '',
       corner: 1,
       rowsBatch: 5,
       header: [
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "P",
-        "Q",
-        "R",
-        "S",
-        "T",
-        "U",
-        "V",
-        "W",
-        "X",
-        "Y",
-        "Z",
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
       ],
       blankTabMatrix: [
         [
-          "a",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'a',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
       ],
       blankTabRow: [
-        "a",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        'a',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
       ],
       textEdit: `
 Hello World!
@@ -896,1052 +1109,1052 @@ clone free ai open apps:
 github.com/ai-accelerator`,
       listBiz: [
         [
-          "1",
-          "Post",
-          ":",
-          "Best Practices Blockchains",
-          "",
-          "subtitle",
-          ":",
-          "welcome to ai web",
+          '1',
+          'Post',
+          ':',
+          'Best Practices Blockchains',
+          '',
+          'subtitle',
+          ':',
+          'welcome to ai web',
         ],
         [
-          "1",
-          "Post",
-          ":",
-          "Ranked Contribution Blockchains",
-          "",
-          "subtitle",
-          ":",
-          "welcome to ai web",
+          '1',
+          'Post',
+          ':',
+          'Ranked Contribution Blockchains',
+          '',
+          'subtitle',
+          ':',
+          'welcome to ai web',
         ],
       ],
-      matrixEdit: matrixEdit()[2],
+      matrixEdit: matrixEdit()[3],
       cellToEdit: `AI super productivity app.
 Add ideas and projects to trigger contributors worldwide.
 Or monetize your services
 on world's most interesting projects.`,
       matrixBiz: [
         [
-          "a",
-          "STATUS",
-          ":",
-          "OK?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'a',
+          'STATUS',
+          ':',
+          'OK?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pa-State",
-          ":",
-          "-",
-          "",
-          "sa-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pa-State',
+          ':',
+          '-',
+          '',
+          'sa-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "b",
-          "RATES",
-          ":",
-          "DEAL?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'b',
+          'RATES',
+          ':',
+          'DEAL?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pb-State",
-          ":",
-          "-",
-          "",
-          "sb-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pb-State',
+          ':',
+          '-',
+          '',
+          'sb-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "c",
-          "DOCS",
-          ":",
-          "TERMS?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'c',
+          'DOCS',
+          ':',
+          'TERMS?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pc-State",
-          ":",
-          "-",
-          "",
-          "sc-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pc-State',
+          ':',
+          '-',
+          '',
+          'sc-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "d",
-          "BOOK",
-          ":",
-          "BOOKED?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'd',
+          'BOOK',
+          ':',
+          'BOOKED?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pd-State",
-          ":",
-          "-",
-          "",
-          "sd-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pd-State',
+          ':',
+          '-',
+          '',
+          'sd-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "e",
-          "INPUT",
-          ":",
-          "CREATED?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'e',
+          'INPUT',
+          ':',
+          'CREATED?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pe-State",
-          ":",
-          "-",
-          "",
-          "se-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pe-State',
+          ':',
+          '-',
+          '',
+          'se-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "f",
-          "STEPS",
-          ":",
-          "PLANNED?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'f',
+          'STEPS',
+          ':',
+          'PLANNED?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pf-State",
-          ":",
-          "-",
-          "",
-          "sf-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pf-State',
+          ':',
+          '-',
+          '',
+          'sf-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "g",
-          "OUTPUT",
-          ":",
-          "TESTED?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'g',
+          'OUTPUT',
+          ':',
+          'TESTED?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "pg-State",
-          ":",
-          "-",
-          "",
-          "sg-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'pg-State',
+          ':',
+          '-',
+          '',
+          'sg-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "h",
-          "PAY",
-          ":",
-          "PAID?",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'h',
+          'PAY',
+          ':',
+          'PAID?',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "tx-State",
-          ":",
-          "-",
-          "",
-          "ph-State",
-          ":",
-          "-",
-          "",
-          "sh-State",
-          ":",
-          "-",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '1',
+          'tx-State',
+          ':',
+          '-',
+          '',
+          'ph-State',
+          ':',
+          '-',
+          '',
+          'sh-State',
+          ':',
+          '-',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
       ],
       listDev: [
         // list/rows of posts, docs, links, obj, etc from matrixDev
-        { title: "Toronto W3AI News", post: "bla bla, bla", author: "SI" },
+        { title: 'Toronto W3AI News', post: 'bla bla, bla', author: 'SI' },
       ],
       matrixDev: [
         [
-          "a",
-          "SOCIAL",
-          ":",
-          "project",
-          "",
-          "title",
-          ":",
-          "AI Economy",
-          "",
-          "priority",
-          "=",
-          "1",
-          "",
-          "votes",
-          "=",
-          "247",
-          "",
-          "comments",
-          "=",
-          "144",
-          "",
-          "clones",
-          "=",
-          "24",
-          "",
-          "",
-          "\n",
+          'a',
+          'SOCIAL',
+          ':',
+          'project',
+          '',
+          'title',
+          ':',
+          'AI Economy',
+          '',
+          'priority',
+          '=',
+          '1',
+          '',
+          'votes',
+          '=',
+          '247',
+          '',
+          'comments',
+          '=',
+          '144',
+          '',
+          'clones',
+          '=',
+          '24',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Post",
-          ":",
-          "Project Data & Scripts Database",
-          "",
-          "subtitle",
-          ":",
-          "welcome to ai web",
-          "",
-          "body",
-          ":",
+          '1',
+          'Post',
+          ':',
+          'Project Data & Scripts Database',
+          '',
+          'subtitle',
+          ':',
+          'welcome to ai web',
+          '',
+          'body',
+          ':',
           `AI super productivity app.
 Add incentive check lists to trigger ai innovators worldwide.
 Or add your services to contribute to world's innovation projects.`,
-          "",
-          "signature",
-          ":",
+          '',
+          'signature',
+          ':',
           `clone free ai world apps:
 github.com/ai-accelerator`,
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "b",
-          "RATES",
-          ":",
-          "money",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'b',
+          'RATES',
+          ':',
+          'money',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Post",
-          ":",
-          "Recombinant Project Templates",
-          "",
-          "help",
-          ":",
-          "Check if service rate is in project range",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '1',
+          'Post',
+          ':',
+          'Recombinant Project Templates',
+          '',
+          'help',
+          ':',
+          'Check if service rate is in project range',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "c",
-          "DOCS",
-          ":",
-          "terms",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'c',
+          'DOCS',
+          ':',
+          'terms',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( sc-Docs == "ready" ) { pc-State = "Ok" } else { pc-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         // ['1','Post',':','Toronto W3AI News','','posts',':','24','','comments',':','36','','','','','','','','','','','','','','','\n'],
         [
-          "d",
-          "BOOK",
-          ":",
-          "done",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'd',
+          'BOOK',
+          ':',
+          'done',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( sd-Book == "open" ) { pd-State = "Ok" } else { pd-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         // ['1','Gantt',':','calendar','','','','','','','','','','','','','','','','','','','','','','','\n'],
         [
-          "e",
-          "INPUT",
-          ":",
-          "create",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'e',
+          'INPUT',
+          ':',
+          'create',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( se-Input == "match" ) { pe-State = "Ok" } else { pe-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "f",
-          "STEPS",
-          ":",
-          "plan",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'f',
+          'STEPS',
+          ':',
+          'plan',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Cmd",
-          ":",
+          '1',
+          'Cmd',
+          ':',
           '= if ( sf-Steps == "ok" ) { pf-State = "Ok" && cmd = "gcloud firestore create-indexes index.yaml"} else { pf-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "g",
-          "OUTPUT",
-          ":",
-          "test",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'g',
+          'OUTPUT',
+          ':',
+          'test',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Order",
-          ":",
+          '1',
+          'Order',
+          ':',
           '= if ( sg-Output == "created" ) { pg-State = "Ok" && request = "@QA-Team : run tests"} else { pg-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "h",
-          "PAY",
-          ":",
-          "paid",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          'h',
+          'PAY',
+          ':',
+          'paid',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
         [
-          "1",
-          "Verbal",
-          ":",
+          '1',
+          'Verbal',
+          ':',
           '= if ( sh-Pay == "cashed" ) { ph-State = "Done" && verbal = "Thanks!"} else { ph-State = "Feedback" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "\n",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '\n',
         ],
       ],
       listOps: [
         [
-          "1",
-          "Post",
-          ":",
-          "Service Data & Scripts Database",
-          "",
-          "subtitle",
-          ":",
-          "welcome to ai web",
+          '1',
+          'Post',
+          ':',
+          'Service Data & Scripts Database',
+          '',
+          'subtitle',
+          ':',
+          'welcome to ai web',
         ],
         [
-          "1",
-          "Post",
-          ":",
-          "Recombinant Service APIs",
-          "",
-          "subtitle",
-          ":",
-          "realtime recombinant services",
+          '1',
+          'Post',
+          ':',
+          'Recombinant Service APIs',
+          '',
+          'subtitle',
+          ':',
+          'realtime recombinant services',
         ],
       ],
       matrixOps: [
         [
-          "a",
-          "MARKET",
-          ":",
-          "ready",
-          "",
-          "title",
-          ":",
-          "Skill 37",
-          "",
-          "usage",
-          "=",
-          "247k",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'a',
+          'MARKET',
+          ':',
+          'ready',
+          '',
+          'title',
+          ':',
+          'Skill 37',
+          '',
+          'usage',
+          '=',
+          '247k',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pa-Social == "project" ) { sa-State = "Ok" } else { sa-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         //         ['2','Post',':','Hello Service World!','','subtitle',':','welcome to ai web','','body',':',
         //         `AI super productivity services.
@@ -1949,429 +2162,429 @@ github.com/ai-accelerator`,
         // Or add your services to contribute to world's innovation projects.`,'','signature',':',`clone free ai world apps:
         // github.com/ai-accelerator`,'','','','','','','','','','','\n'],
         [
-          "b",
-          "RATES",
-          ":",
-          "money",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'b',
+          'RATES',
+          ':',
+          'money',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pb-Rates == "range" ) { sb-State = "Ok" } else { sb-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "c",
-          "DOCS",
-          ":",
-          "terms",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'c',
+          'DOCS',
+          ':',
+          'terms',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pc-Docs == "public" ) { sc-State = "Ok" } else { sc-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "d",
-          "BOOK",
-          ":",
-          "done",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'd',
+          'BOOK',
+          ':',
+          'done',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pd-Book == "open" ) { sd-State = "Ok" } else { sd-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "e",
-          "INPUT",
-          ":",
-          "test",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'e',
+          'INPUT',
+          ':',
+          'test',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pe-Input == "match" ) { se-State = "Ok" } else { se-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "f",
-          "STEPS",
-          ":",
-          "plan",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'f',
+          'STEPS',
+          ':',
+          'plan',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pf-Steps == "tasks" ) { sf-State = "Ok" } else { sf-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "g",
-          "OUTPUT",
-          ":",
-          "create",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'g',
+          'OUTPUT',
+          ':',
+          'create',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( pg-Output == "tested" ) { sg-State = "Ok" } else { sg-State = "Quit" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "h",
-          "PAY",
-          ":",
-          "paid",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          'h',
+          'PAY',
+          ':',
+          'paid',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
         [
-          "1",
-          "Click",
-          ":",
+          '1',
+          'Click',
+          ':',
           '= if ( ph-Pay == "paid" ) { sh-State = "Done" } else { sh-State = "Back" }',
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ],
       ],
       newDevPosts: [
-        "Funded: 5min innovation engine install",
-        "Voting: Chinese & Hindi innovation engine",
-        "Idea: Job posts as innovation demand",
+        'Funded: 5min innovation engine install',
+        'Voting: Chinese & Hindi innovation engine',
+        'Idea: Job posts as innovation demand',
       ],
       newOpsPosts: [
-        "COM: xl cash = meta AI/ML/Kubernetes",
-        "ORG: Innovation/Project Rendering",
-        "R&D: Code/Branch Ranking Blockchains",
+        'COM: xl cash = meta AI/ML/Kubernetes',
+        'ORG: Innovation/Project Rendering',
+        'R&D: Code/Branch Ranking Blockchains',
       ],
     };
   },
   computed: {
-    devPosts: function () {
-      return this.matrixDev.filter((row) => row[1] === "Post");
+    devPosts: function() {
+      return this.matrixDev.filter((row) => row[1] === 'Post');
     },
-    filteredMatrixOps: function () {
+    filteredMatrixOps: function() {
       let result = [];
       let tabLine = false;
 
@@ -2380,7 +2593,7 @@ github.com/ai-accelerator`,
         // eslint-disable-next-line no-console
         console.log(this.tab[2]);
 
-        if (this.tab[2] === "0") {
+        if (this.tab[2] === '0') {
           result.push(element);
         }
 
@@ -2400,14 +2613,14 @@ github.com/ai-accelerator`,
               cursor = this.matrixOps[cursorIndex];
               char = cursor[0];
               // eslint-disable-next-line no-console
-              console.log("char is: " + char);
+              console.log('char is: ' + char);
               if (regex.test(char)) {
                 // eslint-disable-next-line no-console
-                console.log("test passed");
+                console.log('test passed');
                 result.push(cursor);
               } else {
                 // eslint-disable-next-line no-console
-                console.log("test failed");
+                console.log('test failed');
                 return result;
               }
               cursorIndex++;
@@ -2431,15 +2644,15 @@ github.com/ai-accelerator`,
   },
 
   firestore: {
-    projects: fs.collection("projects"),
+    projects: fs.collection('projects'),
   },
 
   mounted() {
-    if (localStorage.getItem("projects")) {
+    if (localStorage.getItem('projects')) {
       try {
-        this.projectStore = JSON.parse(localStorage.getItem("projects"));
+        this.projectStore = JSON.parse(localStorage.getItem('projects'));
       } catch (e) {
-        localStorage.removeItem("projects");
+        localStorage.removeItem('projects');
       }
     }
   },
@@ -2458,19 +2671,19 @@ github.com/ai-accelerator`,
     uploadProject() {
       let storageRef = storage.ref();
       // let dataRef = storageRef.child('data');
-      let pathname = "data/projects/";
+      let pathname = 'data/projects/';
       pathname = pathname + this.matrixDev[0][7];
       let projectDataRef = storageRef.child(pathname);
 
-      let projectName = this.matrixDev[0][7] + ".ai";
+      let projectName = this.matrixDev[0][7] + '.ai';
       let newProjectData = this.matrixDev.slice(0);
       let file = new File(newProjectData, projectName, {
-        type: "text/plain",
+        type: 'text/plain',
         lastModified: new Date().getTime(),
       });
 
       /* eslint-disable no-unused-vars */
-      projectDataRef.put(file).then(function (snapshot) {
+      projectDataRef.put(file).then(function(snapshot) {
         // console.log('Uploaded a blob or file!');
       });
       /* eslint-enable no-unused-vars */
@@ -2491,7 +2704,7 @@ github.com/ai-accelerator`,
     },
     saveProjects() {
       const parsed = JSON.stringify(this.projectStore);
-      localStorage.setItem("projects", parsed);
+      localStorage.setItem('projects', parsed);
     },
 
     start() {
@@ -2519,61 +2732,61 @@ github.com/ai-accelerator`,
 
       // dev dummy animation
 
-      this.setCellAndColor("d-table", 2, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 2, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 2, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 2, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 2, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 1, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 2, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 2, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 2, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 2, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 2, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 1, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 4, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 4, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 4, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 4, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 4, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 3, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 4, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 4, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 4, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 4, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 4, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 3, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 6, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 6, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 6, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 6, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 6, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 5, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 6, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 6, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 6, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 6, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 6, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 5, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 8, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 8, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 8, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 8, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 8, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 7, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 8, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 8, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 8, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 8, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 8, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 7, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 10, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 10, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 10, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 10, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 10, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 9, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 10, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 10, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 10, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 10, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 10, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 9, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 12, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 12, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 12, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 12, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 12, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 11, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 12, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 12, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 12, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 12, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 12, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 11, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 14, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 14, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 14, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 14, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 14, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 13, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 14, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 14, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 14, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 14, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 14, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 13, 3, 'OK', 'blockchain-green');
 
-      this.setCellAndColor("d-table", 16, 2, "ok", "project-color");
-      this.setCellAndColor("o-table", 16, 2, "ok", "service-color");
-      this.setCellAndColor("b-table", 16, 11, "ok", "service-color");
-      this.setCellAndColor("b-table", 16, 7, "ok", "project-color");
-      this.setCellAndColor("b-table", 16, 3, "ok", "blockchain-color");
-      this.setCellAndColor("b-table", 15, 3, "OK", "blockchain-green");
+      this.setCellAndColor('d-table', 16, 2, 'ok', 'project-color');
+      this.setCellAndColor('o-table', 16, 2, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 16, 11, 'ok', 'service-color');
+      this.setCellAndColor('b-table', 16, 7, 'ok', 'project-color');
+      this.setCellAndColor('b-table', 16, 3, 'ok', 'blockchain-color');
+      this.setCellAndColor('b-table', 15, 3, 'OK', 'blockchain-green');
 
       // Run/Eval Service Input queries on Project data and add/update results as step[0]
 
@@ -2668,7 +2881,7 @@ github.com/ai-accelerator`,
       // let tabrow = el.target.getAttribute('tabrow');                    // r - row: 1,... - the row in the tab
       // let r = tabrow;
 
-      let cellId = matrix + ":" + row + ":" + col;
+      let cellId = matrix + ':' + row + ':' + col;
       // console.log(cellId);
 
       let cellToUpdate = document.getElementById(cellId);
@@ -2678,19 +2891,19 @@ github.com/ai-accelerator`,
     },
     onCellClick(el) {
       /* eslint-disable no-unused-vars */
-      let mat = (this.currentTable = el.target.getAttribute("matrix")); // mat - matrix/table: Biz | Dev | Ops | Edit
+      let mat = (this.currentTable = el.target.getAttribute('matrix')); // mat - matrix/table: Biz | Dev | Ops | Edit
       let m = mat[0].toUpperCase(); // m - matrix/table: B | D | O | E
 
-      let col = (this.currentCol = el.target.getAttribute("col")); // col - col: 1-26
+      let col = (this.currentCol = el.target.getAttribute('col')); // col - col: 1-26
       let c = this.header[col - 1]; // c - col: A-Z
-      let row = (this.currentRow = el.target.getAttribute("row")); // row - row: 1,... - the row in the matrix table
+      let row = (this.currentRow = el.target.getAttribute('row')); // row - row: 1,... - the row in the matrix table
       // let tr = row;
 
       // let tab = Math.floor( row / (this.visibleRows+1) + 1);         // tab - tab 1-8
-      let tab = el.target.getAttribute("tab");
+      let tab = el.target.getAttribute('tab');
       let t = tab; // t - tab a-h
 
-      let tabrow = el.target.getAttribute("tabrow"); // r - row: 1,... - the row in the tab
+      let tabrow = el.target.getAttribute('tabrow'); // r - row: 1,... - the row in the tab
       let r = tabrow;
 
       // let val = this.currentCellVal = el.target.innerHTML.trim();       // val - cell value - string
@@ -2699,7 +2912,7 @@ github.com/ai-accelerator`,
       this.currentCellVal = v;
       /* eslint-enable no-unused-vars */
 
-      let cellId = mat + ":" + row + ":" + col;
+      let cellId = mat + ':' + row + ':' + col;
 
       // console.log('test onCellClick')
       /* eslint-disable no-console */
@@ -2758,26 +2971,26 @@ github.com/ai-accelerator`,
     },
     showPause() {
       // Toggle play button between play '>' and pause '||'
-      return this.pause ? "| |" : ">";
+      return this.pause ? '| |' : '>';
     },
     nextBranch() {
       // To add animation for showing the next branch table
       this.branch++;
     },
     addNewRule() {
-      this.rules.push("new rule");
+      this.rules.push('new rule');
     },
     onProjectFork() {
-      this.newDevPosts.unshift("New project idea");
+      this.newDevPosts.unshift('New project idea');
 
       const lines = { ...this.matrixDev };
 
-      fs.collection("projects").add({
+      fs.collection('projects').add({
         tablelines: lines,
       });
 
       // experimenting with adding task to local Redis database
-      redisAxios.post("/task/add", { task: "Test task sent form Vue app" });
+      redisAxios.post('/task/add', { task: 'Test task sent form Vue app' });
 
       // axios.post('https://aiplanet.firebaseio.com/projects.json', this.matrixDev)
       // axios.post('https://firestore.googleapis.com/v1/projects/aibase/databases/(default)/documents/projects', this.matrixDev)
@@ -2785,8 +2998,8 @@ github.com/ai-accelerator`,
       //   .catch(err => console.log(err));
     },
     onServiceFork() {
-      this.newOpsPosts.unshift("New service idea");
-      axios.post("https://aibase.firebaseio.com/services.json", this.matrixOps);
+      this.newOpsPosts.unshift('New service idea');
+      axios.post('https://aibase.firebaseio.com/services.json', this.matrixOps);
       // .then(res => console.log(res))
       // .catch(err => console.log(err));
     },
@@ -2794,7 +3007,7 @@ github.com/ai-accelerator`,
       let hex = (200 + index).toString(2);
       hex = hex.substr(-5);
       // hex = hex + hex;
-      hex = hex.replace(/[0]/g, "8");
+      hex = hex.replace(/[0]/g, '8');
       hex = hex.replace(/[1]/g, symbol);
       return hex;
     },
@@ -2802,7 +3015,7 @@ github.com/ai-accelerator`,
       // let projectsNo = this.viewProjects.length;
       this.viewProjects.push(Math.floor(Math.random() * 100)); // add project to end/bottom
       this.viewProjects.shift(); // removes the first project
-      this.projectIconBits = this.generateIconBits(this.viewProjects[0], "1");
+      this.projectIconBits = this.generateIconBits(this.viewProjects[0], '1');
       // ToDo: add branches and results structures to project data structure - Code below is just demo/dummy
       this.branches.push(Math.floor(Math.random() * 100));
       this.branches.shift();
@@ -2812,7 +3025,7 @@ github.com/ai-accelerator`,
       // let servicesNo = this.services.length;
       this.services.unshift(Math.floor(Math.random() * 100)); // add service to top
       this.services.pop(); // removes the last service
-      this.serviceIconBits = this.generateIconBits(this.services[0], "1");
+      this.serviceIconBits = this.generateIconBits(this.services[0], '1');
     },
     // ToDo - To include in Processor / Eval workflow
     addTableRow(tableId, contextId, array) {
@@ -2840,7 +3053,7 @@ github.com/ai-accelerator`,
 
       x[col].innerHTML = value;
 
-      x[col].classList.add("fade-on-change");
+      x[col].classList.add('fade-on-change');
     },
     setCellAndColor(tableId, row, col, value, color) {
       let table = document.getElementById(tableId);
@@ -2849,7 +3062,7 @@ github.com/ai-accelerator`,
       x[col].innerHTML = value;
 
       x[col].classList.add(color);
-      x[col].classList.add("fade-on-change");
+      x[col].classList.add('fade-on-change');
       // setTimeout(250);
     },
   },
