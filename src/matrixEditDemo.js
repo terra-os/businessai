@@ -2516,7 +2516,24 @@ it("acks the message", async () => {});
 ---`,
     
       ], [
-        
+`# Testing the case of Out-Of-Order Events 
+
+- 
+`,`ticket-updated-listener.test.ts
+---
+it("does not call ack if the event has a skipped version number", async () => {
+  const { msg, data, listener, ticket } = await setup();
+
+  data.version = 10;
+
+  try {
+    await listener.onMessage(data, msg);
+  } catch (err) {}
+
+  expect(msg.ack).not.toHaveBeenCalled();
+});
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20120.png")`,
+    
       ], [
         
       ], [
