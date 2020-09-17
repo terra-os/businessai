@@ -2226,7 +2226,18 @@ const setup = async () => {
 ---`,
     
       ], [
-        
+        `# Calling the listeners in tickets/src/index.ts
+
+- initialize and start the listeners on the tickets service
+
+- 
+`,`tickets/src/index.ts
+---
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
+
+---`,
+    
       ], [
         
       ]
