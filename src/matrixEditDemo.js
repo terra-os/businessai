@@ -1693,7 +1693,36 @@ export interface ExpirationCompleteEvent {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20153.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20159.png")`,
     
       ], [
-        
+        `# Publishing an Event on Job Processing
+
+- 
+`,`queues/expiration-queue.ts
+---
+import Queue from "bull";
+import { ExpirationCompletePublisher } from "../events/publishers/expiration-complete-publisher";
+import { natsWrapper } from "../nats-wrapper";
+
+// Describes Data to be stored inside a Job
+interface Payload {
+  orderId: string;
+}
+
+const expirationQueue = new Queue<Payload>("order:expiration", {
+  redis: {
+    host: process.env.REDIS_HOST,
+  },
+});
+
+expirationQueue.process(async (job) => {
+  new ExpirationCompletePublisher(natsWrapper.client).publish({
+    orderId: job.data.orderId,
+  });
+});
+
+export { expirationQueue };
+
+---`,
+    
       ], [
         
       ], [
