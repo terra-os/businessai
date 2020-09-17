@@ -1940,7 +1940,24 @@ it("implements optimistic concurrency control", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2094.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2093.png")`,
     
       ], [
-        
+        `# The Expiration Service
+
+- Watch / listen for order:created
+
+- Expiration service needs to start a 15 minute timer to eventually time out this order
+
+- After 15min - publish an event / msg : expiration:complete - after 15 mins
+
+- Orders service needs to know that an order has gone over the 15 minute time limit.  
+It is up to the orders service to decide whether or not to cancel the order 
+(it might have already been paid!!!)
+
+- Expiration service is just a 15 min timer - 
+  - not announcing an order being cancelled - this is Orders service job
+
+- 4 options to implement the timer to analyze next
+`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20141.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20140.png")`,
+    
       ], [
         
       ], [
