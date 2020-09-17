@@ -1490,7 +1490,22 @@ it("emits an order cancelled event", async () => {
     ],
     [
       [
+        `# Time for Listeners!
 
+- Inside Orders Service we need to build at least 2 listeners: for << to code 1st
+  - ticket:created
+  - ticket:updated
+
+- Tickets Service needs to listen for :
+  - order:created
+  - order:cancelled
+
+- Implement a version field in the tickets service !!
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2077.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2076.png")`,
+    
       ], [
         
       ], [
