@@ -1610,7 +1610,18 @@ it("ack the message", async () => {
 ---`,
     
       ], [
-        
+        `# The Payment Service
+
+- Payments service needs to know there is a new order 
+  that a user might submit a payment for
+
+- Payments should know that any incoming payments for this order should be rejected
+
+- Orders service needs to know that an order has been paid for
+
+
+`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20169.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20167.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20168.png")`,
+    
       ], [
         
       ], [
