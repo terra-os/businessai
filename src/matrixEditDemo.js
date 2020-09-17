@@ -2428,7 +2428,35 @@ orders.tickets
     ],
     [
       [
+        `# Success Case Testing
 
+- 
+`,`ticket-updated-listener.test.ts
+---
+it("finds, updates, and saves a ticket", async () => {
+  const { msg, data, ticket, listener } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  const updatedTicket = await Ticket.findById(ticket.id);
+
+  expect(updatedTicket!.title).toEqual(data.title);
+  expect(updatedTicket!.price).toEqual(data.price);
+  expect(updatedTicket!.version).toEqual(data.version);
+});
+
+it("acks the message", async () => {
+  const { msg, data, listener } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(msg.ack).toHaveBeenCalled();
+});
+---`,`ticket-updated-listener.test.ts
+---
+
+---`,
+    
       ], [
         `# Testing the Ticket Updated Listener 
 
