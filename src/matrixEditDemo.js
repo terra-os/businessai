@@ -1420,7 +1420,55 @@ export class OrderCancelledPublisher extends Publisher<
 ---`,
     
       ], [
-        
+        `# Testing Publishing Order Events
+
+- 
+`,`new.test.ts
+---
+it("emits an order created event", async () => {
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", global.signin())
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
+---`,`delete.test.ts
+---
+it("emits an order cancelled event", async () => {
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  const user = global.signin();
+  // make a request to create an order
+  const { body: order } = await request(app)
+    .post("/api/orders")
+    .set("Cookie", user)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  // make a request to cancel the order
+  await request(app)
+    //.delete(\`/api/orders/\${order.id}\`)
+    .set("Cookie", user)
+    .send()
+    .expect(204);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
+
+---`,
+    
       ], [
         
       ], [
