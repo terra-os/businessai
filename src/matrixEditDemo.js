@@ -1697,7 +1697,20 @@ export class TicketUpdatedListener extends Listener<
 ---`,
     
       ], [
-        
+        `# Testing the Ticket Listeners within Orders service with Postman
+
+- 
+`,`kubectl
+---
+[orders-depl-6c8d749dd8-twkhx orders] Connected to NATS
+[orders-depl-6c8d749dd8-twkhx orders] Connected to MongoDB
+[orders-depl-6c8d749dd8-twkhx orders] Orders: Listening on port 3000!
+[orders-depl-6c8d749dd8-twkhx orders] Message received: ticket:created / orders-service
+[tickets-depl-85ff5b75c5-zbrh9 tickets] Event published to subject ticket:created
+[tickets-depl-85ff5b75c5-zbrh9 tickets] Event published to subject ticket:updated
+[orders-depl-6c8d749dd8-twkhx orders] Message received: ticket:updated / orders-service
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2085.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2084.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2083.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2082.png")`,
+    
       ], [
         
       ], [
@@ -1713,7 +1726,34 @@ export class TicketUpdatedListener extends Listener<
     ],
     [
       [
+        `# Concurrency Issues
 
+- Concurrency test script creating and updating 200 tickets in parallel
+- 4 Orders listeners will update the Orders Tickets DB
+- 4 copies of the Tickets Services
+
+- Tickets service DB will have consistent data 
+  => 200 tickets with a price of 15 (5 => 10 => 15)
+
+- We want the Orders tickets db to be consistent with the Tickets service DB
+
+-  Occasionally the updates / messages will be processed out of order => 
+  5 > 15 > 10 ==>> inconsistent / out of order
+
+- => Concurrency issue => not matching the Titckets DB
+
+- 2 Mongo Shell /  Tickets DB / Orders DB
+  db.tickets.find({})
+  db.tickets.remove({})
+  db.tickets.find({ price: 10 }).length() // in Tickets DB = 0
+  db.tickets.find({ price: 10 }).length() // in Orders DB = 1,3, 10
+
+
+- Solution - > Need to ensure Events are processed in the Correct Order !!`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2089.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2088.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2087.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2086.png")`,
+    
       ], [
         
       ], [
