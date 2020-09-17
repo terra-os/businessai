@@ -1771,7 +1771,25 @@ export class TicketUpdatedListener extends Listener<
 [client-depl-5979685985-h8tzc client] event - compiled successfully`,
     
       ], [
-        
+        `# Listener Creation
+
+- 
+`,`expiration/src/events/listeners/order-created-listener.ts
+---
+import { Listener, OrderCreatedEvent, Subjects } from '@w3ai/common';
+import { Message } from 'node-nats-streaming';
+import { queueGroupName } from './queue-group-name';
+
+export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
+  readonly subject = Subjects.OrderCreated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCreatedEvent['data'], msg: Message) {
+
+  }
+}
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,
+    
       ], [
         
       ], [
