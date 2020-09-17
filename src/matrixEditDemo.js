@@ -2655,7 +2655,70 @@ What's the status of order ADS? User who owns the ticket
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20128.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20127.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20126.png")`,
     
       ], [
-        
+        `# Implementing Reserving / Locking a Ticket
+
+- 
+`,`order-created-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Listener, OrderCreatedEvent, Subjects } from "@w3ai/common";
+import { queueGroupName } from "./queue-group-name";
+import { Ticket } from "../../models/ticket";
+
+export class OrderCreatedListener extends Listener<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+    // Find the ticket that the order is reserving
+    const ticket = await Ticket.findById(data.ticket.id);
+
+    // If no ticket, throw error
+    if (!ticket) {
+      throw new Error("Ticket not found");
+    }
+
+    // Mark the ticket as being reserved by setting its orderId property
+    ticket.set({ orderId: data.id });
+
+    // Save the ticket
+    await ticket.save();
+
+    // ack the message
+    msg.ack();
+  }
+}
+
+---`,`order-created-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Listener, OrderCreatedEvent, Subjects } from "@w3ai/common";
+import { queueGroupName } from "./queue-group-name";
+
+export class OrderCreatedListener extends Listener<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+    // Find the ticket that the order is reserving
+
+    // If no ticket, throw error
+
+    // Mark the ticket as being reserved by setting its orderId property
+
+    // Save the ticket
+
+    // ack the message
+    
+  }
+}
+
+---`,
+    
       ], [
         
       ]
