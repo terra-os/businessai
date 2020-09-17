@@ -1755,7 +1755,32 @@ export class TicketUpdatedListener extends Listener<
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2089.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2088.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2087.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2086.png")`,
     
       ], [
-        
+        `# Versioning Records
+
+- Adding a version attribute for the record / ticket
+
+- Any time we update a record / ticket we increment the version number !!
+
+- By not calling the ack() function in the onMessage() 
+  we can force processing in order of the messages / events 
+  based on the version of the data of the record
+
+- Out of order event will be re-emitted after 5 seconds by NATS 
+
+- During those 5 secs eventually the correct sequence / next version message will
+  be processed
+
+- Need to manage the version flag in the dbs 
+
+- But Mongo and Mongoose can manage the versioning for us !!!
+
+- We'll have to include a version flag in the tickets / record data structure !!
+  => update of the common module !!
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2090.png")`,
+    
       ], [
         
       ], [
