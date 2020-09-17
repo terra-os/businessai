@@ -2418,7 +2418,46 @@ orders.tickets
 { "_id" : ObjectId("5f0dde6cfb38770018e53b76"), "title" : "Video Service", "price" : 103.3, "version" : 4 }`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20130.png")`,
     
       ], [
-        
+        `# Order-Created-Listener Test Implementation
+
+- it tests : 
+it('sets the userId of the ticket', async () => {
+
+});
+
+it('acks the message', async () => {
+
+});
+`,`order-created-listener.test.ts
+---
+it("sets the userId of the ticket", async () => {
+  const { listener, ticket, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  const updatedTicket = await Ticket.findById(ticket.id);
+
+  expect(updatedTicket!.orderId).toEqual(data.id);
+});
+
+it("acks the message", async () => {
+  const { listener, ticket, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(msg.ack).toHaveBeenCalled();
+});
+---`,`order-created-listener.test.ts
+---
+it('sets the userId of the ticket', async () => {
+
+});
+
+it('acks the message', async () => {
+
+});
+---`,
+    
       ], [
         
       ], [
