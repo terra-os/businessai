@@ -1975,7 +1975,20 @@ it("increments the version number on multiple saves", async () => {
 ---`,
     
       ], [
-        
+        `# Adding version to common event messages
+
+- When should we increment or include the 'version' number of a record with an event? 
+
+- Increment the 'version' number whenever the
+  primary service responsible for a record 
+  emits an event to describe a create/update/destroy to a record
+
+
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2096.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2095.png")`,
+    
       ], [
         
       ], [
