@@ -1569,7 +1569,19 @@ it("ack the message", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20166.png")`,
     
       ], [
-        
+        `# Added the Expiration Complete Listener in index.ts
+
+- new ExpirationCompleteListener(natsWrapper.client).listen();
+`,`orders/src/index.ts
+---
+
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
+    new ExpirationCompleteListener(natsWrapper.client).listen();
+
+
+---`,
+    
       ], [
         
       ], [
