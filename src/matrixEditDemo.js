@@ -2592,7 +2592,22 @@ it("marks an order as cancelled", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20122.png")`,
     
       ], [
-        
+        `# Listeners in the Tickets Service
+
+- Need to implement 2 Listeners for the Ticket Service
+
+- 1 - for Order Created event - to lock down the ticket of the order !!
+
+- 2 - for Order Cancelled event - the ticket should be unreserved
+
+- similar to an On/Off flag
+
+
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20125.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20124.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20123.png")`,
+    
       ], [
         
       ], [
