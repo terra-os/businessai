@@ -2054,7 +2054,48 @@ npm notice
     ],
     [
       [
+        `# Applying a Version Query
 
+- $ orders % npm install mongoose-update-if-current
+
+- added version to the orderSchema - to avoid error in skaffold
+`,`ticket-updated-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Subjects, Listener, TicketUpdatedEvent } from "@w3ai/common";
+import { Ticket } from "../../models/ticket";
+import { queueGroupName } from "./queue-group-name";
+
+export class TicketUpdatedListener extends Listener<
+  TicketUpdatedEvent
+> {
+  readonly subject = Subjects.TicketUpdated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
+    const ticket = await Ticket.findOne({
+      _id: data.id,
+      version: data.version - 1,
+    });
+
+    if (!ticket) {
+      throw new Error("Ticket not found");
+    }
+
+    const { title, price } = data;
+    ticket.set({ title, price });
+    await ticket.save();
+
+    msg.ack();
+  }
+}
+
+---`,`orders/src/models/ticket.ts
+---
+ticketSchema.set("versionKey", "version");
+ticketSchema.plugin(updateIfCurrentPlugin);
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20100.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2099.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2098.png")`,
+    
       ], [
         
       ], [
