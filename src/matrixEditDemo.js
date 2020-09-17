@@ -1515,7 +1515,59 @@ const setup = async () => {
 ---`,
     
       ], [
-        
+        `# Testing the Expiration Complete Listener / Orders Service - cont.
+
+- it test scripts :
+
+it('updates the order status to cancelled', async () => {
+
+});
+
+it('emit an OrderCancelled event', async () => {
+
+});
+
+it('ack the message', async () => {
+
+});
+
+- 
+
+
+`,`expiration-complete-listener.test.ts
+---
+it("updates the order status to cancelled", async () => {
+  const { listener, order, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  const updatedOrder = await Order.findById(order.id);
+  expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
+});
+
+it("emit an OrderCancelled event", async () => {
+  const { listener, order, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+  const eventData = JSON.parse(
+    (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
+  );
+  expect(eventData.id).toEqual(order.id);
+});
+
+it("ack the message", async () => {
+  const { listener, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(msg.ack).toHaveBeenCalled();
+});
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20166.png")`,
+    
       ], [
         
       ], [
