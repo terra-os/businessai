@@ -506,7 +506,7 @@
                     <div class="table-title">
                       <h3
                         class="long"
-                        title="Ops Patents - Service & Skills Offer in your social network"
+                        title="Services & Skills Offer in your social network"
                       >
                         <!-- <div class="icon3x3srv">{{ serviceIcon }}</div>&nbsp; -->
                         <ai-icon :bits="serviceIconBits"></ai-icon>
