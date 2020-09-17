@@ -1770,7 +1770,41 @@ export class ExpirationCompleteListener extends Listener<
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20161.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20163.png")`,
     
       ], [
-        
+        `# Emiting the Order Cancelled Event 
+
+- 
+`,`expiration-complete-listener.ts
+---
+  async onMessage(
+    data: ExpirationCompleteEvent["data"],
+    msg: Message
+  ) {
+    const order = await Order.findById(data.orderId).populate(
+      "ticket"
+    );
+
+    if (!order) {
+      throw new Error("Order not found");
+    }
+
+    order.set({
+      status: OrderStatus.Cancelled,
+      // ticket: null // ticket id/info could be used later if needed
+    });
+    await order.save();
+    await new OrderCancelledPublisher(this.client).publish({
+      id: order.id,
+      version: order.version,
+      ticket: {
+        id: order.ticket.id,
+      },
+    });
+
+    msg.ack();
+  }
+
+---`,
+    
       ]
 
     ],
