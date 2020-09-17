@@ -951,13 +951,249 @@ it("fetches orders for a particular user", async () => {
 };`,`152=LEN(G372)`,`13.818181818181818=152/11`,
     
       ], [
-        
+        `# Implementing Show Request Handler
+
+- 
+`,`orders/src/routes/show.ts
+---
+import express, { Request, Response } from "express";
+import {
+  requireAuth,
+  NotFoundError,
+  NotAuthorizedError,
+} from "@w3ai/common";
+import { Order } from "../models/order";
+
+const router = express.Router();
+
+router.get(
+  "/api/orders/:orderId",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const order = await Order.findById(req.params.orderId).populate(
+      "ticket"
+    );
+
+    if (!order) {
+      throw new NotFoundError();
+    }
+    if (order.userId !== req.currentUser!.id) {
+      throw new NotAuthorizedError();
+    }
+
+    res.send(order);
+  }
+);
+
+export { router as showOrderRouter };
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2060.png")`,
+    
       ], [
-        
+        `# Test script for show.ts / show specific order
+
+- 
+`,`show.test.ts
+---
+import request from "supertest";
+import { app } from "../../app";
+import { Ticket } from "../../models/ticket";
+
+it("fetches the order", async () => {
+  // Create a ticket
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  const user = global.signin();
+  // Make a request to build an order with this ticket
+  const { body: order } = await request(app)
+    .post("/api/orders")
+    .set("Cookie", user)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  // Make request to fetch the order
+  const { body: fetchedOrder } = await request(app)
+    .get(`/api/orders/${order.id}`)
+    .set("Cookie", user)
+    .send()
+    .expect(200);
+
+  expect(fetchedOrder.id).toEqual(order.id);
+});
+
+it("returns an error if one user tries to fetch another users order", async () => {
+  // Create a ticket
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  const user = global.signin();
+  // Make a request to build an order with this ticket
+  const { body: order } = await request(app)
+    .post("/api/orders")
+    .set("Cookie", user)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  // Make request to fetch the order
+  await request(app)
+    .get(`/api/orders/${order.id}`)
+    .set("Cookie", global.signin())
+    .send()
+    .expect(401);
+});
+
+---`,`show.test.ts
+---
+import request from "supertest";
+import { app } from "../../app";
+import { Ticket } from "../../models/ticket";
+
+it("fetches the order", async () => {
+  // Create a ticket
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  const user = global.signin();
+  // Make a request to build an order with this ticket
+  const { body: order } = await request(app)
+    .post("/api/orders")
+    .set("Cookie", user)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  // Make request to fetch the order
+  const { body: fetchedOrder } = await request(app)
+    .get(`/api/orders/${order.id}`)
+    .set("Cookie", user)
+    .send()
+    .expect(200);
+
+  expect(fetchedOrder.id).toEqual(order.id);
+});
+
+---`,
+    
       ], [
-        
+        `# Cancelling the Order
+
+- We won't cancel the order - we'll just change status to Cancelled
+
+- 
+`,`orders/src/routes/delete.ts
+---
+import express, { Request, Response } from "express";
+import {
+  requireAuth,
+  NotFoundError,
+  NotAuthorizedError,
+} from "@w3ai/common";
+import { Order, OrderStatus } from "../models/order";
+
+const router = express.Router();
+
+router.delete(
+  "/api/orders/:orderId",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const { orderId } = req.params;
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      throw new NotFoundError();
+    }
+    if (order.userId !== req.currentUser!.id) {
+      throw new NotAuthorizedError();
+    }
+    order.status = OrderStatus.Cancelled;
+    await order.save();
+
+    res.status(204).send(order); // 204 - record deleted
+  }
+);
+
+export { router as deleteOrderRouter };
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2062.png")`,
+    
       ], [
-        
+        `# Testing Deleting Order
+
+- Comments to guide Coding the test:
+
+  // create a ticket with Ticket model
+  
+  // make a request to create an order
+
+  // make a request to cancel the order
+
+  // expectation to make sure the thing is cancelled
+
+`,`delete.test.ts
+---
+import request from "supertest";
+import { app } from "../../app";
+import { Ticket } from "../../models/ticket";
+import { Order, OrderStatus } from "../../models/order";
+
+it("marks an order as cancelled", async () => {
+  // create a ticket with Ticket model
+  const ticket = Ticket.build({
+    title: "service",
+    price: 20,
+  });
+  await ticket.save();
+
+  const user = global.signin();
+  // make a request to create an order
+  const { body: order } = await request(app)
+    .post("/api/orders")
+    .set("Cookie", user)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  // make a request to cancel the order
+  await request(app)
+    .delete(\`/api/orders/\${order.id\}\`)
+    .set("Cookie", user)
+    .send()
+    .expect(204);
+
+  // expectation to make sure the thing is cancelled
+  const updatedOrder = await Order.findById(order.id);
+
+  expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
+});
+
+it.todo("emits an order cancelled event");
+---`,`delete.test.ts
+---
+import request from 'supertest';
+import { app } from '../../app';
+import { Ticket } from '../../models/ticket';
+
+it('marks an order as cancelled', async () => {
+  // create a ticket with Ticket model
+  
+  // make a request to create an order
+
+  // make a request to cancel the order
+
+  // expectation to make sure the thing is cancelled
+});
+
+---`,
+    
       ], [
         
       ], [
