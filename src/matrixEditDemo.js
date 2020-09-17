@@ -1583,7 +1583,32 @@ it("ack the message", async () => {
 ---`,
     
       ], [
-        
+        `# Do not cancel Completed Orders
+
+- 
+`,`expiration-complete-listener.ts
+---
+  async onMessage(
+    data: ExpirationCompleteEvent["data"],
+    msg: Message
+  ) {
+    const order = await Order.findById(data.orderId).populate(
+      "ticket"
+    );
+
+    if (!order) {
+      throw new Error("Order not found");
+    }
+    if (order.status === OrderStatus.Complete) {
+      return msg.ack(); // Do not cancel Completed Orders
+    }
+
+    order.set({
+      status: OrderStatus.Cancelled,
+      // ticket: null // ticket id/info could be used later if needed
+    });
+---`,
+    
       ], [
         
       ], [
