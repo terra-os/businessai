@@ -1993,7 +1993,25 @@ It is up to the orders service to decide whether or not to cancel the order
 `,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20148.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20147.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20146.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20145.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20144.png")`,
     
       ], [
-        
+        `# Setup Bull JS and Redis inside the Kubernetes cluster
+- Bull JS - job processing manager
+
+- copy base service files from tickets service :
+  Dockerfile, .dockerignore, package.json, tsconfig.json
+
+- copy tickets/src index, nats-wrapper.ts and __mocks__ to expiration/src
+
+- cleanup dependencies
+
+- $ expiration % npm install bull @types/bull
+
+- $ expiration % npm install 
+
+- cleanup index.ts
+
+- 
+`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,
+    
       ], [
         
       ]
