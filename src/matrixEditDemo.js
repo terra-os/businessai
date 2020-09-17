@@ -1624,7 +1624,33 @@ export class TicketCreatedListener extends Listener<
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2079.png")`,
     
       ], [
-        
+        `# ID Adjustment
+
+- Need to ensure Tickets in Orders service have the same ID as in the Tickets Service
+
+- Technical debt - changes to Ticket attributes need manual update of attrs in 
+  orders /src/models/ticket.ts : 
+
+ticketSchema.statics.build = (attrs: TicketAttrs) => {
+  return new Ticket({
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price
+  });
+};
+
+
+`,`
+---
+ticketSchema.statics.build = (attrs: TicketAttrs) => {
+  return new Ticket({
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price
+  });
+};
+---`,
+    
       ], [
         
       ], [
