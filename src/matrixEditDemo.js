@@ -1990,7 +1990,29 @@ it("increments the version number on multiple saves", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2096.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2095.png")`,
     
       ], [
-        
+        `# Adding version: number to the 4 Events in Common module
+
+- $ common % npm run pub 
+
+- $ orders % npm update @w3ai/common
+
+- $ tickets % npm update @w3ai/common
+
+
+`,`$ common % npm run pub
+---
+npm notice === Tarball Details === 
+npm notice name:          @w3ai/common                            
+npm notice version:       1.0.9                                   
+npm notice package size:  5.2 kB                                  
+npm notice unpacked size: 21.8 kB                                 
+npm notice shasum:        9148bc8d9c4b130cc7cc16fbeb8fc4267c11cbed
+npm notice integrity:     sha512-mgceYHjvmh2Gt[...]lVFbdJ0U6MVtw==
+npm notice total files:   39                                      
+npm notice 
++ @w3ai/common@1.0.9
+---`,
+    
       ], [
         
       ], [
