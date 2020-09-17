@@ -1724,7 +1724,51 @@ export { expirationQueue };
 ---`,
     
       ], [
-        
+        `# Handling an Expiration Event in Orders Service
+
+- Orders service needs to know that an order has gone over the 15 minute time limit.  
+It is up to the orders service to decide whether or not to cancel the order 
+(it might have already been paid!!!)
+
+- $ orders % npm update @w3ai/common  
+
+- `,`orders/src/events/listeners/expiration-complete-listener.ts
+---
+import {
+  Listener,
+  Subjects,
+  ExpirationCompleteEvent,
+  OrderStatus,
+} from "@w3ai/common";
+import { Message } from "node-nats-streaming";
+import { queueGroupName } from "./queue-group-name";
+import { Order } from "../../models/order";
+
+export class ExpirationCompleteListener extends Listener<
+  ExpirationCompleteEvent
+> {
+  readonly subject = Subjects.ExpirationComplete;
+  queueGroupName = queueGroupName;
+
+  async onMessage(
+    data: ExpirationCompleteEvent["data"],
+    msg: Message
+  ) {
+    const order = await Order.findById(data.orderId);
+
+    if (!order) {
+      throw new Error("Order not found");
+    }
+
+    order.set({
+      status: OrderStatus.Cancelled,
+      ticket: null,
+    });
+  }
+}
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20161.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20163.png")`,
+    
       ], [
         
       ]
