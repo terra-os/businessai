@@ -2014,7 +2014,29 @@ npm notice
 ---`,
     
       ], [
-        
+        `# Updating Tickets Event Definitions
+
+- version: ticket.version,
+`,`new.ts
+---
+    await new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: ticket.version,
+    });
+---`,`update.ts
+---
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: ticket.version,
+    });
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2097.png")`,
+    
       ], [
         
       ], [
