@@ -2630,7 +2630,30 @@ export class OrderCreatedListener extends Listener<
 ---`,
     
       ], [
-        
+        `# Strategies for Locking a Ticket
+
+- simple boolean might not work
+
+- no reporting info provided to the owner of the ticket / service 
+  - who is buying, status, etc
+
+- Solution: include the orderId associated with the ticket
+
+- Tickets TicketId 'CZQ' orderId 'ADS' Is someone buying my ticket? 
+Yes, the order ID is ADS Orders OrderId ADS status AwaitingPayment 
+What's the status of order ADS? User who owns the ticket
+
+- We can use the presence of an orderId to indicate if ticket is reserved or not !!
+
+- by default tickets will be created with a null value for orderId 
+
+- in the onMessage we can take the orderId and store in in the ticket record !!
+  - also need to include orderId in ticket model !!
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20128.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20127.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20126.png")`,
+    
       ], [
         
       ], [
