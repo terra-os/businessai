@@ -1658,7 +1658,40 @@ export class OrderCreatedListener extends Listener<
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20158.png")`,
     
       ], [
-        
+        `# Defining the Expiration Complete Event
+
+- Adding to common module a definition for Expiration Complete Event
+
+- we only need to include in data : the orderId
+
+1 - add event to Subjects :
+
+  ExpirationComplete = "expiration:complete",
+
+2 - Add event file : 
+
+  common/src/events/expiration-complete-event.ts
+
+3 - Add Event export in common/ index.ts
+
+  export * from "./events/expiration-complete-event";
+
+- $ common % npm run pub
+
+- $ expiration % npm update @w3ai/common  
+`,`expiration-complete-event.ts
+---
+import { Subjects } from "./subjects";
+
+export interface ExpirationCompleteEvent {
+  subject: Subjects.ExpirationComplete;
+  data: {
+    orderId: string;
+  };
+}
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20153.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20159.png")`,
+    
       ], [
         
       ], [
