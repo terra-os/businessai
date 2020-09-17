@@ -1623,7 +1623,68 @@ it("ack the message", async () => {
 `,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20169.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20167.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20168.png")`,
     
       ], [
-        
+        `# Payments Service Setup / Microservice Setup / Service Setup
+
+- mkdir payments
+
+- cp tickets/ .dockerignore Dockerfile package.json tsconfig.json payments/
+
+- mkdir payments/src
+
+- cp tickets/src  __mocks__  test apps.ts index.ts nats-wrapper  payments/src
+- Updates : 
+  - app.ts - delete routers imports & app.use routers 
+  - index.ts - delete Listeners imports & new Listener .listen()
+  - package.json - "name": "payments"
+
+- Install Dependencies / npm install
+
+- build Docker image
+  $ payments % docker build -t stefian22/payments .
+  $ payments % docker push stefian22/payments 
+
+- Add config for k8s new service / payments + mongodb pod
+  - replace all tickets => payments / payments-depl.yaml
+    cp tickets-depl.yaml payments-depl.yaml && sed -i -- "s/tickets/payments/g" payments-depl.yaml
+  - replace all tickets => payments / payments-mongo-depl.yaml
+    cp tickets-mongo-depl.yaml payments-mongo-depl.yaml && sed -i -- "s/tickets/payments/g" payments-mongo-depl.yaml
+
+- Add skaffold artifact / image for payments
+      - image: stefian22/payments # or for GCP: us.gcr.io/aibazar-dev/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+
+`,`
+---
+SI 9:45:47 $ market % kp                                                   (master)market
+kubectl get pods
+NAME                                    READY   STATUS    RESTARTS   AGE
+auth-depl-66795b6f97-l4x5b              1/1     Running   0          5m1s
+auth-mongo-depl-598cc5d7cb-gptbv        1/1     Running   0          5m1s
+client-depl-78875c799-p4795             1/1     Running   0          5m1s
+expiration-depl-7f564b945c-hr725        1/1     Running   0          5m1s
+expiration-redis-depl-9d994b795-5frtr   1/1     Running   0          5m1s
+nats-depl-5f5c686b74-nw5dm              1/1     Running   0          5m
+orders-depl-77f68fd974-nzc5l            1/1     Running   0          5m
+orders-mongo-depl-659b774578-9whlv      1/1     Running   0          5m
+payments-depl-7646dcd57-dftv5           1/1     Running   0          5m
+payments-mongo-depl-76b4f5c8-2s9wr      1/1     Running   0          5m
+tickets-depl-67bff8c7d8-vb78j           1/1     Running   0          4m59s
+tickets-mongo-depl-66bffb87c6-5jmsq     1/1     Running   0          4m59s
+---`,`
+---
+[payments-depl-7646dcd57-dftv5 payments] [INFO] 12:42:42 Restarting: /app/src/app.ts has been modified
+[payments-depl-7646dcd57-dftv5 payments] Using ts-node version 8.10.2, typescript version 3.9.7
+[payments-depl-7646dcd57-dftv5 payments] Connected to NATS
+[payments-depl-7646dcd57-dftv5 payments] Connected to MongoDB
+[payments-depl-7646dcd57-dftv5 payments] Tickets: Listening on port 3000!
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20170.png")`,
+    
       ], [
         
       ], [
