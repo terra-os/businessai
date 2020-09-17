@@ -1782,9 +1782,61 @@ export class TicketUpdatedListener extends Listener<
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2090.png")`,
     
       ], [
-        
+        `# Optimistic Concurrency Control - OCC
+
+- The process is known as Optimistic Concurrency Control
+  - not a Mongo / mongoose specific strategy
+  - implemented by may dbs
+
+- mongoose updates the version field of the document automatically
+
+- internally mongoose will ask mongo to find the record with the ID & version of 1 / v
+ => select the record with the right version
+
+- Process is specific for for updating records
+
+- Record creation process will default to version of 0 or 1
+
+- 
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2092.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2091.png")`,
+    
       ], [
-        
+        `# Mongoose Update-If-Current
+
+- mongoose-update-if-current
+https://www.npmjs.com/package/mongoose-update-if-current
+Optimistic concurrency control plugin for Mongoose v5.0 and higher.
+
+This plugin brings optimistic concurrency control to Mongoose documents by 
+incrementing document version numbers on each save, and preventing previous 
+versions of a document from being saved over the current version.
+options: version or timestamp
+Inspired by issue #4004 in the Mongoose GitHub repository.
+
+Installation
+$ npm install --save mongoose
+$ npm install --save mongoose-update-if-current
+
+- we will not use the default mongo __v but will rename to version
+
+$ tickets % npm install mongoose-update-if-current 
+
+`,`
+---
+
+---`,`Default behaviour is to use the schema's version key (__v by default) to implement concurrency control. The plugin can be configured to use timestamps (updatedAt by default) instead, if they are enabled on the schema:
+
+/* Global plugin - remember to add { timestamps: true } to each schema */
+mongoose.plugin(updateIfCurrentPlugin, { strategy: 'timestamp' });
+ 
+/* Single schema */
+const mySchema = new mongoose.Schema({ ... }, { timestamps: true });
+mySchema.plugin(updateIfCurrentPlugin, { strategy: 'timestamp' });
+The plugin will hook into the save() function on schema documents to increment the version and check that it matches the version in the database before persisting it`,
+    
       ], [
         
       ], [
