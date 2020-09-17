@@ -2535,7 +2535,34 @@ it("does not call ack if the event has a skipped version number", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20120.png")`,
     
       ], [
-        
+        `# Next Videos
+
+1 - Add the 'mongoose-update-if-current' module into the Orders model - Done
+
+2 - Fix up some tests - we are creating some Tickets in the Orders service 
+  without providing them an ID Next Couple Videos 
+
+3 - Fix up some route handlers - we are publishing events around orders 
+  but not providing the version of the order
+
+
+`,`models/order.ts
+---
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
+
+interface OrderDoc extends mongoose.Document {
+  userId: string;
+  status: OrderStatus;
+  expiresAt: Date;
+  ticket: TicketDoc;
+  version: number;
+}
+
+
+orderSchema.set("versionKey", "version");
+orderSchema.plugin(updateIfCurrentPlugin);
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20121.png")`,
+    
       ], [
         
       ], [
