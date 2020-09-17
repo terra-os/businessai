@@ -1601,7 +1601,62 @@ export const queueGroupName = "orders-service";
 ---`,
     
       ], [
-        
+        `# Delaying Job Processing
+
+- testing first with a 10 seconds delay:
+
+delay: 10000, // 10 seconds
+
+
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+    const delay =
+      new Date(data.expiresAt).getTime() - new Date().getTime(); // the delay time in miliseconds
+    console.log(
+      "Waiting this may miliseconds to process the job",
+      delay
+    );
+
+    await expirationQueue.add(
+      {
+        orderId: data.id,
+      },
+      {
+        delay, // the delay in millisecond calculated above
+      }
+    );
+
+    msg.ack();
+  }
+}
+`,`order-created-listener.ts
+---
+import { Listener, OrderCreatedEvent, Subjects } from "@w3ai/common";
+import { Message } from "node-nats-streaming";
+import { queueGroupName } from "./queue-group-name";
+import { expirationQueue } from "../../queues/expiration-queue";
+
+export class OrderCreatedListener extends Listener<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+    await expirationQueue.add(
+      {
+        orderId: data.id,
+      },
+      {
+        delay: 10000, // 10 seconds
+      }
+    );
+
+    msg.ack();
+  }
+}
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20158.png")`,
+    
       ], [
         
       ], [
