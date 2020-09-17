@@ -2165,7 +2165,22 @@ const doRequest = async () => {
 ---`,
     
       ], [
-        
+        `# Abstracted Ticket Query Method - findByEvent()
+
+- 
+`,`orders/src/models/ticket.ts
+---
+ticketSchema.statics.findByEvent = (event: {
+  id: string;
+  version: number;
+}) => {
+  return Ticket.findOne({
+    _id: event.id,
+    version: event.version - 1,
+  });
+};
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20102.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20101.png")`,
+    
       ], [
         
       ], [
