@@ -2239,7 +2239,44 @@ const setup = async () => {
 ---`,
     
       ], [
-        
+        `# Rejecting Editd of Reserved Tickets
+
+- Must be tested as this is critical business logic !!
+
+
+`,`update.test.ts
+---
+it("reject updates if the ticket is reserved", async () => {
+  const cookie = global.signin();
+
+  const response = await request(app)
+    .post("/api/tickets")
+    .set("Cookie", cookie)
+    .send({
+      title: "asldkfj",
+      price: 20,
+    });
+
+  const ticket = await Ticket.findById(response.body.id);
+  ticket!.set({ orderId: mongoose.Types.ObjectId().toHexString() });
+  await ticket!.save();
+
+  await request(app)
+    .put(\`/api/tickets/\${response.body.id}\`)
+    .set("Cookie", cookie)
+    .send({
+      title: "new title",
+      price: 100,
+    })
+    .expect(400);
+});
+---`,`tickets/src/routes/update.ts
+---
+    if (ticket.orderId) {
+      throw new BadRequestError("Cannot edit a reserved ticket");
+    }
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20139.png")`,
+    
       ]
 
     ],
