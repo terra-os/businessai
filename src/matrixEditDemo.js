@@ -2470,7 +2470,25 @@ it('acks the message', async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20135.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20134.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20133.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20132.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20131.png")`,
     
       ], [
-        
+        `# Publish an event immediatelly after ticket.save()
+  - to inform abou the record update
+
+- Need to update the TicketUpdatedPublisher / Event - to include orderId
+
+-  Easy solution but issues later in testing :
+
+  new TicketUpdatedPublisher(natsWrapper.client);
+
+- There is a Private nats client in the base-listener class though !!
+
+- => make the nats client Protected inside the base-listener / common lib
+
+-  
+`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20137.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20136.png")`,
+    
       ]
 
     ],
