@@ -2609,7 +2609,26 @@ it("marks an order as cancelled", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20125.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20124.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20123.png")`,
     
       ], [
-        
+        `# Building the Listener for the Tickets Service
+
+- Created basic / stub listener
+`,`order-created-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Listener, OrderCreatedEvent, Subjects } from "@w3ai/common";
+import { queueGroupName } from "./queue-group-name";
+
+export class OrderCreatedListener extends Listener<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {}
+}
+
+---`,
+    
       ], [
         
       ], [
