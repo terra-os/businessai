@@ -1319,6 +1319,9 @@ on world's most interesting projects.`,
       this.nextService();
       // this.readService();
       this.matrixEdit = matrixEdit()[this.randomInt(0, 9)];
+      this.cellToEdit = this.matrixEdit[this.randomInt(0, 1)][
+        this.randomInt(0, 1)
+      ]; // Show text / file from cell //
     },
     stop() {
       this.pause = true;
