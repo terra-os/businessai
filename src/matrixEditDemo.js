@@ -1959,7 +1959,39 @@ It is up to the orders service to decide whether or not to cancel the order
 `,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20141.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20140.png")`,
     
       ], [
-        
+        `# How to Implement a timer for the Expiration Service
+
+- Waiting 15 mins = Emitting the expiration:complete event when 
+  order created time is 15 mins in the past !!
+
+- Option 1 - setTimeout(() => ... 15mins ) every time we get the order created event !!
+   - Timer stored in memory => If service restarts, all timers are lost.
+
+- Option 2 - Rely on NATS redelivery mechanism
+  - with no ack - NATS will re-emit the order created after 5 sec
+  - when order created is in the past we can ack the message and send exp complete
+  - Downside: for logging purposes we want to track nr of re-deliveries
+    => Using this mechanism for both logging / maint. and business logic 
+    => Confusing Ops & Business
+    - Doesn't feel right => Complications later
+
+- Option 3 - Message Broker / Scheduler to delay expiration complete msg for 15mins
+  - NOT supported by NATS (now) - scheduled message / event
+  - immediatelly publish exp:complete with additional instructions for Event Bus / Broker
+    to delay publishing for 15mins
+
+- Option 4 - Bull JS / Redis Server << We'll implement this !!!
+  - Bull JS library - to set long lived timers / schedule tasks
+  - When order:created use Bull JS to remind us to do something / emit exp complete
+    in 15 mins 
+  - Bull JS will store a reminder inside a Redis instance 
+  - Redis is an in mem database commonly used for tasks like this
+  - Bull will store in Redis a list of jobs / tasks scheduled to be done at some time
+  - after 15 mins - Bull will get a reminder from Redis that needs to do something
+  - Bull will announce Exp Service that 15mins are elapsed and shoud send 
+    exp:complete
+`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20148.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20147.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20146.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20145.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20144.png")`,
+    
       ], [
         
       ], [
