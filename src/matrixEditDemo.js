@@ -1686,7 +1686,16 @@ export class TicketUpdatedListener extends Listener<
 ---`,
     
       ], [
-        
+        `# Initializing the Listeners
+
+- inside orders/src/index.ts
+`,`orders/src/index.ts
+---
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
+
+---`,
+    
       ], [
         
       ], [
