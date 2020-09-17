@@ -2038,7 +2038,40 @@ npm notice
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2097.png")`,
     
       ], [
-        
+        `# Publishing While Listening
+
+- Changes in base listener and publisher : 
+protected client: Stan;
+
+in ticket created / updated event :
+orderId?: string;
+
+npm run pub >> v1.0.10
+
+$ tickets % npm update @w3ai/common  
+
+- Cmd + Shift + P / Reload window if ts error on this.client
+  - this will reboot the TS type checker !!
+
+- 
+
+`,`order-created-listener.ts
+---
+    // Save the  ticket and publish a TicketUpdated message
+    await ticket.save();
+    await new TicketUpdatedPublisher(this.client).publish({
+      id: ticket.id,
+      price: ticket.price,
+      title: ticket.title,
+      userId: ticket.userId,
+      orderId: ticket.orderId,
+      version: ticket.version,
+    });
+
+    // ack the message
+    msg.ack();
+---`,
+    
       ], [
         
       ], [
