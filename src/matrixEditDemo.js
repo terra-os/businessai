@@ -1017,7 +1017,7 @@ it("fetches the order", async () => {
 
   // Make request to fetch the order
   const { body: fetchedOrder } = await request(app)
-    .get(`/api/orders/${order.id}`)
+    //.get(\`/api/orders/\${order.id}\`)
     .set("Cookie", user)
     .send()
     .expect(200);
@@ -1043,7 +1043,7 @@ it("returns an error if one user tries to fetch another users order", async () =
 
   // Make request to fetch the order
   await request(app)
-    .get(`/api/orders/${order.id}`)
+    //.get(\`/api/orders/\${order.id}\`)
     .set("Cookie", global.signin())
     .send()
     .expect(401);
@@ -1073,7 +1073,7 @@ it("fetches the order", async () => {
 
   // Make request to fetch the order
   const { body: fetchedOrder } = await request(app)
-    .get(`/api/orders/${order.id}`)
+    //.get(\`/api/orders/\${order.id}\`)
     .set("Cookie", user)
     .send()
     .expect(200);
@@ -1164,7 +1164,7 @@ it("marks an order as cancelled", async () => {
 
   // make a request to cancel the order
   await request(app)
-    .delete(\`/api/orders/\${order.id\}\`)
+    //.delete(\`/api/orders/\${order.id}\`)
     .set("Cookie", user)
     .send()
     .expect(204);
