@@ -1712,7 +1712,64 @@ export class TicketUpdatedListener extends Listener<
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2085.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2084.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2083.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2082.png")`,
     
       ], [
-        
+        `# File Sync Setup in Skaffold for Expiration
+
+- 
+`,`skaffold.yaml
+---
+    - image: stefian22/expiration # or for GCP: us.gcr.io/aibazar-dev/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20150.png")`,`Watching for changes...
+[expiration-depl-7446df4d86-xd2rf expiration]
+[expiration-depl-7446df4d86-xd2rf expiration] > expiration@1.0.0 start /app
+[expiration-depl-7446df4d86-xd2rf expiration] > ts-node-dev --poll src/index.ts
+[expiration-depl-7446df4d86-xd2rf expiration]
+[expiration-depl-7446df4d86-xd2rf expiration] Using ts-node version 8.10.2, typescript version 3.9.7
+[tickets-depl-5c55dc956b-njnb8 tickets]
+[tickets-depl-5c55dc956b-njnb8 tickets] > tickets@1.0.0 start /app
+[tickets-depl-5c55dc956b-njnb8 tickets] > ts-node-dev --poll src/index.ts
+[tickets-depl-5c55dc956b-njnb8 tickets]
+[tickets-depl-5c55dc956b-njnb8 tickets] Using ts-node version 8.10.2, typescript version 3.9.7
+[client-depl-5979685985-h8tzc client]
+[client-depl-5979685985-h8tzc client] > client@1.0.0 dev /app
+[client-depl-5979685985-h8tzc client] > next
+[client-depl-5979685985-h8tzc client]
+[client-depl-5979685985-h8tzc client] ready - started server on http://localhost:3000
+[auth-depl-7cfc89b7ff-7rhhv auth]
+[auth-depl-7cfc89b7ff-7rhhv auth] > auth@1.0.0 start /app
+[auth-depl-7cfc89b7ff-7rhhv auth] > ts-node-dev --poll src/index.ts
+[auth-depl-7cfc89b7ff-7rhhv auth]
+[auth-depl-7cfc89b7ff-7rhhv auth] Using ts-node version 8.10.2, typescript version 3.9.5
+[orders-depl-9b8999669-7qp2n orders]
+[orders-depl-9b8999669-7qp2n orders] > orders@1.0.0 start /app
+[orders-depl-9b8999669-7qp2n orders] > ts-node-dev --poll src/index.ts
+[orders-depl-9b8999669-7qp2n orders]
+[orders-depl-9b8999669-7qp2n orders] Using ts-node version 8.10.2, typescript version 3.9.7
+[client-depl-5979685985-h8tzc client] > Using "webpackDevMiddleware" config function defined in next.config.js.
+[expiration-depl-7446df4d86-xd2rf expiration] Connected to NATS
+[tickets-depl-5c55dc956b-njnb8 tickets] Connected to NATS
+[tickets-depl-5c55dc956b-njnb8 tickets] Connected to MongoDB
+[tickets-depl-5c55dc956b-njnb8 tickets] Tickets: Listening on port 3000!
+[orders-depl-9b8999669-7qp2n orders] Connected to NATS
+[orders-depl-9b8999669-7qp2n orders] Connected to MongoDB
+[orders-depl-9b8999669-7qp2n orders] Orders: Listening on port 3000!
+[auth-depl-7cfc89b7ff-7rhhv auth] Connected to MongoDB
+[auth-depl-7cfc89b7ff-7rhhv auth] Auth: Listening on port 3000!
+[client-depl-5979685985-h8tzc client] event - compiled successfully
+[client-depl-5979685985-h8tzc client] wait  - compiling...
+[client-depl-5979685985-h8tzc client] Attention: Next.js now collects completely anonymous telemetry regarding usage.
+[client-depl-5979685985-h8tzc client] This information is used to shape Next.js' roadmap and prioritize features.
+[client-depl-5979685985-h8tzc client] You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+[client-depl-5979685985-h8tzc client] https://nextjs.org/telemetry
+[client-depl-5979685985-h8tzc client]
+[client-depl-5979685985-h8tzc client] event - compiled successfully`,
+    
       ], [
         
       ], [
