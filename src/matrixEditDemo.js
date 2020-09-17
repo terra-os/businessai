@@ -1791,7 +1791,25 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,
     
       ], [
-        
+        `# Bull JS
+
+- Traditional Bull use : 
+  - Bull is handling the entire process / on the Web Server  and Worker Servers
+  - Bull is designed for 1 off little jobs
+  - Not for handling a huge nr of messages like NATS it is built for
+
+- Terms :
+  - Queue - Series of messages that we want to queue up and process over time
+
+- In our case we don't have separate Web and Worker servers
+  - everything is containe in our Expiration service
+
+-  And we separate Expiration and Redis on diff pods 
+  => they should not get down at same time`,`
+---
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20153.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20152.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20151.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,
+    
       ], [
         
       ], [
