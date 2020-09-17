@@ -1851,7 +1851,81 @@ export { expirationQueue };
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20153.png")`,
     
       ], [
-        
+        `# Queueing a job on event arrival
+
+- initially will wire things without the delay of 15mins
+  - for testing => we'll imediatelly process the job
+
+- start the listener in index.ts : 
+  new OrderCreatedListener(natsWrapper.client).listen();
+`,`index.ts
+---
+import { natsWrapper } from "./nats-wrapper";
+import { OrderCreatedListener } from './events/listeners/order-created-listener';
+
+const start = async () => {
+  if (!process.env.NATS_CLIENT_ID) {
+    throw new Error("NATS_CLIENT_ID must be defined");
+  }
+  if (!process.env.NATS_URL) {
+    throw new Error("NATS_URL must be defined");
+  }
+  if (!process.env.NATS_CLUSTER_ID) {
+    throw new Error("NATS_CLUSTER_ID must be defined");
+  }
+
+  try {
+    await natsWrapper.connect(
+      process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URL
+    );
+    // capture connection close events
+    natsWrapper.client.on("close", () => {
+      console.log("NATS connection closed!");
+      process.exit();
+    });
+    process.on("SIGINT", () => natsWrapper.client.close());
+    process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new OrderCreatedListener(natsWrapper.client).listen();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+start();
+
+---`,`order-created-listener.ts
+---
+import { Listener, OrderCreatedEvent, Subjects } from "@w3ai/common";
+import { Message } from "node-nats-streaming";
+import { queueGroupName } from "./queue-group-name";
+import { expirationQueue } from "../../queues/expiration-queue";
+
+export class OrderCreatedListener extends Listener<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+    await expirationQueue.add({
+      orderId: data.id,
+    });
+
+    msg.ack();
+  }
+}
+
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20154.png")`,`Watching for changes...
+Syncing 1 files for stefian22/expiration:90a828c2805c5450d131c1002be67cf2a8e9a8a5d4ce0111db00759cc852deab
+Watching for changes...
+[expiration-depl-7446df4d86-xd2rf expiration] [INFO] 11:27:41 Restarting: /app/src/index.ts has been modified
+[expiration-depl-7446df4d86-xd2rf expiration] NATS connection closed!
+[expiration-depl-7446df4d86-xd2rf expiration] Using ts-node version 8.10.2, typescript version 3.9.7
+[expiration-depl-7446df4d86-xd2rf expiration] Connected to NATS`,
+    
       ]
 
     ],
