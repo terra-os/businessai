@@ -1537,7 +1537,39 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
 ---`,
     
       ], [
-        
+        `# Reminders on queueGroupName, data and msg in Listeners
+
+- Events in a channel will be sent to only one of the queueGroup listeners / service
+
+- To avoid typos, etc on queue group names, we should define then once :
+
+export const queueGroupName = "orders-service";
+
+import { queueGroupName } from "./queue-group-name";
+
+- we call ack(): void; - when we successfully processed a message / event !
+
+- when ack() is not called => msg will be re-distribuited
+
+
+`,`/@w3ai/common/build/events/ticket-created-event.d.ts
+---
+import { Subjects } from "./subjects";
+export interface TicketCreatedEvent {
+    subject: Subjects.TicketCreated;
+    data: {
+        id: string;
+        title: string;
+        price: number;
+        userId: string;
+    };
+}
+
+---`,`listeners/queue-group-name.ts
+---
+export const queueGroupName = "orders-service";
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2078.png")`,
+    
       ], [
         
       ], [
