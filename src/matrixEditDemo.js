@@ -1707,7 +1707,96 @@ tickets-mongo-depl-66bffb87c6-5jmsq     1/1     Running   0          4m59s
 `,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20174.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20173.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20172.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20171.png")`,
     
       ], [
-        
+        `# Mongoose Order Model for Payments Service
+
+- + 3 Interfaces :
+  - OrderAttrs - Attributes needed to build an order
+  - OrderDoc - extends mongoose.Document
+  - OrderModel - extends mongoose.Model<OrderDoc> // + methods()
+
+- 
+`,`payments/src/models/order.ts
+---
+import mongoose from "mongoose";
+import { OrderStatus } from "@w3ai/common";
+
+interface OrderAttrs {
+  id: string;
+  version: number;
+  userId: string;
+  price: number;
+  status: OrderStatus;
+}
+
+interface OrderDoc extends mongoose.Document {
+  version: number;
+  userId: string;
+  price: number;
+  status: OrderStatus;
+}
+
+interface OrderModel extends mongoose.Model<OrderDoc> {
+  build(attrs: OrderAttrs): OrderDoc;
+}
+---`,`
+---
+const orderSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+      enum: Object.values(OrderStatus),
+    },
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+      },
+    },
+  }
+);
+---`,`
+---
+orderSchema.statics.build = (attrs: OrderAttrs) => {
+  return new Order({
+    _id: attrs.id,
+    version: attrs.version,
+    price: attrs.price,
+    userId: attrs.userId,
+    status: attrs.status
+  });
+};
+
+const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
+
+export { Order };
+---`,`payments/src/models/order.ts
+---
+import mongoose from 'mongoose';
+
+interface OrderAttrs {
+
+}
+
+interface OrderDoc extends mongoose.Document {
+
+}
+
+interface OrderModel extends mongoose.Model<OrderDoc> {
+  
+}
+---`,
+    
       ]
 
     ],
