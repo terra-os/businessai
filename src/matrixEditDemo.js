@@ -2013,7 +2013,96 @@ It is up to the orders service to decide whether or not to cancel the order
 `,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20149.png")`,
     
       ], [
-        
+        `# Kubernetes Setup
+
+- $ expiration % docker build -t stefian22/expiration .
+
+- $ expiration % docker push stefian22/expiration
+
+- create expiration-redis-depl ~ auth-mongo-depl
+and 
+expiration-depl ~ tickets-depl
+`,`expiration-depl.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration
+  template:
+    metadata:
+      labels:
+        app: expiration
+    spec:
+      containers:
+        - name: expiration
+          image: stefian22/expiration # image: us.gcr.io/aibazar-dev/expiration
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: aibazar
+            - name: REDIS_HOST
+              value: expiration-redis-srv
+
+---`,`expiration-redis-depl.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-redis-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration-redis
+  template:
+    metadata:
+      labels:
+        app: expiration-redis
+    spec:
+      containers:
+        - name: expiration-redis
+          image: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expiration-redis-srv
+spec:
+  selector:
+    app: expiration-redis
+  ports:
+    - name: db
+      protocol: TCP
+      port: 6379 # default listening port for redis
+      targetPort: 6379
+
+---`,`
+---
+SI 22:40:22 $ market % kp                                                             (master)market
+kubectl get pods
+NAME                                     READY   STATUS    RESTARTS   AGE
+auth-depl-7d54c499bc-4lddg               1/1     Running   0          2m40s
+auth-mongo-depl-549749c754-9whp7         1/1     Running   0          2m40s
+client-depl-56844d85d9-rg2rb             1/1     Running   0          2m40s
+expiration-depl-757f8fb7fb-l6g6x         1/1     Running   0          2m40s
+expiration-redis-depl-768c9cdfbf-cwxv2   1/1     Running   0          2m40s
+nats-depl-7d74ff8c64-m4tt9               1/1     Running   0          2m39s
+orders-depl-9fbffd865-zkmvt              1/1     Running   0          2m39s
+orders-mongo-depl-56f499456-fwk9q        1/1     Running   0          2m39s
+tickets-depl-5d9b44c966-ph2nc            1/1     Running   0          2m39s
+tickets-mongo-depl-77b4978f98-w79qb      1/1     Running   0          2m38s
+---`,
+    
       ]
 
     ],
