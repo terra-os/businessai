@@ -2182,7 +2182,118 @@ ticketSchema.statics.findByEvent = (event: {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20102.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20101.png")`,
     
       ], [
-        
+        `# Optional - Versioning Without Update-If-Current
+
+- mongoose-update-if-current assumes version / __v starts at 0 and increments by 1
+
+- there might be further situations with other services / dbs where start is at 100 and 
+  increments by 100
+
+- or version string that is a timestamp
+
+- Option to manage the versioning by our own code instead of relying on a modulle !!!
+  that might not implement / cover all the scenarios we need !!
+
+- This code will be reverted !!! and the solution further will be based on :
+  mongoose-update-if-current 
+
+- What mongoose-update-if-current does : 
+1 - Updates the version number by 1 on records before they are saved 
+
+    // Versioning WITHOUT NPM module - mongoose-update-if-current
+    const { title, price, version } = data;
+    ticket.set({ title, price, version });
+    await ticket.save();
+
+2 - Customizes the find-and-update operation (save) to look for the correct version
+
+- injecting code in to the save operation :
+https://mongoosejs.com/docs/api/model.html#model_Model-$where
+- Additional properties to attach to the query when calling save() and isNew is false.
+- this is how to overwrite or add additional query props
+
+- $ kubectl exec -it orders-mongo-depl-5bd49b4655-wtxgl mongo
+
+
+`,`original orders/src/events/listeners/ticket-update-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Subjects, Listener, TicketUpdatedEvent } from "@w3ai/common";
+import { Ticket } from "../../models/ticket";
+import { queueGroupName } from "./queue-group-name";
+
+export class TicketUpdatedListener extends Listener<
+  TicketUpdatedEvent
+> {
+  readonly subject = Subjects.TicketUpdated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
+    const ticket = await Ticket.findByEvent(data);
+
+    if (!ticket) {
+      throw new Error("Ticket not found");
+    }
+
+    const { title, price } = data;
+    ticket.set({ title, price });
+    await ticket.save();
+
+    msg.ack();
+  }
+}
+
+---`,`orders/src/events/listeners/ticket-update-listener.ts
+---
+import { Message } from "node-nats-streaming";
+import { Subjects, Listener, TicketUpdatedEvent } from "@w3ai/common";
+import { Ticket } from "../../models/ticket";
+import { queueGroupName } from "./queue-group-name";
+
+export class TicketUpdatedListener extends Listener<
+  TicketUpdatedEvent
+> {
+  readonly subject = Subjects.TicketUpdated;
+  queueGroupName = queueGroupName;
+
+  async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
+    const ticket = await Ticket.findByEvent(data);
+
+    if (!ticket) {
+      throw new Error("Ticket not found");
+    }
+
+    // Versioning WITHOUT NPM module - mongoose-update-if-current
+    const { title, price, version } = data;
+    ticket.set({ title, price, version });
+    await ticket.save();
+
+    // Versioning with NPM module - mongoose-update-if-current
+    // const { title, price } = data;
+    // ticket.set({ title, price });
+    // await ticket.save();
+
+    msg.ack();
+  }
+}
+
+---`,`order/src/models/ticket.ts
+---
+// ticketSchema.plugin(updateIfCurrentPlugin);
+
+// Setting a mongoose pre save hook: // when NOT using the updateIfCurrentPlugin
+ticketSchema.pre('save', function (done) {
+  // @ts-ignore
+  this.$where = {
+    // assuming versioning is incremented by 1 on each update
+    // to change to 10, 100, etc eg: => version: this.get('version') - 100  
+    version: this.get('version') - 1  
+  };
+
+  done();
+}); // middleware that will run anytime we save() a record
+---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20118.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20117.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20116.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20115.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20114.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20113.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20112.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20111.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20110.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20108.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20105.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20104.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20103.png")`,
+    
       ], [
         
       ], [
