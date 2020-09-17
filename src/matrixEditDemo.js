@@ -2295,7 +2295,32 @@ ticketSchema.pre('save', function (done) {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20118.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20117.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20116.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20115.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20114.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20113.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20112.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20111.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20110.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20108.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20105.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20104.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20103.png")`,
     
       ], [
-        
+        `# Testing Listeners
+
+- prepared template for listeners test file
+`,`orders/src/events/listeners/ticket-created-listener.ts
+---
+const setup = async () => {
+  // create an instance of the listener
+
+  // create a fake data event
+
+  // create a fake message object
+};
+
+it('creates and saves a ticket', async () => {
+  // call the onMessage function with the data object + message object
+
+  // write assertions to make sure a ticket was created
+});
+
+it('acks the message', async () => {
+  // call the onMessage function with the data object + message object
+
+  // write assertions to make sure ack function is called
+});
+---`,
+    
       ], [
         
       ], [
