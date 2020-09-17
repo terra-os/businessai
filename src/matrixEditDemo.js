@@ -1838,7 +1838,44 @@ mySchema.plugin(updateIfCurrentPlugin, { strategy: 'timestamp' });
 The plugin will hook into the save() function on schema documents to increment the version and check that it matches the version in the database before persisting it`,
     
       ], [
-        
+        `# Implementig OCC with Mongoose in tickets service
+
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
+
+
+- Defining / Renaming __v to version :
+
+ticketSchema.set('versionKey', 'version');
+ticketSchema.plugin(updateIfCurrentPlugin);
+
+- GOGITO : beside version to define a branch attribute for 
+  services (tickets) and projects (orders)
+
+- 
+`,`ticket/src/models/ticket.ts
+---
+
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
+
+interface TicketDoc extends mongoose.Document {
+  // gives option to add properties in the future
+  title: string;
+  price: number;
+  userId: string;
+  version: number;
+}
+
+ticketSchema.set("versionKey", "version");
+ticketSchema.plugin(updateIfCurrentPlugin);
+
+---`,`models/__test__/ticket.test.ts
+---
+import { Ticket } from "../ticket";
+
+it("implements optimistic concurrency control", async () => {});
+
+---`,
+    
       ], [
         
       ], [
