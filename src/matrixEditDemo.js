@@ -1571,7 +1571,35 @@ export const queueGroupName = "orders-service";
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%2078.png")`,
     
       ], [
-        
+        `# Testing Job Processing Manually / Postman
+
+- with Postman
+  - Create ticket
+  - Create order
+  - we should see immediately from expiration service the console log:
+  I want to publish an expiration:complete event for orderId
+
+- Yey - it works!
+
+- Next: add a Delay in Expiration listener
+
+`,`Watching for changes...
+[expiration-depl-7446df4d86-xd2rf expiration] [INFO] 11:27:41 Restarting: /app/src/index.ts has been modified
+[expiration-depl-7446df4d86-xd2rf expiration] NATS connection closed!
+[expiration-depl-7446df4d86-xd2rf expiration] Using ts-node version 8.10.2, typescript version 3.9.7
+[expiration-depl-7446df4d86-xd2rf expiration] Connected to NATS
+[orders-depl-9b8999669-7qp2n orders] Message received: ticket:created / orders-service
+[tickets-depl-5c55dc956b-njnb8 tickets] Event published to subject ticket:created
+[orders-depl-9b8999669-7qp2n orders] Event published to subject order:created
+[tickets-depl-5c55dc956b-njnb8 tickets] Message received: order:created / tickets-service
+[expiration-depl-7446df4d86-xd2rf expiration] Message received: order:created / expiration-service
+[expiration-depl-7446df4d86-xd2rf expiration] I want to publish an expiration:complete event for orderId 5f118f2accd83b001a844773
+[tickets-depl-5c55dc956b-njnb8 tickets] Event published to subject ticket:updated
+[orders-depl-9b8999669-7qp2n orders] Message received: ticket:updated / orders-service`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20157.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20156.png")`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20155.png")`,`
+---
+
+---`,
+    
       ], [
         
       ], [
