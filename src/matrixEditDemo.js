@@ -2073,7 +2073,33 @@ $ tickets % npm update @w3ai/common
 ---`,
     
       ], [
-        
+        `# Mock Function Arguments
+
+-   Get TS access to mock functions
+  (natsWrapper.client.publish as jest.Mock).mock.calls[0][1];
+
+- `,`tickets/src/events/listeners/__test__/order-created-listener.test.ts
+---
+it("publishes a ticket updated event", async () => {
+  const { listener, ticket, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+  // Get TS access to mock functions
+  const ticketUpdatedData = JSON.parse(
+    (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
+  );
+
+  expect(data.id).toEqual(ticketUpdatedData.orderId);
+
+  // @ts-ignore
+  // console.log(natsWrapper.client.publish.mock.calls[0][1]);
+  // console.log(natsWrapper.client.publish.mock.calls);
+});
+---`,
+    
       ], [
         
       ], [
