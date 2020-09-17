@@ -1318,6 +1318,7 @@ on world's most interesting projects.`,
       // this.readProject();
       this.nextService();
       // this.readService();
+      this.matrixEdit = matrixEdit()[this.randomInt(0, 9)];
     },
     stop() {
       this.pause = true;
