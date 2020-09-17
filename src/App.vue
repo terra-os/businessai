@@ -1133,7 +1133,7 @@ github.com/ai-accelerator`,
           'welcome to ai web',
         ],
       ],
-      matrixEdit: matrixEdit()[7],
+      matrixEdit: matrixEdit()[8],
       cellToEdit: `AI super productivity app.
 Add ideas and projects to trigger contributors worldwide.
 Or monetize your services
