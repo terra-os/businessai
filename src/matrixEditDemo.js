@@ -2384,7 +2384,39 @@ it("creates and saves a ticket", async () => {
 ---`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20119.png")`,
     
       ], [
-        
+        `# Testing the Ack call
+
+- 
+`,`ticket-created-listener.test.ts
+---
+it("acks the message", async () => {
+  const { listener, data, msg } = await setup();
+
+  // call the onMessage function with the data object + message object
+  await listener.onMessage(data, msg);
+
+  // write assertions to make sure ack function is called
+  expect(msg.ack).toHaveBeenCalled();
+});
+---`,`@(shell):1:1
+> cls
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+orders  0.000GB
+> use orders;
+switched to db orders
+> db.tickets
+orders.tickets
+> db.ticket.find({ price: 2000})
+> db.tickets.find({ price: 2000})
+{ "_id" : ObjectId("5f0dde6cfb38770018e53b76"), "title" : "Video Service", "price" : 2000, "version" : 2 }
+> db.tickets.find({ price: 1982.3})
+{ "_id" : ObjectId("5f0dde6cfb38770018e53b76"), "title" : "Video Service", "price" : 1982.3, "version" : 3 }
+> db.tickets.find({ price: 103.3})
+{ "_id" : ObjectId("5f0dde6cfb38770018e53b76"), "title" : "Video Service", "price" : 103.3, "version" : 4 }`,`=IMAGE("https://storage.googleapis.com/ilabs/screens/screen%20130.png")`,
+    
       ], [
         
       ], [
