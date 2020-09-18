@@ -736,7 +736,7 @@
                 <textarea
                   id="textEdit"
                   v-model="cellToEdit"
-                  placeholder="Edit your AI Post & Ops here."
+                  placeholder="Edit your Post & Ops here."
                 ></textarea>
               </div>
 
@@ -773,6 +773,7 @@
                       v-bind:key="colIndex"
                       :row="rowIndex"
                       :col="colIndex"
+                      :class="[cell.includes('---') ? codeEditor : '']"
                       @click="onCellClick"
                     >
                       {{ cell }}
@@ -999,6 +1000,7 @@ export default {
       branches: [8],
       services: [10],
       blockchains: [365],
+      codeEditor: 'codefile',
       tabClass: 'tabline',
       tabTitle: 'tabname',
       checkBtn: 'checkbtn',
@@ -1913,6 +1915,11 @@ h2.title {
 
 .edit {
   margin-right: 1rem;
+}
+
+.codefile {
+  color: #4285f4;
+  background-color: #1e1e1e;
 }
 
 .input-edit {
