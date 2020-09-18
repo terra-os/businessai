@@ -2068,12 +2068,12 @@ li.list-group-item {
 
 .xcell {
   padding: 0;
-  max-height: 20px;
-  min-width: 3rem;
-  max-width: 10rem;
-  overflow-x: visible;
+  /* max-height: 20px; */
+  /* min-width: 3rem;
+  max-width: 10rem; */
+  /* overflow-x: visible; */
   overflow-wrap: normal;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .cell,
