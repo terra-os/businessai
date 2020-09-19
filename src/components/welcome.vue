@@ -1,6 +1,6 @@
 <template>
   <div id="welcome">
-    <h1 contenteditable="true">Terralogs @ AI speed</h1>
+    <h1 contenteditable="true">Terralog @ AI speed</h1>
     <p>Cloud Terralog app / monetization engine PoC</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
