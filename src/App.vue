@@ -628,6 +628,7 @@
                       :row="rowIndex"
                       :col="colIndex"
                       :class="[cell.includes('---') ? codeEditor : '']"
+                      :style="cell.includes('=IMAGE') ? { backgroundImage: 'url('+ cell.split('&quot;')[1]  +')'} : ''"
                       @click="onCellClick"
                     >{{ cell }}</td>
                   </tr>
