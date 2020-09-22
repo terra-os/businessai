@@ -1,4 +1,4 @@
-# TerraColab monetization engine
+# TerraOffice monetization engine
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
