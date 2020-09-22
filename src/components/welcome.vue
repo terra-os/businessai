@@ -1,7 +1,7 @@
 <template>
   <div id="welcome">
     <h1 contenteditable="true">colab @ AI speed</h1>
-    <p>realtime collaboration & monetization engine PoC</p>
+    <p>24/7 collaboration & monetization engine PoC</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>

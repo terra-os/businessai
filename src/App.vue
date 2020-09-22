@@ -816,7 +816,7 @@ export default {
       postNameId: 0,
       opsName: ["ads", "app", "ops", "srv", "offr", "ask", "rRNA"],
       opsNameId: 1,
-      backgroundText: `&nbsp; logs = &nbsp;task &nbsp;&#x2731 ops
+      backgroundText: `&nbsp; colab = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
             &nbsp;money &nbsp; accelerator`,
       liveText: `&nbsp; cash = &nbsp;cmds &nbsp;&#x2731 ops
