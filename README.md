@@ -1,4 +1,4 @@
-# AI Terralog monetization engine (Cloud Mitochondria)
+# TerraColab monetization engine
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
