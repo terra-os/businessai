@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">AI Terralog</router-link>
+      <router-link to="/">TerraColab</router-link>
     </div>
     <nav>
       <ul>
