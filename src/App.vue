@@ -612,7 +612,7 @@
                       @click.prevent.right="expandRowsBatch"
                     >{{ corner }}</td>
                     <td
-                      class="xcell tbl-head"
+                      class="tbl-edit-head"
                       v-for="(h, index) in header"
                       v-bind:key="index"
                     >{{ h }}</td>
@@ -1619,7 +1619,14 @@ h5.long {
 }
 
 .tbl-head {
+  padding-left: 0.5rem;
   background-color: rgba(100, 100, 100, 0.2);
+}
+
+.tbl-edit-head {
+  padding-left: 0.5rem;
+  background-color: rgba(100, 100, 100, 0.2);
+  width: 20%;
 }
 
 textarea {
@@ -1915,14 +1922,15 @@ li.list-group-item {
 }
 
 .xcell {
-  padding: 0;
+  padding-left: 0.3rem;
   width: 20%;
   /* max-height: 20px; */
   /* min-width: 3rem;
   max-width: 10rem; */
-  /* overflow-x: visible; */
+  overflow-x: scroll;
+  overflow-y: scroll;
   overflow-wrap: nowrap;
-  white-space: normal;
+  white-space: pre;
 }
 
 .cell,
