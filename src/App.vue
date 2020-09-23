@@ -619,6 +619,7 @@
                   </tr>
 
                   <tr class="row" v-for="(row, rowIndex) in matrixEdit" v-bind:key="rowIndex">
+                    <td class="cell tbl-head">{{ rowIndex + 1 }}</td>
                     <td
                       contenteditable="true"
                       class="xcell"
@@ -1915,12 +1916,13 @@ li.list-group-item {
 
 .xcell {
   padding: 0;
+  width: 20%;
   /* max-height: 20px; */
   /* min-width: 3rem;
   max-width: 10rem; */
   /* overflow-x: visible; */
-  overflow-wrap: normal;
-  /* white-space: nowrap; */
+  overflow-wrap: nowrap;
+  white-space: normal;
 }
 
 .cell,
