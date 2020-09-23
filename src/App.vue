@@ -631,7 +631,7 @@
                       :class="[cell.includes('---') ? codeEditor : '']"
                       :style="cell.includes('=IMAGE') ? { backgroundImage: 'url('+ cell.split('&quot;')[1]  +')'} : ''"
                       @click="onCellClick"
-                    >{{ cell }}</td>
+                    >{{ cell.includes('=IMAGE') ? '' : cell }}</td>
                   </tr>
                 </table>
               </div>
