@@ -1923,10 +1923,10 @@ li.list-group-item {
 
 .xcell {
   padding-left: 0.3rem;
-  width: 20%;
-  /* max-height: 20px; */
-  /* min-width: 3rem;
-  max-width: 10rem; */
+  min-height: 20rem;
+  max-height: 20rem;
+  min-width: 40rem;
+  max-width: 40rem;
   overflow-x: scroll;
   overflow-y: scroll;
   overflow-wrap: nowrap;
