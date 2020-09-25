@@ -699,8 +699,34 @@
               >
                 {{ pause ? '>' : '| |' }}
               </button>
-              <div>
+              <div class="edit-title">
                 <h3 class="title" contenteditable="true">Project:</h3>
+                <li v-for="project in viewProjects" v-bind:key="project">
+                  <div class="edit-title">
+                    <h3 class="long">
+                      <!-- <div class="icon3x3prj">{{ projectIcon }}</div>&nbsp;  -->
+                      <ai-icon
+                        title="Project icon"
+                        :bits="projectIconBits"
+                      ></ai-icon>
+                      <!-- title[{{ project }}]  -->
+                      {{ team.demoProjects[project] }}
+                      <img
+                        class="owner"
+                        title="Project owner"
+                        :src="
+                          require('./assets/img/users/2' + project + '.png')
+                        "
+                      />
+                      <img
+                        class="icon"
+                        title="Project Id"
+                        :src="require('./assets/icons/share.png')"
+                      />
+                      [{{ project }}]
+                    </h3>
+                  </div>
+                </li>
               </div>
 
               <button class="edit btn btn-primary" @click="show = !show">
@@ -708,12 +734,6 @@
               </button>
               <button class="edit btn btn-primary" @click="show = !show">
                 Members
-              </button>
-              <button class="edit btn btn-primary" @click="show = !show">
-                Projects
-              </button>
-              <button class="edit btn btn-primary" @click="show = !show">
-                Services
               </button>
               <button class="edit btn btn-primary" @click="show = !show">
                 Wiki
@@ -1775,6 +1795,14 @@ h5.long {
 .table-title {
   height: 5rem;
   border-bottom: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-title {
+  height: 5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
