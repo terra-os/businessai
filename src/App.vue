@@ -1827,7 +1827,7 @@ h5.long {
 }
 
 .edit-title {
-  padding-right: 1rem;
+  padding-right: 1.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
