@@ -1,4 +1,4 @@
-# Terra OS collaboration app
+# Terra OS - 24/7 collaboration web app
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
