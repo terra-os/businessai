@@ -773,6 +773,7 @@
                       ? {
                           backgroundImage:
                             'url(' + cellToEdit.split('&quot;')[1] + ')',
+                          backgroundRepeat: 'no-repeat',
                           backgroundSize: 'contain',
                         }
                       : ''
@@ -820,6 +821,7 @@
                           ? {
                               backgroundImage:
                                 'url(' + cell.split('&quot;')[1] + ')',
+                              backgroundRepeat: 'no-repeat',
                               backgroundSize: 'contain',
                             }
                           : ''
