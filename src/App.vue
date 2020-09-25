@@ -713,7 +713,7 @@
                 {{ pause ? ">" : "| |" }}
               </button>
               <div class="edit-title">
-                <h3 class="title" contenteditable="true">Project:</h3>
+                <h3 class="title">Project:</h3>
                 <li v-for="project in viewProjects" v-bind:key="project">
                   <div class="edit-title">
                     <h3 class="long">
