@@ -713,9 +713,9 @@
                 {{ pause ? ">" : "| |" }}
               </button>
               <div class="edit-title">
-                <h3 class="title">Project:</h3>
-                <li v-for="project in viewProjects" v-bind:key="project">
-                  <div class="edit-title">
+                <h3 class="long">Project:</h3>
+                <div v-for="project in viewProjects" v-bind:key="project">
+                  <div class="edit-project-title">
                     <h3 class="long">
                       <!-- <div class="icon3x3prj">{{ projectIcon }}</div>&nbsp;  -->
                       <ai-icon
@@ -739,7 +739,7 @@
                       [{{ project }}]
                     </h3>
                   </div>
-                </li>
+                </div>
               </div>
 
               <button class="edit btn btn-primary" @click="show = !show">
@@ -1827,7 +1827,7 @@ h5.long {
 }
 
 .edit-title {
-  height: 5rem;
+  padding-right: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
