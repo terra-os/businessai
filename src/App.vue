@@ -1033,7 +1033,7 @@ export default {
             git &nbsp;commit &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
-      fair &nbsp; cash &nbsp; engine`,
+      open &nbsp;cash &nbsp;engine`,
       visibleRows: 1,
       tab: ["0", "0", "0"],
       pause: true,
