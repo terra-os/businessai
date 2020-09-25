@@ -1,4 +1,4 @@
-# TerraOffice monetization engine
+# Terra OS collaboration app
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
