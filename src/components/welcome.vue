@@ -1,6 +1,6 @@
 <template>
   <div id="welcome">
-    <h1 contenteditable="true">Office @ AI speed</h1>
+    <h1 contenteditable="true">Terra @ AI speed</h1>
     <p>24/7 collaboration & monetization engine PoC</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
