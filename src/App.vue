@@ -767,7 +767,16 @@
                 <textarea
                   id="textEdit"
                   v-model="cellToEdit"
-                  placeholder="Edit your Post & Ops here."
+                  placeholder="Edit cell file here."
+                  :style="
+                    cellToEdit.includes('https://storage.googleapis.com/')
+                      ? {
+                          backgroundImage:
+                            'url(' + cellToEdit.split('&quot;')[1] + ')',
+                          backgroundSize: 'contain',
+                        }
+                      : ''
+                  "
                 ></textarea>
               </div>
 
@@ -818,6 +827,7 @@
                       @click="onCellClick"
                     >
                       {{ cell.includes("=IMAGE") ? "" : cell }}
+                      <!-- {{ cell.includes("=IMAGE") ? cell.split('"')[1] : cell }} -->
                     </td>
                   </tr>
                 </table>
