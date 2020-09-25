@@ -1027,7 +1027,7 @@ export default {
       opsNameId: 1,
       backgroundText: `&nbsp; colab = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
-            &nbsp;money &nbsp; accelerator`,
+            &nbsp;progress&nbsp;accelerator`,
       liveText: `&nbsp; cash = &nbsp;cmds &nbsp;&#x2731 ops
             <br><br>
             git &nbsp;commit &nbsp;engine`,
@@ -1851,6 +1851,7 @@ textarea {
 }
 
 .line {
+  padding-left: 1rem;
   display: flex;
 }
 
