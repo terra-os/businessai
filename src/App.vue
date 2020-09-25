@@ -291,10 +291,7 @@
                     v-bind:key="project"
                   >
                     <div class="table-title">
-                      <h3
-                        class="long"
-                        title="Dev Project & Job Demand in your social network"
-                      >
+                      <h3 class="long" title="Project icon">
                         <!-- <div class="icon3x3prj">{{ projectIcon }}</div>&nbsp;  -->
                         <ai-icon :bits="projectIconBits"></ai-icon>
                         <!-- title[{{ project }}]  -->
@@ -703,8 +700,9 @@
                 {{ pause ? '>' : '| |' }}
               </button>
               <div>
-                <h2 class="title" contenteditable="true"></h2>
+                <h3 class="title" contenteditable="true">Project:</h3>
               </div>
+
               <button class="edit btn btn-primary" @click="show = !show">
                 Interests
               </button>
