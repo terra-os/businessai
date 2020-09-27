@@ -1027,13 +1027,13 @@ export default {
       opsNameId: 1,
       backgroundText: `&nbsp; colab = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
-            &nbsp;progress&nbsp;accelerator`,
-      liveText: `&nbsp; cash = &nbsp;cmds &nbsp;&#x2731 ops
+            &nbsp;project &nbsp;accelerator`,
+      liveText: `&nbsp; cash =&nbsp;cmds &nbsp;&#x2731 ops
             <br><br>
-            terra commit engine`,
+            terra &nbsp;hub &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
-      open &nbsp;cash &nbsp;engine`,
+      agile &nbsp; git &nbsp; office`,
       visibleRows: 1,
       tab: ["0", "0", "0"],
       pause: true,
