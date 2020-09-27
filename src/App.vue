@@ -1030,7 +1030,7 @@ export default {
             &nbsp;progress&nbsp;accelerator`,
       liveText: `&nbsp; cash = &nbsp;cmds &nbsp;&#x2731 ops
             <br><br>
-            git &nbsp;commit &nbsp;engine`,
+            terra commit engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
       open &nbsp;cash &nbsp;engine`,
