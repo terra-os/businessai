@@ -1192,7 +1192,8 @@ github.com/ai-accelerator`,
         ],
       ],
       matrixEdit: matrixEdit()[0],
-      cellToEdit: `AI super productivity app.
+      cellToEdit: `# Super Productivity App
+      
 Add ideas and projects to trigger contributors worldwide.
 Or monetize your services
 on world's most interesting projects.`,
