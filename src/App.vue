@@ -1033,7 +1033,7 @@ export default {
             terra &nbsp;hub &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
-      agile &nbsp; git &nbsp; office`,
+      best &nbsp;practices &nbsp;AI`,
       visibleRows: 1,
       tab: ["0", "0", "0"],
       pause: true,
@@ -1193,7 +1193,7 @@ github.com/ai-accelerator`,
       ],
       matrixEdit: matrixEdit()[0],
       cellToEdit: `# Super Productivity App
-      
+
 Add ideas and projects to trigger contributors worldwide.
 Or monetize your services
 on world's most interesting projects.`,
