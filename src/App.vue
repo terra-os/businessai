@@ -778,8 +778,10 @@
                       : ''
                   "
                 >
-                  Clone Terra OS Best Practices App Engine @
-                  <a href="https://github.com/terra-os"> github.com/terra-os</a>
+                  <a href="https://github.com/terra-os" target="_blank"
+                    >Clone Terra OS Best Practices Engine @
+                    github.com/terra-os</a
+                  >
                 </div>
                 <textarea
                   v-else
