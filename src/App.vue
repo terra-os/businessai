@@ -779,7 +779,7 @@
                   "
                 >
                   <a href="https://github.com/terra-os" target="_blank"
-                    >Clone Terra OS Best Practices Engine @
+                    >Clone Terra OS Best Practices Engine PoC @
                     github.com/terra-os</a
                   >
                 </div>
