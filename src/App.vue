@@ -764,10 +764,9 @@
 
             <div id="editor-tabs">
               <div id="text-editor">
-                <textarea
-                  id="textEdit"
-                  v-model="cellToEdit"
-                  placeholder="Edit cell file here."
+                <div
+                  id="view-link"
+                  v-if="cellToEdit.includes('https://storage.googleapis.com/')"
                   :style="
                     cellToEdit.includes('https://storage.googleapis.com/')
                       ? {
@@ -778,6 +777,14 @@
                         }
                       : ''
                   "
+                >
+                  Clone Terra OS Best Practices Engine @ github.com/terra-os
+                </div>
+                <textarea
+                  v-else
+                  id="textEdit"
+                  v-model="cellToEdit"
+                  placeholder="Edit cell text here."
                 ></textarea>
               </div>
 
@@ -1914,6 +1921,12 @@ textarea {
   width: 50%;
   overflow-x: auto;
   border-left: 1px solid #888888;
+}
+
+#view-link {
+  padding-left: 2rem;
+  width: 100%;
+  height: 100%;
 }
 
 #textEdit {
