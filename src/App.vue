@@ -1925,6 +1925,7 @@ textarea {
 
 #view-link {
   padding-left: 2rem;
+  color: #4285f4;
   width: 100%;
   height: 100%;
 }
