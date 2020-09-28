@@ -1,4 +1,4 @@
-# Terra OS - 24/7 Collaboration & Monetization App
+# Terra OS - 24/7 Collaboration & Monetization Social App
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
