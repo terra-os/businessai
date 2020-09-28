@@ -779,10 +779,10 @@
                   "
                 >
                   <a href="https://github.com/terra-os" target="_blank"
-                    >Clone Terra OS Best Practices Engine PoC @
-                    github.com/terra-os</a
+                    >Clone Terra OS Best Practices Engine
+                    @github.com/terra-os</a
                   ><br />
-                  And build or buy your own 24/7 AI Monetized Skills / Services
+                  & Build or Buy your own 24/7 AI Monetized Skills / Services
                 </div>
                 <textarea
                   v-else
