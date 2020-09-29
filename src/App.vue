@@ -713,6 +713,8 @@
                 {{ pause ? ">" : "| |" }}
               </button>
               <div class="edit-title">
+                <h3 class="long">Poll: a.Interest</h3>
+                <h3 class="long">/</h3>
                 <h3 class="long">Project:</h3>
                 <div v-for="project in viewProjects" v-bind:key="project">
                   <div class="edit-project-title">
