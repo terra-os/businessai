@@ -1041,7 +1041,7 @@ export default {
             &nbsp;project &nbsp;accelerator`,
       liveText: `&nbsp; cash =&nbsp;cmds &nbsp;&#x2731 ops
             <br><br>
-            terra &nbsp;hub &nbsp;engine`,
+            terra &nbsp;poll &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
       best &nbsp;practices &nbsp;AI`,
