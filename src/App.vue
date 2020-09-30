@@ -1043,7 +1043,7 @@ export default {
             &nbsp;project &nbsp;accelerator`,
       liveText: `&nbsp; cash =&nbsp;cmds&nbsp;&#x2731 ops
             <br><br>
-            terra&nbsp;collab &nbsp;engine`,
+            terra winwin engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
       best &nbsp;practices &nbsp;AI`,
