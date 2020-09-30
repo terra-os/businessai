@@ -1041,9 +1041,9 @@ export default {
       backgroundText: `&nbsp; colab = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
             &nbsp;project &nbsp;accelerator`,
-      liveText: `&nbsp; cash =&nbsp;cmds &nbsp;&#x2731 ops
+      liveText: `&nbsp; cash =&nbsp;cmds&nbsp;&#x2731 ops
             <br><br>
-            terra &nbsp;poll &nbsp;engine`,
+            terra&nbsp;collab &nbsp;engine`,
       devText: `&nbsp; ATP &nbsp; &nbsp; DNA &nbsp;&nbsp; RNA
       <br><br>
       best &nbsp;practices &nbsp;AI`,
