@@ -1,6 +1,6 @@
 <template>
   <div id="welcome">
-    <h1>Terra @ AI speed</h1>
+    <h1>Win-Win @ AI speed</h1>
     <p>24/7 collaboration & monetization engine</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
