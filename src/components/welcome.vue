@@ -1,7 +1,7 @@
 <template>
   <div id="welcome">
     <h1>Terra @ AI speed</h1>
-    <p>24/7 collaboration & monetization OS PoC</p>
+    <p>24/7 collaboration & monetization engine</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>
