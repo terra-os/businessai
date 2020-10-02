@@ -1,7 +1,7 @@
 <template>
   <div id="welcome">
     <h1>WinWin @ AI speed</h1>
-    <p>24/7 WinWin collaboration & monetization engine PoC</p>
+    <p>24/7 WinWin collaboration & monetization OS PoC</p>
     <!-- <p>evolutionary learning & fair monetary engine</p> -->
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>

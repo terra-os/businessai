@@ -27,7 +27,7 @@
                   class="btn btn-success player"
                   @click="pause ? start() : stop()"
                 >
-                  {{ pause ? '>' : '| |' }}
+                  {{ pause ? ">" : "| |" }}
                 </button>
               </div>
               <div class="title">
@@ -62,7 +62,7 @@
                   title="Switch views: fb | xls | yml | d3"
                   @click="fbview = !fbview"
                 >
-                  &nbsp; {{ fbview ? 'fb' : 'xls' }} &nbsp;
+                  &nbsp; {{ fbview ? "fb" : "xls" }} &nbsp;
                 </div>
               </div>
               <!-- <div class="title" contenteditable="true">
@@ -280,7 +280,7 @@
                   @click="sheetView = !sheetView"
                   title="Switch Tabs/Folder direction: Vertical/Horizontal"
                 >
-                  {{ sheetView ? '-' : '|' }}
+                  {{ sheetView ? "-" : "|" }}
                 </button>
               </div>
               <ul class="list-group">
@@ -710,7 +710,7 @@
                 class="edit player btn btn-success"
                 @click="pause ? start() : stop()"
               >
-                {{ pause ? '>' : '| |' }}
+                {{ pause ? ">" : "| |" }}
               </button>
               <div class="edit-title">
                 <h3 class="long">Poll: a.Interest</h3>
@@ -781,8 +781,7 @@
                   "
                 >
                   <a href="https://github.com/terra-os" target="_blank"
-                    >Clone Terra OS Best Practices Engine
-                    @github.com/terra-os</a
+                    >Clone WinWin Best Practices Engine @github.com/terra-os</a
                   ><br />
                   & Build or Buy your own 24/7 AI Monetized Skills / Services
                 </div>
@@ -847,7 +846,7 @@
                       "
                       @click="onCellClick"
                     >
-                      {{ cell.includes('=IMAGE') ? '' : cell }}
+                      {{ cell.includes("=IMAGE") ? "" : cell }}
                       <!-- {{ cell.includes("=IMAGE") ? cell.split('"')[1] : cell }} -->
                     </td>
                   </tr>
@@ -966,83 +965,83 @@
 </template>
 
 <script>
-import axios from 'axios'; // for connecting to Frirebase RTDB
-import redisAxios from 'axios'; // for connecting to local Redis db
+import axios from "axios"; // for connecting to Frirebase RTDB
+import redisAxios from "axios"; // for connecting to local Redis db
 
 // import CodeMirror from 'codemirror';
 
-import fb from './gcp.js';
+import fb from "./gcp.js";
 const fs = fb.firestore();
 const storage = fb.storage(); //  Firebase / GCP Storage
 
-import aiteam from './ai-config.json';
+import aiteam from "./ai-config.json";
 
-import Header from './components/header.vue';
-import Tabs from './components/tabs.vue';
+import Header from "./components/header.vue";
+import Tabs from "./components/tabs.vue";
 
-import Post from './views/Post.vue';
-import Report from './views/Report.vue';
-import Steps from './views/Steps.vue';
+import Post from "./views/Post.vue";
+import Report from "./views/Report.vue";
+import Steps from "./views/Steps.vue";
 
-import matrixBiz from './matrixBizDemo';
-import matrixDev from './matrixDevDemo';
-import matrixOps from './matrixOpsDemo';
-import matrixEdit from './matrixEditDemo';
+import matrixBiz from "./matrixBizDemo";
+import matrixDev from "./matrixDevDemo";
+import matrixOps from "./matrixOpsDemo";
+import matrixEdit from "./matrixEditDemo";
 
-import Icon from './util/icon.vue';
-import Spreadsheet from './views/Spreadsheet';
+import Icon from "./util/icon.vue";
+import Spreadsheet from "./views/Spreadsheet";
 
 // import gcp from "./gcp.js";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    'app-header': Header,
-    'ai-post': Post,
-    'ai-report': Report,
-    'ai-steps': Steps,
-    'ai-icon': Icon,
+    "app-header": Header,
+    "ai-post": Post,
+    "ai-report": Report,
+    "ai-steps": Steps,
+    "ai-icon": Icon,
     Spreadsheet,
     Tabs,
   },
   created() {
-    this.$store.dispatch('tryAutoLogin');
+    this.$store.dispatch("tryAutoLogin");
     // CodeMirror.fromTextArea(this.textEdit);
   },
   data() {
     return {
       team: aiteam,
-      interval: 'timer',
+      interval: "timer",
       speed: 2000, // milliseconds
       cycle: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       cycleId: 1,
-      timeUnit: ['sec', 'min'],
+      timeUnit: ["sec", "min"],
       timeUnitId: 0,
-      view: ['run', 'com', 'edu', 'soc', 'dev', 'ops', 'test', 'bank'],
+      view: ["run", "com", "edu", "soc", "dev", "ops", "test", "bank"],
       viewId: 0,
       sheetView: false,
-      mode: ['CEO', 'DEV', 'OPS', 'EDU', 'QA', 'UA'],
+      mode: ["CEO", "DEV", "OPS", "EDU", "QA", "UA"],
       modeId: 0,
       policyRule: [
-        'ROI',
-        'FAM',
-        'SOC',
-        'ECO',
-        'BIZ',
-        'POL',
-        'LOC',
-        'PWR',
-        'CTRL',
-        'TEAM',
-        'FUN',
-        'ATTN',
-        'MED',
-        'GAME',
-        'LIFE',
+        "ROI",
+        "FAM",
+        "SOC",
+        "ECO",
+        "BIZ",
+        "POL",
+        "LOC",
+        "PWR",
+        "CTRL",
+        "TEAM",
+        "FUN",
+        "ATTN",
+        "MED",
+        "GAME",
+        "LIFE",
       ],
-      postName: ['job', 'post', 'dev', 'repo', 'prj', 'bid', 'rDNA'],
+      postName: ["job", "post", "dev", "repo", "prj", "bid", "rDNA"],
       postNameId: 0,
-      opsName: ['ads', 'app', 'ops', 'srv', 'offr', 'ask', 'rRNA'],
+      opsName: ["ads", "app", "ops", "srv", "offr", "ask", "rRNA"],
       opsNameId: 1,
       backgroundText: `&nbsp; colab = &nbsp;task &nbsp;&#x2731 ops
             <br><br>
@@ -1054,130 +1053,130 @@ export default {
       <br><br>
       best &nbsp;practices &nbsp;AI`,
       visibleRows: 1,
-      tab: ['0', '0', '0'],
+      tab: ["0", "0", "0"],
       pause: true,
       show: true,
       load: true,
-      rules: ['FAST'],
+      rules: ["FAST"],
       results: [8],
       patentState: 10,
       fbview: true,
-      noView: 'noview',
+      noView: "noview",
       viewProjects: [24],
       projects: [],
       projectStore: [],
       // newProjectTitle: 'New Project Title',
-      projectIconBits: '11010',
-      serviceIconBits: '10110',
+      projectIconBits: "11010",
+      serviceIconBits: "10110",
       // projectIcon: '11100',
       // serviceIcon: '10111',
       branch: 1,
       branches: [8],
       services: [10],
       blockchains: [365],
-      codeEditor: 'codefile',
-      tabClass: 'tabline',
-      tabTitle: 'tabname',
-      checkBtn: 'checkbtn',
-      cmdBtn: 'cmdbtn',
-      orderBtn: 'orderbtn',
-      verbalBtn: 'verbalbtn',
-      postClass: 'postclass',
-      currentTable: '',
-      currentRow: '',
-      currentCol: '',
-      currentCellVal: ' ',
-      fx: '',
-      fxEval: '',
+      codeEditor: "codefile",
+      tabClass: "tabline",
+      tabTitle: "tabname",
+      checkBtn: "checkbtn",
+      cmdBtn: "cmdbtn",
+      orderBtn: "orderbtn",
+      verbalBtn: "verbalbtn",
+      postClass: "postclass",
+      currentTable: "",
+      currentRow: "",
+      currentCol: "",
+      currentCellVal: " ",
+      fx: "",
+      fxEval: "",
       corner: 1,
       rowsBatch: 5,
       header: [
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-        'G',
-        'H',
-        'I',
-        'J',
-        'K',
-        'L',
-        'M',
-        'N',
-        'O',
-        'P',
-        'Q',
-        'R',
-        'S',
-        'T',
-        'U',
-        'V',
-        'W',
-        'X',
-        'Y',
-        'Z',
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
       ],
       blankTabMatrix: [
         [
-          'a',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
+          "a",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
         ],
       ],
       blankTabRow: [
-        'a',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
+        "a",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
       ],
       textEdit: `
 Hello World!
@@ -1190,24 +1189,24 @@ clone free ai open apps:
 github.com/ai-accelerator`,
       listBiz: [
         [
-          '1',
-          'Post',
-          ':',
-          'Best Practices Blockchains',
-          '',
-          'subtitle',
-          ':',
-          'welcome to ai web',
+          "1",
+          "Post",
+          ":",
+          "Best Practices Blockchains",
+          "",
+          "subtitle",
+          ":",
+          "welcome to ai web",
         ],
         [
-          '1',
-          'Post',
-          ':',
-          'Ranked Contribution Blockchains',
-          '',
-          'subtitle',
-          ':',
-          'welcome to ai web',
+          "1",
+          "Post",
+          ":",
+          "Ranked Contribution Blockchains",
+          "",
+          "subtitle",
+          ":",
+          "welcome to ai web",
         ],
       ],
       matrixEdit: matrixEdit()[0],
@@ -1220,49 +1219,49 @@ on world's most interesting projects.`,
       matrixBiz: matrixBiz(),
       listDev: [
         // list/rows of posts, docs, links, obj, etc from matrixDev
-        { title: 'Toronto W3AI News', post: 'bla bla, bla', author: 'SI' },
+        { title: "Toronto W3AI News", post: "bla bla, bla", author: "SI" },
       ],
       matrixDev: matrixDev(),
       listOps: [
         [
-          '1',
-          'Post',
-          ':',
-          'Service Data & Scripts Database',
-          '',
-          'subtitle',
-          ':',
-          'welcome to ai web',
+          "1",
+          "Post",
+          ":",
+          "Service Data & Scripts Database",
+          "",
+          "subtitle",
+          ":",
+          "welcome to ai web",
         ],
         [
-          '1',
-          'Post',
-          ':',
-          'Recombinant Service APIs',
-          '',
-          'subtitle',
-          ':',
-          'realtime recombinant services',
+          "1",
+          "Post",
+          ":",
+          "Recombinant Service APIs",
+          "",
+          "subtitle",
+          ":",
+          "realtime recombinant services",
         ],
       ],
       matrixOps: matrixOps(),
       newDevPosts: [
-        'Funding: 5min innovation engine install',
-        'Voting: Chinese & Hindi innovation engine',
-        'Idea: Job posts as innovation demand',
+        "Funding: 5min innovation engine install",
+        "Voting: Chinese & Hindi innovation engine",
+        "Idea: Job posts as innovation demand",
       ],
       newOpsPosts: [
-        'COM: xl cash = meta AI/ML/Kubernetes',
-        'ORG: Innovation/Project Rendering',
-        'R&D: Code/Branch Ranking Blockchains',
+        "COM: xl cash = meta AI/ML/Kubernetes",
+        "ORG: Innovation/Project Rendering",
+        "R&D: Code/Branch Ranking Blockchains",
       ],
     };
   },
   computed: {
-    devPosts: function() {
-      return this.matrixDev.filter((row) => row[1] === 'Post');
+    devPosts: function () {
+      return this.matrixDev.filter((row) => row[1] === "Post");
     },
-    filteredMatrixOps: function() {
+    filteredMatrixOps: function () {
       let result = [];
       let tabLine = false;
 
@@ -1271,7 +1270,7 @@ on world's most interesting projects.`,
         // eslint-disable-next-line no-console
         console.log(this.tab[2]);
 
-        if (this.tab[2] === '0') {
+        if (this.tab[2] === "0") {
           result.push(element);
         }
 
@@ -1291,14 +1290,14 @@ on world's most interesting projects.`,
               cursor = this.matrixOps[cursorIndex];
               char = cursor[0];
               // eslint-disable-next-line no-console
-              console.log('char is: ' + char);
+              console.log("char is: " + char);
               if (regex.test(char)) {
                 // eslint-disable-next-line no-console
-                console.log('test passed');
+                console.log("test passed");
                 result.push(cursor);
               } else {
                 // eslint-disable-next-line no-console
-                console.log('test failed');
+                console.log("test failed");
                 return result;
               }
               cursorIndex++;
@@ -1322,15 +1321,15 @@ on world's most interesting projects.`,
   },
 
   firestore: {
-    projects: fs.collection('projects'),
+    projects: fs.collection("projects"),
   },
 
   mounted() {
-    if (localStorage.getItem('projects')) {
+    if (localStorage.getItem("projects")) {
       try {
-        this.projectStore = JSON.parse(localStorage.getItem('projects'));
+        this.projectStore = JSON.parse(localStorage.getItem("projects"));
       } catch (e) {
-        localStorage.removeItem('projects');
+        localStorage.removeItem("projects");
       }
     }
   },
@@ -1349,19 +1348,19 @@ on world's most interesting projects.`,
     uploadProject() {
       let storageRef = storage.ref();
       // let dataRef = storageRef.child('data');
-      let pathname = 'data/projects/';
+      let pathname = "data/projects/";
       pathname = pathname + this.matrixDev[0][7];
       let projectDataRef = storageRef.child(pathname);
 
-      let projectName = this.matrixDev[0][7] + '.ai';
+      let projectName = this.matrixDev[0][7] + ".ai";
       let newProjectData = this.matrixDev.slice(0);
       let file = new File(newProjectData, projectName, {
-        type: 'text/plain',
+        type: "text/plain",
         lastModified: new Date().getTime(),
       });
 
       /* eslint-disable no-unused-vars */
-      projectDataRef.put(file).then(function(snapshot) {
+      projectDataRef.put(file).then(function (snapshot) {
         // console.log('Uploaded a blob or file!');
       });
       /* eslint-enable no-unused-vars */
@@ -1382,7 +1381,7 @@ on world's most interesting projects.`,
     },
     saveProjects() {
       const parsed = JSON.stringify(this.projectStore);
-      localStorage.setItem('projects', parsed);
+      localStorage.setItem("projects", parsed);
     },
 
     start() {
@@ -1414,61 +1413,61 @@ on world's most interesting projects.`,
 
       // dev dummy animation
 
-      this.setCellAndColor('d-table', 2, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 2, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 2, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 2, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 2, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 1, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 2, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 2, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 2, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 2, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 2, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 1, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 4, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 4, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 4, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 4, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 4, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 3, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 4, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 4, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 4, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 4, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 4, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 3, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 6, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 6, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 6, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 6, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 6, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 5, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 6, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 6, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 6, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 6, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 6, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 5, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 8, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 8, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 8, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 8, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 8, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 7, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 8, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 8, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 8, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 8, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 8, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 7, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 10, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 10, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 10, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 10, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 10, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 9, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 10, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 10, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 10, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 10, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 10, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 9, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 12, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 12, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 12, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 12, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 12, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 11, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 12, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 12, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 12, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 12, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 12, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 11, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 14, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 14, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 14, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 14, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 14, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 13, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 14, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 14, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 14, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 14, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 14, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 13, 3, "OK", "blockchain-green");
 
-      this.setCellAndColor('d-table', 16, 2, 'ok', 'project-color');
-      this.setCellAndColor('o-table', 16, 2, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 16, 11, 'ok', 'service-color');
-      this.setCellAndColor('b-table', 16, 7, 'ok', 'project-color');
-      this.setCellAndColor('b-table', 16, 3, 'ok', 'blockchain-color');
-      this.setCellAndColor('b-table', 15, 3, 'OK', 'blockchain-green');
+      this.setCellAndColor("d-table", 16, 2, "ok", "project-color");
+      this.setCellAndColor("o-table", 16, 2, "ok", "service-color");
+      this.setCellAndColor("b-table", 16, 11, "ok", "service-color");
+      this.setCellAndColor("b-table", 16, 7, "ok", "project-color");
+      this.setCellAndColor("b-table", 16, 3, "ok", "blockchain-color");
+      this.setCellAndColor("b-table", 15, 3, "OK", "blockchain-green");
 
       // Run/Eval Service Input queries on Project data and add/update results as step[0]
 
@@ -1563,7 +1562,7 @@ on world's most interesting projects.`,
       // let tabrow = el.target.getAttribute('tabrow');                    // r - row: 1,... - the row in the tab
       // let r = tabrow;
 
-      let cellId = matrix + ':' + row + ':' + col;
+      let cellId = matrix + ":" + row + ":" + col;
       // console.log(cellId);
 
       let cellToUpdate = document.getElementById(cellId);
@@ -1572,7 +1571,7 @@ on world's most interesting projects.`,
       cellToUpdate.innerHTML = this.matrixDev[row][col];
     },
     onRowHeadClick(el) {
-      let row = (this.currentRow = el.target.getAttribute('row')); // row - row: 1,... - the row in the matrix table
+      let row = (this.currentRow = el.target.getAttribute("row")); // row - row: 1,... - the row in the matrix table
       this.rowRoll++;
       this.cellToEdit = this.matrixEdit[row][
         this.rowRoll % this.matrixEdit[row].length
@@ -1581,19 +1580,19 @@ on world's most interesting projects.`,
     onCellClick(el) {
       this.rowRoll = 0;
       /* eslint-disable no-unused-vars */
-      let mat = (this.currentTable = el.target.getAttribute('matrix')); // mat - matrix/table: Biz | Dev | Ops | Edit
+      let mat = (this.currentTable = el.target.getAttribute("matrix")); // mat - matrix/table: Biz | Dev | Ops | Edit
       let m = mat[0].toUpperCase(); // m - matrix/table: B | D | O | E
 
-      let col = (this.currentCol = el.target.getAttribute('col')); // col - col: 1-26
+      let col = (this.currentCol = el.target.getAttribute("col")); // col - col: 1-26
       let c = this.header[col - 1]; // c - col: A-Z
-      let row = (this.currentRow = el.target.getAttribute('row')); // row - row: 1,... - the row in the matrix table
+      let row = (this.currentRow = el.target.getAttribute("row")); // row - row: 1,... - the row in the matrix table
       // let tr = row;
 
       // let tab = Math.floor( row / (this.visibleRows+1) + 1);         // tab - tab 1-8
-      let tab = el.target.getAttribute('tab');
+      let tab = el.target.getAttribute("tab");
       let t = tab; // t - tab a-h
 
-      let tabrow = el.target.getAttribute('tabrow'); // r - row: 1,... - the row in the tab
+      let tabrow = el.target.getAttribute("tabrow"); // r - row: 1,... - the row in the tab
       let r = tabrow;
 
       // let val = this.currentCellVal = el.target.innerHTML.trim();       // val - cell value - string
@@ -1602,7 +1601,7 @@ on world's most interesting projects.`,
       this.currentCellVal = v;
       /* eslint-enable no-unused-vars */
 
-      let cellId = mat + ':' + row + ':' + col;
+      let cellId = mat + ":" + row + ":" + col;
 
       // console.log('test onCellClick')
       /* eslint-disable no-console */
@@ -1661,26 +1660,26 @@ on world's most interesting projects.`,
     },
     showPause() {
       // Toggle play button between play '>' and pause '||'
-      return this.pause ? '| |' : '>';
+      return this.pause ? "| |" : ">";
     },
     nextBranch() {
       // To add animation for showing the next branch table
       this.branch++;
     },
     addNewRule() {
-      this.rules.push('new rule');
+      this.rules.push("new rule");
     },
     onProjectFork() {
-      this.newDevPosts.unshift('New project idea');
+      this.newDevPosts.unshift("New project idea");
 
       const lines = { ...this.matrixDev };
 
-      fs.collection('projects').add({
+      fs.collection("projects").add({
         tablelines: lines,
       });
 
       // experimenting with adding task to local Redis database
-      redisAxios.post('/task/add', { task: 'Test task sent form Vue app' });
+      redisAxios.post("/task/add", { task: "Test task sent form Vue app" });
 
       // axios.post('https://aiplanet.firebaseio.com/projects.json', this.matrixDev)
       // axios.post('https://firestore.googleapis.com/v1/projects/aibase/databases/(default)/documents/projects', this.matrixDev)
@@ -1688,8 +1687,8 @@ on world's most interesting projects.`,
       //   .catch(err => console.log(err));
     },
     onServiceFork() {
-      this.newOpsPosts.unshift('New service idea');
-      axios.post('https://aibase.firebaseio.com/services.json', this.matrixOps);
+      this.newOpsPosts.unshift("New service idea");
+      axios.post("https://aibase.firebaseio.com/services.json", this.matrixOps);
       // .then(res => console.log(res))
       // .catch(err => console.log(err));
     },
@@ -1697,7 +1696,7 @@ on world's most interesting projects.`,
       let hex = (200 + index).toString(2);
       hex = hex.substr(-5);
       // hex = hex + hex;
-      hex = hex.replace(/[0]/g, '8');
+      hex = hex.replace(/[0]/g, "8");
       hex = hex.replace(/[1]/g, symbol);
       return hex;
     },
@@ -1705,7 +1704,7 @@ on world's most interesting projects.`,
       // let projectsNo = this.viewProjects.length;
       this.viewProjects.push(Math.floor(Math.random() * 100)); // add project to end/bottom
       this.viewProjects.shift(); // removes the first project
-      this.projectIconBits = this.generateIconBits(this.viewProjects[0], '1');
+      this.projectIconBits = this.generateIconBits(this.viewProjects[0], "1");
       // ToDo: add branches and results structures to project data structure - Code below is just demo/dummy
       this.branches.push(Math.floor(Math.random() * 100));
       this.branches.shift();
@@ -1715,7 +1714,7 @@ on world's most interesting projects.`,
       // let servicesNo = this.services.length;
       this.services.unshift(Math.floor(Math.random() * 100)); // add service to top
       this.services.pop(); // removes the last service
-      this.serviceIconBits = this.generateIconBits(this.services[0], '1');
+      this.serviceIconBits = this.generateIconBits(this.services[0], "1");
     },
     // ToDo - To include in Processor / Eval workflow
     addTableRow(tableId, contextId, array) {
@@ -1743,7 +1742,7 @@ on world's most interesting projects.`,
 
       x[col].innerHTML = value;
 
-      x[col].classList.add('fade-on-change');
+      x[col].classList.add("fade-on-change");
     },
     setCellAndColor(tableId, row, col, value, color) {
       let table = document.getElementById(tableId);
@@ -1752,7 +1751,7 @@ on world's most interesting projects.`,
       x[col].innerHTML = value;
 
       x[col].classList.add(color);
-      x[col].classList.add('fade-on-change');
+      x[col].classList.add("fade-on-change");
       // setTimeout(250);
     },
   },
