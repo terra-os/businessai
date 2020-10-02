@@ -121,7 +121,7 @@
             </div>
           </div>
 
-          <div id="ai-protocol">
+          <div id="ai-protocol" v-if="viewId % view.length != 4">
             <div id="ai-prog">
               <div class="buttons">
                 <button
