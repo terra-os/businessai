@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">WinWin</router-link>
+      <router-link to="/">WinWin OS</router-link>
     </div>
     <nav>
       <ul>
