@@ -1,4 +1,4 @@
-# Terra WinWin - 24/7 Collaboration & Monetization App
+# WinWin - 24/7 Collaboration & Monetization Engine
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
