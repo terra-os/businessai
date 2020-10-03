@@ -52,7 +52,7 @@
               <div class="title">
                 <div
                   class="config-btn"
-                  title="run > com > edu > soc > dev > ops > test > bank"
+                  title="biz > dev > soc"
                   @click="viewId++"
                 >
                   &nbsp; {{ view[viewId % view.length] }} &nbsp;
@@ -121,7 +121,7 @@
             </div>
           </div>
 
-          <div id="ai-protocol" v-if="viewId % view.length != 4">
+          <div id="ai-protocol" v-if="viewId % view.length != 1">
             <div id="ai-prog">
               <div class="buttons">
                 <button
@@ -1017,7 +1017,7 @@ export default {
       cycleId: 1,
       timeUnit: ["sec", "min"],
       timeUnitId: 0,
-      view: ["run", "com", "edu", "soc", "dev", "ops", "test", "bank"],
+      view: ["biz", "dev", "soc"],
       viewId: 0,
       sheetView: false,
       mode: ["CEO", "DEV", "OPS", "EDU", "QA", "UA"],
