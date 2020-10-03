@@ -90,7 +90,7 @@
               </div>
             </div>
 
-            <div class="header-group opsNews">
+            <div class="header-group opsNews" v-if="viewId % view.length != 2">
               <div class="title long">
                 <h2>{{ team.newOpsTitle }}</h2>
               </div>
@@ -110,7 +110,7 @@
             </div>
           </div>
 
-          <div id="flags">
+          <div id="flags" v-if="viewId % view.length != 2">
             <div v-for="index in 6" :key="index">
               <img
                 class="flag"
@@ -122,7 +122,7 @@
           </div>
 
           <div id="ai-protocol" v-if="viewId % view.length != 1">
-            <div id="ai-prog">
+            <div id="ai-prog" v-if="viewId % view.length != 2">
               <div class="buttons">
                 <button
                   class="next btn btn-warning"
@@ -486,7 +486,7 @@
               </div>
             </div>
 
-            <div id="ai-ops">
+            <div id="ai-ops" v-if="viewId % view.length != 2">
               <div class="buttons">
                 <button class="next btn btn-primary" @click="nextService">
                   Services
@@ -688,13 +688,13 @@
             <!-- </div> -->
           </div>
 
-          <div class="background-signs">
+          <div class="background-signs" v-if="viewId % view.length != 2">
             <p>
               <span v-html="backgroundText"></span>
             </p>
           </div>
 
-          <div id="editor">
+          <div id="editor" v-if="viewId % view.length != 2">
             <div class="buttons">
               <div>
                 <h2 class="title">
@@ -857,7 +857,7 @@
             </div>
           </div>
 
-          <div id="footer">
+          <div id="footer" v-if="viewId % view.length != 2">
             <div id="ai-engines" class="title-container">
               <h4>
                 <a href="https://ai-cell.web.app">CEO</a>
