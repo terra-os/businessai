@@ -1211,6 +1211,7 @@ github.com/ai-accelerator`,
           "welcome to ai web",
         ],
       ],
+      matrixEditId: 0,
       matrixEdit: matrixEdit()[0],
       rowRoll: 0,
       cellToEdit: `# Super Productivity App
@@ -1398,10 +1399,9 @@ on world's most interesting projects.`,
       // this.readProject();
       this.nextService();
       // this.readService();
-      this.matrixEdit = matrixEdit()[this.randomInt(0, 9)];
-      this.cellToEdit = this.matrixEdit[this.randomInt(0, 9)][
-        this.randomInt(0, 1)
-      ]; // Show text / file from cell //
+      this.matrixEditId++;
+      this.matrixEdit = matrixEdit()[this.matrixEditId % matrixEdit().length];
+      this.cellToEdit = this.matrixEdit[0][0]; // Show text / file from cell //
     },
     stop() {
       this.pause = true;
@@ -1409,10 +1409,9 @@ on world's most interesting projects.`,
       this.backgroundText = this.devText;
     },
     nextProjectInEditor() {
-      this.matrixEdit = matrixEdit()[this.randomInt(0, 9)];
-      this.cellToEdit = this.matrixEdit[this.randomInt(0, 9)][
-        this.randomInt(0, 1)
-      ];
+      this.matrixEditId++;
+      this.matrixEdit = matrixEdit()[this.matrixEditId % matrixEdit().length];
+      this.cellToEdit = this.matrixEdit[0][0];
     },
     runOneOps() {
       // Read/update current Service and Project tables/matrix - to include user edits
