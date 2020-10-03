@@ -705,7 +705,9 @@
               <button class="edit btn btn-warning" @click="show = !show">
                 Clone
               </button>
-              <button class="edit btn btn-warning" @click="runOneOps">+</button>
+              <button class="edit btn btn-warning" @click="nextProjectInEditor">
+                +
+              </button>
               <button
                 class="edit player btn btn-success"
                 @click="pause ? start() : stop()"
@@ -1405,6 +1407,12 @@ on world's most interesting projects.`,
       this.pause = true;
       clearInterval(this.interval);
       this.backgroundText = this.devText;
+    },
+    nextProjectInEditor() {
+      this.matrixEdit = matrixEdit()[this.randomInt(0, 9)];
+      this.cellToEdit = this.matrixEdit[this.randomInt(0, 9)][
+        this.randomInt(0, 1)
+      ];
     },
     runOneOps() {
       // Read/update current Service and Project tables/matrix - to include user edits
