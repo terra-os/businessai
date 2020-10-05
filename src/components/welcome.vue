@@ -1,8 +1,7 @@
 <template>
   <div id="welcome">
-    <h1>WinWin @ AI speed</h1>
-    <p>24/7 win-win collaboration & monetization OS PoC</p>
-    <!-- <p>evolutionary learning & fair monetary engine</p> -->
+    <h1>compete @ AI speed</h1>
+    <p>compete and monetize 24/7 with 3rd gen DNA OS PoC</p>
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>
       <router-link to="/signin">Sign In</router-link>
