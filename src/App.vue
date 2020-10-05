@@ -52,17 +52,18 @@
               <div class="title">
                 <div
                   class="config-btn"
-                  title="biz > dev > soc"
+                  title="Mode view: Monetize > Compete > Colab"
                   @click="viewId++"
                 >
                   &nbsp; {{ view[viewId % view.length] }} &nbsp;
                 </div>
                 <div
                   class="config-btn"
-                  title="Switch views: fb | xls | yml | d3"
-                  @click="fbview = !fbview"
+                  title="Social views: xls > mix > fb"
+                  @click="socialViewId++"
                 >
-                  &nbsp; {{ fbview ? "fb" : "xls" }} &nbsp;
+                  &nbsp;
+                  {{ socialView[socialViewId % socialView.length] }} &nbsp;
                 </div>
               </div>
               <!-- <div class="title" contenteditable="true">
@@ -189,13 +190,16 @@
 
                     <!-- <section class="views"> -->
 
-                    <div v-if="fbview">
+                    <div v-if="socialViewId % socialView.length >= 1">
                       <ai-report :matrix="listBiz"></ai-report>
                     </div>
 
                     <!-- </section> -->
 
-                    <div class="scrollable">
+                    <div
+                      v-if="socialViewId % socialView.length <= 1"
+                      class="scrollable"
+                    >
                       <table id="b-table" class="matrix">
                         <tr class="row">
                           <td
@@ -341,7 +345,7 @@
 
                     <!-- <section class="views"> -->
 
-                    <div v-if="fbview">
+                    <div v-if="socialViewId % socialView.length >= 1">
                       <ai-steps :matrix="devPosts"></ai-steps>
                     </div>
 
@@ -351,7 +355,10 @@
 
                     <!-- </section> -->
 
-                    <div class="scrollable">
+                    <div
+                      v-if="socialViewId % socialView.length <= 1"
+                      class="scrollable"
+                    >
                       <table id="d-table" class="matrix">
                         <tr class="row">
                           <td
@@ -567,13 +574,16 @@
 
                     <!-- <section class="views"> -->
 
-                    <div v-if="fbview">
+                    <div v-if="socialViewId % socialView.length >= 1">
                       <ai-post :matrix="listOps"></ai-post>
                     </div>
 
                     <!-- </section> -->
 
-                    <div class="scrollable">
+                    <div
+                      v-if="socialViewId % socialView.length <= 1"
+                      class="scrollable"
+                    >
                       <table id="o-table" class="matrix">
                         <tr class="row">
                           <td
@@ -1021,6 +1031,8 @@ export default {
       timeUnitId: 0,
       view: ["biz", "dev", "soc"],
       viewId: 0,
+      socialView: ["xls", "mix", "fb"],
+      socialViewId: 1,
       sheetView: false,
       mode: ["CEO", "DEV", "OPS", "EDU", "QA", "UA"],
       modeId: 0,
@@ -1062,7 +1074,6 @@ export default {
       rules: ["FAST"],
       results: [8],
       patentState: 10,
-      fbview: true,
       noView: "noview",
       viewProjects: [24],
       projects: [],
