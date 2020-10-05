@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">iDNA</router-link>
+      <router-link to="/">iTeam OS</router-link>
     </div>
     <nav>
       <ul>
