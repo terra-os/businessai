@@ -1,6 +1,6 @@
 <template>
   <div id="welcome">
-    <h1>DevOps @ AI speed</h1>
+    <h1>GitOps @ AI speed</h1>
     <p>collaborate compete monetize 24/7 - 3rd gen DNA OS</p>
     <div class="cta">
       <router-link to="/signup">Sign Up</router-link>

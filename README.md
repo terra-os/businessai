@@ -1,4 +1,4 @@
-# DevOps OS - 24/7 Collaboration & Monetization Engine
+# GitOps OS - 24/7 Collaboration & Monetization Engine
 
 collaboration engine / social & enterprise innovation protocol - PoC
 

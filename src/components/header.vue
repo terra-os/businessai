@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">DevOps</router-link>
+      <router-link to="/">GitOps</router-link>
     </div>
     <nav>
       <ul>
