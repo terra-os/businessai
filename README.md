@@ -1,4 +1,4 @@
-# myTeam OS - 24/7 Collaboration & Monetization Engine
+# meta cloud OS - 24/7 Collaboration & Monetization Engine
 
 collaboration engine / social & enterprise innovation protocol - PoC
 
