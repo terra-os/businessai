@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">GitOps OS PoC</router-link>
+      <router-link to="/">innovate</router-link>
     </div>
     <nav>
       <ul>
